@@ -48,12 +48,12 @@
 				'directory' => 'lecons/',
 				'url-formatter' => 'lecons/show/{id|all}'
 			),
-			'add-lecons' => array(
+			/*'add-lecons' => array(
 				'controller' => 'AddController',
 				'directory' => 'lecons/',
 				'url-formatter' => 'lecons/add'
 				'url-formatter' => 'lecons/add'
-			),
+			),*/
 			'confirm-add-lecons' => array(
 				'controller' => 'ConfirmAddController',
 				'directory' => 'lecons/',

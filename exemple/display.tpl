@@ -30,8 +30,8 @@
 		</tr>
 	{% for caravan in caravans %}
 		<tr>
-			<td>{{caravan.PK_MARQUE}}</td>
-			<td>{{caravan.NOM}}</td>
+			<td>{{caravan.IDACHAT}}</td>
+			<td>{{caravan.DATEACHAT}}</td>
 			<td>{{caravan.car_price}}</td>
 			<td>{{caravan.car_nb_person}}</td>
 			<td>{{caravan.car_id_location}}</td>

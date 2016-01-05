@@ -11,11 +11,11 @@
 
 {% block content %}
 
-	<form method="post" ACTION="/Cas-M-Ping/rentals/add">
+	<form method="post" ACTION="/AutoEcole-05-01-2016-05-01-2016/rentals/add">
 	<button type="submit" > Ajout d'une location </button>
 	</form>
 	
-	<form method="post" ACTION="/Cas-M-Ping/rentals/delete/all">
+	<form method="post" ACTION="/AutoEcole-05-01-2016-05-01-2016/rentals/delete/all">
 	<button type="submit" > Suppression des locations </button>
 	</form>
 	

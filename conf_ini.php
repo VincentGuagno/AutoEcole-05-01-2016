@@ -20,7 +20,7 @@
 	/**
 	 * Project's name
 	 */
-	define('_PROJECT_NAME_', 'AutoEcole');
+	define('_PROJECT_NAME_', 'AutoEcole-05-01-2016');
 	
 	/**
 	 * Twig settings
@@ -62,7 +62,7 @@
 	/**
 	 * Database settings
 	 */
-	define('_HOST_', 'localhost'); 
-	define('_DATABASE_', 'camping'); 
-	define('_LOGIN_', 'root'); 
-	define('_PASSWORD_', ''); 
+	define('_HOST_', '//localhost/XE'); 
+	define('_DATABASE_', ''); 
+	define('_LOGIN_', 'auto'); 
+	define('_PASSWORD_', 'ecole'); 
