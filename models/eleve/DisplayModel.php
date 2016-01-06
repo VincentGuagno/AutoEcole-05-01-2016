@@ -78,7 +78,7 @@
 		 */	
 		public function display_eleves() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT * FROM ELEVES');
+				$qry = oci_parse($this->db, 'SELECT ELEVE.* FROM ELEVE');
 				oci_execute($qry);
 				
 				//$qry = $this->db->prepare('SELECT * FROM caravan ORDER BY caravan.car_id');	
@@ -107,7 +107,83 @@
 		public function display_eleve($PK_ELEVE) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =?');	
+				$qry = oci_parse($this->db, 'SELECT ELEVE.NOM,
+													  ELEVE.PRENOM,
+													  FORMULES.LIBELLE
+													FROM ELEVE
+													INNER JOIN FORMULES
+													ON FORMULES.PK_FORMULE = ELEVE.FK_FORMULES
+													WHERE ELEVE.PK_ELEVE   = ?');	
+				$qry->bindValue(1, $car_id, \PDO::PARAM_INT);
+
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+
+				oci_close($this->db);
+				return $res;				
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+
+		/**
+		 * All Eleve's informations from one Eleve 
+		 *
+		 * @param PK_ELEVE, Eleve's id
+		 * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function display_planning_eleve($PK_ELEVE) {
+			try {
+
+				$qry = oci_parse($this->db, 'SELECT ELEVE.NOM,
+												  ELEVE.PRENOM,
+												  MONITEUR.SURNOM,
+												  EXAMEN.NOM AS NOM1,
+												  EXAMEN.DATE_PASSAGE,
+												  LECON.ETAT_LECON,
+												  LECON.DATE_LECON,
+												  LECON.PK_LECON,
+												  EXAMEN.PK_EXAMEN,
+												  ELEVE.PK_ELEVE
+												FROM ELEVE
+												INNER JOIN MONITEUR
+												ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR
+												INNER JOIN LECON
+												ON ELEVE.PK_ELEVE = LECON.FK_ELEVE
+												INNER JOIN EXAMEN
+												ON ELEVE.PK_ELEVE    = EXAMEN.FK_ELEVE
+												WHERE ELEVE.PK_ELEVE = ?');	
+				$qry->bindValue(1, $car_id, \PDO::PARAM_INT);
+
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+
+				oci_close($this->db);
+				return $res;				
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+
+		/**
+		 * All Eleve's informations from one Eleve 
+		 *
+		 * @param PK_ELEVE, Eleve's id
+		 * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function display_eleve_examen($PK_ELEVE) {
+			try {
+
+				$qry = oci_parse($this->db, 'SELECT EXAMEN.*,
+													  PERMIS.*,
+													  ELEVE.NOM AS NOM1,
+													  ELEVE.PRENOM
+													FROM ELEVE
+													INNER JOIN EXAMEN
+													ON ELEVE.PK_ELEVE = EXAMEN.FK_ELEVE
+													INNER JOIN PERMIS
+													ON PERMIS.PK_PERMIS  = EXAMEN.PK_EXAMEN
+													WHERE ELEVE.PK_ELEVE = ?');	
 				$qry->bindValue(1, $car_id, \PDO::PARAM_INT);
 
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);

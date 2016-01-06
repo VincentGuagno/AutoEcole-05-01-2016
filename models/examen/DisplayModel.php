@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Moniteur;	
-	require_once('MoniteurModel.php'); 
+	namespace Examen;	
+	require_once('ExamenModel.php'); 
 	
-	class DisplayModel extends MoniteurModel {
+	class DisplayModel extends ExamenModel {
 
 		/**
 		 * DisplayModel instance
@@ -76,11 +76,15 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_moniteurs() {
+		public function display_examens() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT MONITEUR.* FROM MONITEUR');			
+				$qry = oci_parse($this->db, 'SELECT EXAMEN.*,
+													  PERMIS.*
+													FROM EXAMEN
+													INNER JOIN PERMIS
+													ON PERMIS.PK_PERMIS = EXAMEN.PK_EXAMEN');			
 				oci_execute($qry);
-							
+					
 				//$return_qry = $qry->fetchAll();
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 				
@@ -94,48 +98,14 @@
 		/**
 		 * All Eleve's informations from one Eleve 
 		 *
-		 * @param PK_MONITEUR, Eleve's id
+		 * @param PK_EXAMEN, Eleve's id
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_moniteur($PK_MONITEUR) {
+		public function display_examen($PK_EXAMEN) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT * FROM AUTO.MONITEUR WHERE MONITEUR.PK_MONITEUR =?');	
-				$qry->bindValue(1, $PK_MONITEUR, \PDO::PARAM_INT);
-				oci_execute($qry);
-					
-				//$return_qry = $qry->fetchAll();
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
-				
-				oci_close($this->db);
-				return $res;		
-			} catch(Exception $e) {
-				return $e->getMessage();
-			}
-		}
-
-			/**
-		 * All Eleve's informations from one Eleve 
-		 *
-		 * @param PK_MONITEUR, Eleve's id
-		 * @return return_qry : result into an object, exception message any others cases
-		 */
-		public function display_planing_moniteur($PK_MONITEUR) {
-			try {
-
-				$qry = oci_parse($this->db, 'SELECT MONITEUR.NOM,
-												  MONITEUR.PRENOM,
-												  MONITEUR.SURNOM,
-												  ELEVE.NOM    AS NOM1,
-												  ELEVE.PRENOM AS PRENOM1,
-												  LECON.*
-												FROM MONITEUR
-												INNER JOIN ELEVE
-												ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR
-												INNER JOIN LECON
-												ON ELEVE.PK_ELEVE          = LECON.FK_ELEVE
-												WHERE MONITEUR.PK_MONITEUR = ?');	
-				$qry->bindValue(1, $PK_MONITEUR, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'SELECT EXAMEN.DATE_PASSAGE, EXAMEN.NOM, EXAMEN.FK_ELEVE FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =?');	
+				$qry->bindValue(1, $PK_EXAMEN, \PDO::PARAM_INT);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();

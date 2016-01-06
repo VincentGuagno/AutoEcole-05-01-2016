@@ -78,7 +78,16 @@
 		 */	
 		public function display_vehicules() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT * FROM AUTO.VEHICULE');			
+				$qry = oci_parse($this->db, 'SELECT VEHICULE.NUMERO,
+													  MODELE.NOM_MODELE,
+													  MONITEUR.SURNOM
+													FROM VEHICULE
+													INNER JOIN MARQUE
+													ON MARQUE.PK_MARQUE = VEHICULE.FK_MARQUE
+													INNER JOIN MODELE
+													ON MODELE.PK_MODELE = VEHICULE.FK_MODELE
+													INNER JOIN MONITEUR
+													ON MONITEUR.PK_MONITEUR = VEHICULE.FK_MONITEUR');			
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -100,7 +109,25 @@
 		public function display_vehicule($PK_VEHICULE) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT * FROM AUTO.VEHICULE WHERE VEHICULE.PK_VEHICULE =?');	
+				$qry = oci_parse($this->db, 'SELECT VEHICULE.NUMERO,
+													  VEHICULE.KM,
+													  VEHICULE.DATE_ACHAT,
+													  VEHICULE.PRIX_ACHAT,
+													  MARQUE.NOM,
+													  MODELE.TYPE_MOTEUR,
+													  MODELE.PUISSANCE,
+													  MODELE.NOM_MODELE,
+													  MONITEUR.SURNOM,
+													  MONITEUR.PRENOM,
+													  MONITEUR.NOM AS NOM1
+													FROM VEHICULE
+													INNER JOIN MARQUE
+													ON MARQUE.PK_MARQUE = VEHICULE.FK_MARQUE
+													INNER JOIN MODELE
+													ON MODELE.PK_MODELE = VEHICULE.FK_MODELE
+													INNER JOIN MONITEUR
+													ON MONITEUR.PK_MONITEUR    = VEHICULE.FK_MONITEUR
+													WHERE VEHICULE.PK_VEHICULE = ?');	
 				$qry->bindValue(1, $PK_VEHICULE, \PDO::PARAM_INT);
 				oci_execute($qry);
 					

@@ -78,7 +78,17 @@
 		 */	
 		public function display_facturations() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT * FROM FACTURATION');			
+				$qry = oci_parse($this->db, 'SELECT FACTURATION.DATE_FACTURE,
+													  FACTURATION.PRIX,
+													  FACTURATION.ETAT_FACTURE,
+													  ELEVE.NOM,
+													  ELEVE.PRENOM,
+													  TYPE_FACTURE.LIBELLE
+													FROM FACTURATION
+													INNER JOIN ELEVE
+													ON FACTURATION.PK_FACTURATION = ELEVE.FK_FACTURE
+													INNER JOIN TYPE_FACTURE
+													ON TYPE_FACTURE.PK_TYPE_FACTURE = FACTURATION.PK_FACTURATION');			
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -100,7 +110,22 @@
 		public function display_facturation($PK_FACTURATION) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT * FROM FACTURATION WHERE FACTURATION.PK_FACTURATION =?');	
+				$qry = oci_parse($this->db, 'SELECT FACTURATION.DATE_FACTURE,
+													  FACTURATION.PRIX,
+													  FACTURATION.ETAT_FACTURE,
+													  ELEVE.NOM,
+													  ELEVE.PRENOM,
+													  TYPE_FACTURE.LIBELLE,
+													  ELEVE.LIEU_ETUDE,
+													  ELEVE.DATE_NAISSANCE,
+													  ELEVE.NUM_TEL,
+													  ELEVE.ADRESSE
+													FROM FACTURATION
+													INNER JOIN ELEVE
+													ON FACTURATION.PK_FACTURATION = ELEVE.FK_FACTURE
+													INNER JOIN TYPE_FACTURE
+													ON TYPE_FACTURE.PK_TYPE_FACTURE = FACTURATION.PK_FACTURATION
+													WHERE ELEVE.PK_ELEVE            = ?');	
 				$qry->bindValue(1, $PK_FACTURATION, \PDO::PARAM_INT);
 				oci_execute($qry);
 					

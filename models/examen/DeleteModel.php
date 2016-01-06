@@ -2,47 +2,47 @@
 
 	/*
 	 * Model for marque modifications
-	 * This class handles the display of a marque
+	 * This class handles the delete of a marque
 	 *
 	 * @author Bastien VAUTIER
 	 * @version 0.0.1
-	 * @copyright 2016 3iL
+	 * @copyright 2015 3iL
 	 */
+	 
+	namespace Examen; 
+	require_once('ExamenModel.php'); 
 	
-	namespace Lecon;	
-	require_once('LeconModel.php'); 
-	
-	class DisplayModel extends LeconModel {
+	class DeleteModel extends ExamenModel{
 
 		/**
-		 * DisplayModel instance
+		 * DeleteModel instance
 		 */
 		public static $instance = null;
 		
 		/**
-		 * The constructor of DisplayModel
+		 * The constructor of DeleteModel
 		 */
 		public function __construct() {
 			try {
-				DisplayModel::init();
+				DeleteModel::init();
 			} catch(Exception $e) {
 				echo $e->getMessage();
 			}
 		}
 		
 		/**
-		 * Get current instance of DisplayModel (singleton)
+		 * Get current instance of DeleteModel (singleton)
 		 *
-		 * @return DisplayModel
+		 * @return DeleteModel
 		 */
 		public static function getInstance() {
 			if (!self::$instance) {
-				self::$instance = new DisplayModel();
+				self::$instance = new DeleteModel();
 			}
 			return self::$instance;
 		}
 		
-		/**
+		/**		
 		 * Initialize the DisplayModel class
 		 */
 		public function init() {
@@ -71,47 +71,40 @@
 			}
 		}
 
+
 		/**
-		 * Display all caravans's informations
-		 *		
-		 * @return return_qry : result into an object, exception message any others cases
-		 */	
-		public function display_formules() {
-			try {								
-				$qry = oci_parse($this->db, 'SELECT FORMULES.* FROM FORMULES');			
-				oci_execute($qry);
-					
-				//$return_qry = $qry->fetchAll();
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+		 * Delete a specified Eleve
+		 *
+		 * @param PK_EXAMEN, Eleve's id
+		 * @return 0 without errors, exception message any others cases
+		 */
+		public function delete_examen($PK_EXAMEN) {
+			try {
 				
-				oci_close($this->db);
-				return $res;
+				$qry = oci_parse($this->db, 'DELETE AUTO.EXAMEN FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =?');	
+				$qry->bindValue(1, $PK_EXAMEN, \PDO::PARAM_INT);
+				oci_execute($qry);
+				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
-		}
+		}		
 
 		/**
-		 * All Eleve's informations from one Eleve 
-		 *
-		 * @param PK_LECON, Eleve's id
-		 * @return return_qry : result into an object, exception message any others cases
+		 * Delete all Eleve
+		 *	
+		 * @return 0 without errors, exception message any others cases
 		 */
-		public function display_formule($PK_LECON) {
-			try {
+		public function delete_examens() {
+			try {								
 
-				$qry = oci_parse($this->db, 'SELECT FORMULES.* FROM FORMULES WHERE FORMULES.PK_FORMULES =?');	
-				$qry->bindValue(1, $PK_LECON, \PDO::PARAM_INT);
-				oci_execute($qry);
-					
-				//$return_qry = $qry->fetchAll();
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
-				
-				oci_close($this->db);
-				return $res;		
+				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.EXAMEN');	
+				oci_execute($qry);		
+				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
 	}
-	?>
+
+?>
