@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Formules; 
-	require_once('FormulesModel.php'); 
+	namespace Vehicule; 
+	require_once('VehiculeModel.php'); 
 	
-	class AddModel extends FormulesModel{
+	class AddModel extends VehiculeModel{
 
 		/**
 		 * AddModel instance
@@ -75,21 +75,31 @@
 
 		/**
 		 * Modify all customer's informations from one customer 		
-		 * @param PRIX_FM ,  customer's lasttName
-		 * @param NB_LECON_PACK ,  customer's lasttName
-		 
-		 * @param LIBELLE ,  customer's lasttName
+		 * @param FK_MODELE ,  customer's lasttName
+		 * @param PUISSANCE ,  customer's lasttName
+		 * @param NUMERO ,  customer's lasttName
+		 * @param KM ,  customer's lasttName
+		 * @param DATE_ACHAT ,  customer's lasttName
+		 * @param PRIX_ACHAT ,  customer's lasttName
 		 */
-		public function add_formule($PRIX_FM,$NB_LECON_PACK, $LIBELLE) {
+		public function add_vehicule($FK_MODELE, $PUISSANCE, $NUMERO, $KM, $DATE_ACHAT, $PRIX_ACHAT) {
 			try {		
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FORMULES (PRIX_FM, NB_LECON_PACK, LIBELLE) VALUES (?,?,?)');
-				$qry->bindValue(1, $PRIX_FM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $NB_LECON_PACK, \PDO::PARAM_STR);
-				$qry->bindValue(3, $LIBELLE, \PDO::PARAM_STR);
+				// INSERT INTO "AUTO"."VEHICULE" (FK_MODELE, PUISSANCE, NUMERO, KM, DATE_ACHAT, PRIX_ACHAT) VALUES ('1', '1', '1', '44', '121', TO_DATE('2016-01-04 17:56:12', 'YYYY-MM-DD HH24:MI:SS'), '11')
+
+
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.VEHICULE (FK_MODELE, FK_MONITEUR, NUMERO, KM, DATE_ACHAT, PRIX_ACHAT) VALUES (?,?,?,?,?,?)');
+				$qry->bindValue(1, $FK_MODELE, \PDO::PARAM_STR);
+				$qry->bindValue(2, $PUISSANCE, \PDO::PARAM_STR);
+				$qry->bindValue(3, $NUMERO, \PDO::PARAM_INT);
+				$qry->bindValue(4, $KM, \PDO::PARAM_STR);
+				$qry->bindValue(5, $DATE_ACHAT, \PDO::PARAM_STR);
+				$qry->bindValue(6, $PRIX_ACHAT, \PDO::PARAM_INT);
 
 				oci_execute($qry);
-				oci_close($this->db);								
+
+				oci_close($this->db);
+				return $res;				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

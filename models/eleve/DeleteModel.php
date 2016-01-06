@@ -84,10 +84,6 @@
 				$qry = oci_parse($this->db, 'DELETE ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =?');	
 				$qry->bindValue(1, $cust_lastName, \PDO::PARAM_INT);
 				oci_execute($qry);
-					
-				//$return_qry = $qry->fetchAll();
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
-
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -102,8 +98,7 @@
 			try {								
 
 				$qry = oci_parse($this->db, 'DELETE * FROM ELEVE');	
-				oci_execute($qry);		
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				oci_execute($qry);	
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

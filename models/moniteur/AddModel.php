@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Formules; 
-	require_once('FormulesModel.php'); 
+	namespace Moniteur; 
+	require_once('MoniteurModel.php'); 
 	
-	class AddModel extends FormulesModel{
+	class AddModel extends MoniteurModel{
 
 		/**
 		 * AddModel instance
@@ -75,21 +75,30 @@
 
 		/**
 		 * Modify all customer's informations from one customer 		
-		 * @param PRIX_FM ,  customer's lasttName
-		 * @param NB_LECON_PACK ,  customer's lasttName
-		 
-		 * @param LIBELLE ,  customer's lasttName
+		 * @param NOM ,  customer's lasttName
+		 * @param PRENOM ,  customer's lasttName
+		 * @param ADRESSE ,  customer's lasttName
+		 * @param NUM_TEL ,  customer's lasttName
+		 * @param SURNOM ,  customer's lasttName	
+		 * @param DATE_EMBAUCHE ,  customer's lasttName
 		 */
-		public function add_formule($PRIX_FM,$NB_LECON_PACK, $LIBELLE) {
+		public function add_moniteur($NOM, $PRENOM, $ADRESSE, $NUM_TEL, $SURNOM, $DATE_EMBAUCHE) {
 			try {		
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FORMULES (PRIX_FM, NB_LECON_PACK, LIBELLE) VALUES (?,?,?)');
-				$qry->bindValue(1, $PRIX_FM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $NB_LECON_PACK, \PDO::PARAM_STR);
-				$qry->bindValue(3, $LIBELLE, \PDO::PARAM_STR);
+				// INSERT INTO "AUTO"."MONITEUR" (NOM, PRENOM, ADRESSE, NUM_TEL, SURNOM, DATE_EMBAUCHE) VALUES ('hobbit', 'bilbo', 'eee', '555', 'orgi', TO_DATE('2016-01-11 18:08:51', 'YYYY-MM-DD HH24:MI:SS'))
+
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MONITEUR  (NOM, PRENOM, ADRESSE, NUM_TEL, SURNOM, DATE_EMBAUCHE) VALUES (?,?,?,?,?,?,?)');
+				$qry->bindValue(1, $NOM, \PDO::PARAM_STR);
+				$qry->bindValue(2, $PRENOM, \PDO::PARAM_STR);
+				$qry->bindValue(3, $ADRESSE, \PDO::PARAM_STR);
+				$qry->bindValue(4, $NUM_TEL, \PDO::PARAM_STR);
+				$qry->bindValue(5, $SURNOM, \PDO::PARAM_STR);
+				$qry->bindValue(6, $DATE_EMBAUCHE, \PDO::PARAM_STR);	
 
 				oci_execute($qry);
-				oci_close($this->db);								
+
+				oci_close($this->db);
+				return $res;				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

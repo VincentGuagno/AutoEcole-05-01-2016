@@ -77,7 +77,7 @@
 		 * Modify all customer's informations from one customer 		
 		 * @param PERMIS ,  customer's lasttName
 		 */
-		public function add_Permis($PERMIS) {
+		public function add_permis($PERMIS) {
 			try {				
 				$qry = oci_parse($this->db, 'INSERT INTO AUTO.PERMIS (NOM) VALUES (?)');
 				$qry->bindValue(1, $car_id, \PDO::PARAM_INT);

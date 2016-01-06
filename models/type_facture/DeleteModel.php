@@ -84,10 +84,8 @@
 				$qry = oci_parse($this->db, 'DELETE AUTO.TYPE_FACTURE FROM TYPE_FACTURE WHERE TYPE_FACTURE.PK_TYPE_FACTURE =?');	
 				$qry->bindValue(1, $PK_TYPE_FACTURE, \PDO::PARAM_INT);
 				oci_execute($qry);
-					
-				//$return_qry = $qry->fetchAll();
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
+				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -103,7 +101,8 @@
 
 				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.TYPE_FACTURE');	
 				oci_execute($qry);		
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

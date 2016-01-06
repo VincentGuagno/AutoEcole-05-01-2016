@@ -1,48 +1,48 @@
 <?php
 
 	/*
-	 * Model for marque modifications
-	 * This class handles the delete of a marque
+	 * Model for Eleve modifications
+	 * This class handles the display of a eleve
 	 *
 	 * @author Bastien VAUTIER
 	 * @version 0.0.1
-	 * @copyright 2015 3iL
+	 * @copyright 2016 3iL
 	 */
-	 
-	namespace Formules; 
-	require_once('FormulesModel.php'); 
 	
-	class DeleteModel extends FormulesModel{
+	namespace Facturation;	
+	require_once('FacturationModel.php'); 
+	
+	class DisplayModel extends FacturationModel {
 
 		/**
-		 * DeleteModel instance
+		 * DisplayModel instance
 		 */
 		public static $instance = null;
 		
 		/**
-		 * The constructor of DeleteModel
+		 * The constructor of DisplayModel
 		 */
 		public function __construct() {
 			try {
-				DeleteModel::init();
+				DisplayModel::init();
 			} catch(Exception $e) {
 				echo $e->getMessage();
 			}
 		}
 		
 		/**
-		 * Get current instance of DeleteModel (singleton)
+		 * Get current instance of DisplayModel (singleton)
 		 *
-		 * @return DeleteModel
+		 * @return DisplayModel
 		 */
 		public static function getInstance() {
 			if (!self::$instance) {
-				self::$instance = new DeleteModel();
+				self::$instance = new DisplayModel();
 			}
 			return self::$instance;
 		}
 		
-		/**		
+		/**
 		 * Initialize the DisplayModel class
 		 */
 		public function init() {
@@ -71,40 +71,47 @@
 			}
 		}
 
-
 		/**
-		 * Delete a specified Eleve
-		 *
-		 * @param PK_LECON, Eleve's id
-		 * @return 0 without errors, exception message any others cases
-		 */
-		public function delete_lecon($PK_LECON) {
-			try {
-				
-				$qry = oci_parse($this->db, 'DELETE AUTO.LECON FROM LECON WHERE LECON.PK_LECON =?');	
-				$qry->bindValue(1, $PK_LECON, \PDO::PARAM_INT);
+		 * Display all caravans's informations
+		 *		
+		 * @return return_qry : result into an object, exception message any others cases
+		 */	
+		public function display_facturations() {
+			try {								
+				$qry = oci_parse($this->db, 'SELECT * FROM FACTURATION');			
 				oci_execute($qry);
-				return 0;
+					
+				//$return_qry = $qry->fetchAll();
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				oci_close($this->db);
+				return $res;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
-		}		
+		}
 
 		/**
-		 * Delete all Eleve
-		 *	
-		 * @return 0 without errors, exception message any others cases
+		 * All Eleve's informations from one Eleve 
+		 *
+		 * @param PK_FACTURATION, Eleve's id
+		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function delete_leconss() {
-			try {								
+		public function display_facturation($PK_FACTURATION) {
+			try {
 
-				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.LECON');	
-				oci_execute($qry);		
-				return 0;
+				$qry = oci_parse($this->db, 'SELECT * FROM FACTURATION WHERE FACTURATION.PK_FACTURATION =?');	
+				$qry->bindValue(1, $PK_FACTURATION, \PDO::PARAM_INT);
+				oci_execute($qry);
+					
+				//$return_qry = $qry->fetchAll();
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				oci_close($this->db);
+				return $res;		
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
 	}
-
-?>
+	?>

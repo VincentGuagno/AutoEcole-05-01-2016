@@ -75,16 +75,18 @@
 
 		/**
 		 * Modify all customer's informations from one customer 		
-		 * @param MARQUE ,  customer's lasttName
-		 * @param DATE_LECON ,  customer's lasttName
-		 * @param ETAT_LECON ,  customer's lasttName
+		 * @param TYPE_MOTEUR ,  customer's lasttName
+		 * @param PUISSANCE ,  customer's lasttName
+		 * @param NOM_MODELE ,  customer's lasttName
 		 */
-		public function add_modele($MARQUE,$PUISSANCE, $ETAT_LECON) {
+		public function add_modele($TYPE_MOTEUR,$PUISSANCE, $NOM_MODELE) {
 			try {		
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.LECON (FK_ELEVE, DATE_LECON, ETAT_LECON) VALUES (?,?,?)');
-				$qry->bindValue(1, $MARQUE, \PDO::PARAM_STR);
-				$qry->bindValue(1, $DATE_LECON, \PDO::PARAM_STR);
-				$qry->bindValue(1, $ETAT_LECON, \PDO::PARAM_STR);
+				//INSERT INTO "AUTO"."MODELE" (TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES ('156', '8456', 'plll')
+
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MODELE (TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES (?,?,?)');
+				$qry->bindValue(1, $TYPE_MOTEUR, \PDO::PARAM_STR);
+				$qry->bindValue(2, $PUISSANCE, \PDO::PARAM_STR);
+				$qry->bindValue(3, $NOM_MODELE, \PDO::PARAM_STR);
 
 				oci_execute($qry);
 				oci_close($this->db);								

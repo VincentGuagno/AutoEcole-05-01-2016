@@ -84,10 +84,7 @@
 				$qry = oci_parse($this->db, 'DELETE AUTO.MODELE FROM MODELE WHERE MODELE.PK_MODELE =?');	
 				$qry->bindValue(1, $PK_MODELE, \PDO::PARAM_INT);
 				oci_execute($qry);
-					
-				//$return_qry = $qry->fetchAll();
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
-
+				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -103,7 +100,7 @@
 
 				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.MODELE');	
 				oci_execute($qry);		
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

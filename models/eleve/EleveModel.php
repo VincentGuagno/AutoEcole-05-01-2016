@@ -40,6 +40,7 @@
 				*/
 
 				$qry = oci_parse($this->db, 'SELECT ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =?');	
+				$qry->bindValue(1, $PK_ELEVE, \PDO::PARAM_STR);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();

@@ -1,49 +1,48 @@
 <?php
 
 	/*
-	 * Model for marque modifications
-	 * This class handles the add  of a marque
+	 * Model for customer modifications
+	 * This class handles the delete of a customer
 	 *
 	 * @author Bastien VAUTIER
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Formules; 
-	require_once('FormulesModel.php'); 
+	namespace Facturation; 
+	require_once('FacturationModel.php'); 
 	
-	class AddModel extends FormulesModel{
+	class DeleteModel extends FacturationModel{
 
 		/**
-		 * AddModel instance
+		 * DeleteModel instance
 		 */
 		public static $instance = null;
 		
 		/**
-		 * The constructor of AddModel
+		 * The constructor of DeleteModel
 		 */
 		public function __construct() {
 			try {
-				AddModel::init();
+				DeleteModel::init();
 			} catch(Exception $e) {
 				echo $e->getMessage();
 			}
 		}
 		
 		/**
-		 * Get current instance of AddModel (singleton)
+		 * Get current instance of DeleteModel (singleton)
 		 *
-		 * @return AddModel
+		 * @return DeleteModel
 		 */
 		public static function getInstance() {
 			if (!self::$instance) {
-				self::$instance = new AddModel();
+				self::$instance = new DeleteModel();
 			}
 			return self::$instance;
 		}
 		
-		/**
-		/**
+		/**		
 		 * Initialize the DisplayModel class
 		 */
 		public function init() {
@@ -74,26 +73,38 @@
 
 
 		/**
-		 * Modify all customer's informations from one customer 		
-		 * @param PRIX_FM ,  customer's lasttName
-		 * @param NB_LECON_PACK ,  customer's lasttName
-		 
-		 * @param LIBELLE ,  customer's lasttName
+		 * Delete a specified Eleve
+		 *
+		 * @param PK_FACTURATION, Eleve's id
+		 * @return 0 without errors, exception message any others cases
 		 */
-		public function add_formule($PRIX_FM,$NB_LECON_PACK, $LIBELLE) {
-			try {		
-
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FORMULES (PRIX_FM, NB_LECON_PACK, LIBELLE) VALUES (?,?,?)');
-				$qry->bindValue(1, $PRIX_FM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $NB_LECON_PACK, \PDO::PARAM_STR);
-				$qry->bindValue(3, $LIBELLE, \PDO::PARAM_STR);
-
-				oci_execute($qry);
-				oci_close($this->db);								
+		public function delete_type_facture($PK_FACTURATION) {
+			try {
+				
+				$qry = oci_parse($this->db, 'DELETE AUTO.FACTURATION FROM FACTURATION WHERE FACTURATION.PK_FACTURATION =?');	
+				$qry->bindValue(1, $PK_FACTURATION, \PDO::PARAM_INT);
+				oci_execute($qry);	
+				return 0;				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
-		}	
+		}
+
+		/**
+		 * Delete all Eleve
+		 *	
+		 * @return 0 without errors, exception message any others cases
+		 */
+		public function delete_type_factures() {
+			try {								
+
+				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.FACTURATION');	
+				oci_execute($qry);
+				return 0;
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
 	}
-	
+
 ?>

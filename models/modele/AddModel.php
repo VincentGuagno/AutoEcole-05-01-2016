@@ -84,8 +84,8 @@
 
 				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MODELE (PK_MODELE, TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES (?,?,?)');
 				$qry->bindValue(1, $MARQUE, \PDO::PARAM_STR);
-				$qry->bindValue(1, $PUISSANCE, \PDO::PARAM_STR);
-				$qry->bindValue(1, $NOM_MODELE, \PDO::PARAM_STR);
+				$qry->bindValue(2, $PUISSANCE, \PDO::PARAM_STR);
+				$qry->bindValue(3, $NOM_MODELE, \PDO::PARAM_STR);
 
 				oci_execute($qry);
 

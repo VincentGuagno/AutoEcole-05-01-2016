@@ -1,18 +1,18 @@
 <?php
 
 	/*
-	 * Model for marque modifications
-	 * This class handles the add  of a marque
+	 * Model for permis modifications
+	 * This class handles the add  of a permis
 	 *
 	 * @author Bastien VAUTIER
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Formules; 
-	require_once('FormulesModel.php'); 
+	namespace Facturation; 
+	require_once('FacturationModel.php'); 
 	
-	class AddModel extends FormulesModel{
+	class AddModel extends FacturationModel{
 
 		/**
 		 * AddModel instance
@@ -75,21 +75,22 @@
 
 		/**
 		 * Modify all customer's informations from one customer 		
-		 * @param PRIX_FM ,  customer's lasttName
-		 * @param NB_LECON_PACK ,  customer's lasttName
-		 
-		 * @param LIBELLE ,  customer's lasttName
+		 * @param DATE_FACTURE ,  customer's lasttName
+		 * @param PRIX ,  customer's lasttName
+		 * @param ETAT_FACTURE ,  customer's lasttName
 		 */
-		public function add_formule($PRIX_FM,$NB_LECON_PACK, $LIBELLE) {
-			try {		
+		public function add_facturation($DATE_FACTURE, $PRIX, $ETAT_FACTURE) {
+			try {				
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FORMULES (PRIX_FM, NB_LECON_PACK, LIBELLE) VALUES (?,?,?)');
-				$qry->bindValue(1, $PRIX_FM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $NB_LECON_PACK, \PDO::PARAM_STR);
-				$qry->bindValue(3, $LIBELLE, \PDO::PARAM_STR);
+				//INSERT INTO "AUTO"."FACTURATION" (FK_TYPE_FACTURE, DATE_FACTURE, PRIX, ETAT_FACTURE) VALUES ('2', TO_DATE('2016-01-22 17:48:34', 'YYYY-MM-DD HH24:MI:SS'), '55', '1')
+
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FACTURATION (DATE_FACTURE, PRIX, ETAT_FACTURE) VALUES (?,?,?)');
+				$qry->bindValue(1, $TYPE_FACTURE, \PDO::PARAM_STR);?
+				$qry->bindValue(2, $PRIX, \PDO::PARAM_INT);?
+				$qry->bindValue(3, $ETAT_FACTURE, \PDO::PARAM_STR);?
 
 				oci_execute($qry);
-				oci_close($this->db);								
+				oci_close($this->db);	
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

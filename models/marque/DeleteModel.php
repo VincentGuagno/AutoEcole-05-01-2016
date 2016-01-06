@@ -84,10 +84,7 @@
 				$qry = oci_parse($this->db, 'DELETE AUTO.MARQUE FROM MARQUE WHERE MARQUE.PK_MARQUE =?');	
 				$qry->bindValue(1, $PK_MARQUE, \PDO::PARAM_INT);
 				oci_execute($qry);
-					
-				//$return_qry = $qry->fetchAll();
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
-
+				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -103,7 +100,7 @@
 
 				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.MARQUE');	
 				oci_execute($qry);		
-				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
