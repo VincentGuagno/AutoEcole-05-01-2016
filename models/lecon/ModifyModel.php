@@ -75,31 +75,23 @@
 		/**
 		 * Modify all customer's informations from one customer 
 		 * NOT IN ORDER
-		 * @param cust_id, customer's id
-		 * @param cust_lastName, customer's name
-		 * @param cust_firstName, customer's name
-		 * @param cust_address, customer's address
-		 * @param cust_zipCode, customer's zip code
-		 * @param cust_city, customer's city
-		 * @param cust_phoneNumber, customer's phone number
-		 * @param cust_recordNumber, customer's record number
+		 * @param DATE_LECON, customer's id
+		 * @param ETAT_LECON, customer's name
+		 * @param PK_LECON, customer's name
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function modify_customer($cust_id, $cust_lastName, $cust_firstName, $cust_address, $cust_zipCode, $cust_city, $cust_phoneNumber, $cust_addNumber) {
+		public function modify_lecon($DATE_LECON, $ETAT_LECON, $PK_LECON) {
 			try {
-				$qry = $this->db->prepare('UPDATE camping.customer SET cust_lastName =?, cust_address =?, cust_postal_code =?, cust_city =?, cust_phone_number =?, cust_record_number =?, cust_firstName =? WHERE cust_id =?');
+
+				// UPDATE LECON SET DATE_LECON = TO_DATE('2011-01-22', 'YYYY-MM-DD HH24:MI:SS'), ETAT_LECON = '0' WHERE PK_LECON = 4
+				$qry = oci_parse($this->db, ("UPDATE LECON SET DATE_LECON = TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS'), ETAT_LECON = ? WHERE PK_LECON = ?");
 				
-				$qry->bindValue(1, $cust_lastName, \PDO::PARAM_STR);
-				$qry->bindValue(2, $cust_address, \PDO::PARAM_STR);
-				$qry->bindValue(3, $cust_zipCode, \PDO::PARAM_STR);
-				$qry->bindValue(4, $cust_city, \PDO::PARAM_STR);
-				$qry->bindValue(5, $cust_phoneNumber, \PDO::PARAM_STR);
-				$qry->bindValue(6, $cust_addNumber, \PDO::PARAM_STR);
-				$qry->bindValue(7, $cust_firstName, \PDO::PARAM_STR);
-				$qry->bindValue(8, $cust_id, \PDO::PARAM_INT);
-				
-				$qry->execute();
-				$qry->closeCursor();
+				$qry->bindValue(1, $DATE_LECON, \PDO::PARAM_STR);
+				$qry->bindValue(2, $ETAT_LECON, \PDO::PARAM_INT);
+				$qry->bindValue(3, $PK_LECON, \PDO::PARAM_INT);
+			
+				oci_execute($qry);
+
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();

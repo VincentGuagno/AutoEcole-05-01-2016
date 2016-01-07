@@ -75,32 +75,27 @@
 		/**
 		 * Modify all customer's informations from one customer 
 		 * NOT IN ORDER
-		 * @param cust_id, customer's id
-		 * @param cust_lastName, customer's name
-		 * @param cust_firstName, customer's name
-		 * @param cust_address, customer's address
-		 * @param cust_zipCode, customer's zip code
-		 * @param cust_city, customer's city
-		 * @param cust_phoneNumber, customer's phone number
-		 * @param cust_recordNumber, customer's record number
+		 * @param NUMERO, customer's id
+		 * @param KM, customer's name
+		 * @param DATE_ACHAT, customer's name
+		 * @param PRIX_ACHAT, customer's address
+		 * @param PK_VEHICULE, customer's zip code
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function modify_customer($cust_id, $cust_lastName, $cust_firstName, $cust_address, $cust_zipCode, $cust_city, $cust_phoneNumber, $cust_addNumber) {
+		public function modify_vehicule($NUMERO, $KM, $DATE_ACHAT, $PRIX_ACHAT, $PK_VEHICULE) {
 			try {
-				$qry = $this->db->prepare('UPDATE camping.customer SET cust_lastName =?, cust_address =?, cust_postal_code =?, cust_city =?, cust_phone_number =?, cust_record_number =?, cust_firstName =? WHERE cust_id =?');
+				// UPDATE VEHICULE SET NUMERO = 008, KM = 13165444456, DATE_ACHAT = TO_DATE('2016-01-05', 'YYYY-MM-DD HH24:MI:SS'), PRIX_ACHAT = 555545 WHERE PK_VEHICULE=6
+				$qry = oci_parse($this->db, ("UPDATE VEHICULE SET NUMERO = ?, KM = ?, DATE_ACHAT = TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS'), PRIX_ACHAT = ? WHERE PK_VEHICULE=?");
 				
-				$qry->bindValue(1, $cust_lastName, \PDO::PARAM_STR);
-				$qry->bindValue(2, $cust_address, \PDO::PARAM_STR);
-				$qry->bindValue(3, $cust_zipCode, \PDO::PARAM_STR);
-				$qry->bindValue(4, $cust_city, \PDO::PARAM_STR);
-				$qry->bindValue(5, $cust_phoneNumber, \PDO::PARAM_STR);
-				$qry->bindValue(6, $cust_addNumber, \PDO::PARAM_STR);
-				$qry->bindValue(7, $cust_firstName, \PDO::PARAM_STR);
-				$qry->bindValue(8, $cust_id, \PDO::PARAM_INT);
-				
-				$qry->execute();
-				$qry->closeCursor();
+				$qry->bindValue(1, $NUMERO, \PDO::PARAM_INT);
+				$qry->bindValue(2, $KM, \PDO::PARAM_INT);
+				$qry->bindValue(3, $DATE_ACHAT, \PDO::PARAM_STR);
+				$qry->bindValue(4, $PRIX_ACHAT, \PDO::PARAM_INT);
+				$qry->bindValue(5, $PK_VEHICULE, \PDO::PARAM_INT);
+			
+				oci_execute($qry);
 				return 0;
+
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

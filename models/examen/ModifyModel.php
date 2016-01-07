@@ -75,31 +75,22 @@
 		/**
 		 * Modify all customer's informations from one customer 
 		 * NOT IN ORDER
-		 * @param cust_id, customer's id
-		 * @param cust_lastName, customer's name
-		 * @param cust_firstName, customer's name
-		 * @param cust_address, customer's address
-		 * @param cust_zipCode, customer's zip code
-		 * @param cust_city, customer's city
-		 * @param cust_phoneNumber, customer's phone number
-		 * @param cust_recordNumber, customer's record number
+		 * @param NOM, customer's id
+		 * @param DATE_PASSAGE, customer's name
+		 * @param PK_EXAMEN, customer's name
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function modify_customer($cust_id, $cust_lastName, $cust_firstName, $cust_address, $cust_zipCode, $cust_city, $cust_phoneNumber, $cust_addNumber) {
+		public function modify_examen($NOM, $DATE_PASSAGE, $PK_EXAMEN) {
 			try {
-				$qry = $this->db->prepare('UPDATE camping.customer SET cust_lastName =?, cust_address =?, cust_postal_code =?, cust_city =?, cust_phone_number =?, cust_record_number =?, cust_firstName =? WHERE cust_id =?');
+	
+				// UPDATE EXAMEN SET NOM = ' 1111', DATE_PASSAGE = TO_DATE('2016-01-14 09:26:23', 'YYYY-MM-DD HH24:MI:SS') WHERE PK_EXAMEN =1
+				$qry = oci_parse($this->db, ("UPDATE EXAMEN SET NOM = '?', DATE_PASSAGE = TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS') WHERE PK_EXAMEN =?");
 				
-				$qry->bindValue(1, $cust_lastName, \PDO::PARAM_STR);
-				$qry->bindValue(2, $cust_address, \PDO::PARAM_STR);
-				$qry->bindValue(3, $cust_zipCode, \PDO::PARAM_STR);
-				$qry->bindValue(4, $cust_city, \PDO::PARAM_STR);
-				$qry->bindValue(5, $cust_phoneNumber, \PDO::PARAM_STR);
-				$qry->bindValue(6, $cust_addNumber, \PDO::PARAM_STR);
-				$qry->bindValue(7, $cust_firstName, \PDO::PARAM_STR);
-				$qry->bindValue(8, $cust_id, \PDO::PARAM_INT);
-				
-				$qry->execute();
-				$qry->closeCursor();
+				$qry->bindValue(1, $NOM, \PDO::PARAM_STR);
+				$qry->bindValue(2, $DATE_PASSAGE, \PDO::PARAM_STR);
+				$qry->bindValue(3, $PK_EXAMEN, \PDO::PARAM_INT);
+			
+				oci_execute($qry);
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();

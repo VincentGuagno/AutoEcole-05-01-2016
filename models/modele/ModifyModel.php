@@ -75,32 +75,26 @@
 		/**
 		 * Modify all customer's informations from one customer 
 		 * NOT IN ORDER
-		 * @param cust_id, customer's id
-		 * @param cust_lastName, customer's name
-		 * @param cust_firstName, customer's name
-		 * @param cust_address, customer's address
-		 * @param cust_zipCode, customer's zip code
-		 * @param cust_city, customer's city
-		 * @param cust_phoneNumber, customer's phone number
-		 * @param cust_recordNumber, customer's record number
+		 * @param TYPE_MOTEUR, customer's id
+		 * @param PUISSANCE, customer's name
+		 * @param NOM_MODELE, customer's name
+		 * @param PK_MODELE, customer's address
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function modify_customer($cust_id, $cust_lastName, $cust_firstName, $cust_address, $cust_zipCode, $cust_city, $cust_phoneNumber, $cust_addNumber) {
+		public function modify_modele($TYPE_MOTEUR, $PUISSANCE, $NOM_MODELE, $PK_MODELE) {
 			try {
-				$qry = $this->db->prepare('UPDATE camping.customer SET cust_lastName =?, cust_address =?, cust_postal_code =?, cust_city =?, cust_phone_number =?, cust_record_number =?, cust_firstName =? WHERE cust_id =?');
+
+				// UPDATE "AUTO"."MODELE" SET TYPE_MOTEUR = '2.54', PUISSANCE = '450cv4', NOM_MODELE = 'porche4' WHERE ROWID = 'AAAE7SAABAAAK/pAAB' AND ORA_ROWSCN = '667602'
+				$qry = oci_parse($this->db, ("UPDATE MODELE SET TYPE_MOTEUR = '?', PUISSANCE = '?', NOM_MODELE = '?' WHERE PK_MODELE = ?");
 				
-				$qry->bindValue(1, $cust_lastName, \PDO::PARAM_STR);
-				$qry->bindValue(2, $cust_address, \PDO::PARAM_STR);
-				$qry->bindValue(3, $cust_zipCode, \PDO::PARAM_STR);
-				$qry->bindValue(4, $cust_city, \PDO::PARAM_STR);
-				$qry->bindValue(5, $cust_phoneNumber, \PDO::PARAM_STR);
-				$qry->bindValue(6, $cust_addNumber, \PDO::PARAM_STR);
-				$qry->bindValue(7, $cust_firstName, \PDO::PARAM_STR);
-				$qry->bindValue(8, $cust_id, \PDO::PARAM_INT);
-				
-				$qry->execute();
-				$qry->closeCursor();
-				return 0;
+				$qry->bindValue(1, $TYPE_MOTEUR, \PDO::PARAM_STR);
+				$qry->bindValue(2, $PUISSANCE, \PDO::PARAM_STR);
+				$qry->bindValue(3, $NOM_MODELE, \PDO::PARAM_STR);
+				$qry->bindValue(4, $PK_MODELE, \PDO::PARAM_INT);
+			
+				oci_execute($qry);
+
+				return 0;				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
