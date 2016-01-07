@@ -117,5 +117,34 @@
 				return $e->getMessage();
 			}
 		}
+
+		/**
+		 * Display all caravans's informations
+		 *		
+		 * @return return_qry : result into an object, exception message any others cases
+		 */	
+		public function display_examens_avec_dates($DEBUT, $FIN)  {
+			try {								
+				$qry = oci_parse($this->db, 'SELECT EXAMEN.*,
+													  PERMIS.*
+													FROM EXAMEN
+													INNER JOIN PERMIS
+													ON PERMIS.PK_PERMIS = EXAMEN.PK_EXAMEN 
+											WHERE EXAMEN.DATE_PASSAGE BETWEEN TO_DATE('2010-01-17', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE('2016-01-19', 'YYYY-MM-DD HH24:MI:SS')');			
+				oci_execute($qry);
+
+				$qry->bindValue(1, $DEBUT, \PDO::PARAM_STR);
+				$qry->bindValue(2, $FIN, \PDO::PARAM_STR);	
+
+				//$return_qry = $qry->fetchAll();
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				oci_close($this->db);
+				return $res;
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+		
 	}
 	?>

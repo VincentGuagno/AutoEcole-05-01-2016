@@ -113,5 +113,34 @@
 				return $e->getMessage();
 			}
 		}
+
+		/**
+		 * All Eleve's informations from one Eleve 
+		 *
+		 * @param DEBUT, Eleve's id
+		 * @param FIN, Eleve's id
+		 * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function display_lecons_avec_date($DEBUT, $FIN)  {
+			try {
+
+				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE LECON.DATE_LECON BETWEEN TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS')');
+
+				$qry->bindValue(1, $DEBUT, \PDO::PARAM_STR);
+				$qry->bindValue(2, $FIN, \PDO::PARAM_STR);
+				oci_execute($qry);
+					
+				//$return_qry = $qry->fetchAll();
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				oci_close($this->db);
+				return $res;		
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+
+	
 	}
 	?>

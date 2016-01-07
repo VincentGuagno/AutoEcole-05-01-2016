@@ -147,5 +147,82 @@
 				return $e->getMessage();
 			}
 		}
+
+			/**
+		 * All Eleve's informations from one Eleve 
+		 *
+		 * @param PK_MONITEUR, Eleve's id
+		 * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function display_planing_moniteur_avec_date($PK_MONITEUR, $DEBUT, $FIN) {
+			try {
+
+				$qry = oci_parse($this->db, 'SELECT MONITEUR.NOM,
+												  MONITEUR.PRENOM,
+												  MONITEUR.SURNOM,
+												  ELEVE.NOM    AS NOM1,
+												  ELEVE.PRENOM AS PRENOM1,
+												  LECON.*
+												FROM MONITEUR
+												INNER JOIN ELEVE
+												ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR
+												INNER JOIN LECON
+												ON ELEVE.PK_ELEVE          = LECON.FK_ELEVE
+												WHERE MONITEUR.PK_MONITEUR = ?
+												AND LECON.DATE_LECON BETWEEN TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS')');	
+
+				$qry->bindValue(1, $PK_MONITEUR, \PDO::PARAM_INT);
+				$qry->bindValue(2, $DEBUT, \PDO::PARAM_STR);
+				$qry->bindValue(3, $FIN, \PDO::PARAM_STR);
+
+				oci_execute($qry);
+					
+				//$return_qry = $qry->fetchAll();
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				oci_close($this->db);
+				return $res;		
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+		/**
+		 * All Eleve's informations from one Eleve 
+		 *
+		 * @param DEBUT, Eleve's id
+		 * @param FIN, Eleve's id
+		 * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function display_planing_moniteurs_avec_date($DEBUT, $FIN) {
+			try {
+
+				$qry = oci_parse($this->db, 'SELECT MONITEUR.NOM,
+												  MONITEUR.PRENOM,
+												  MONITEUR.SURNOM,
+												  ELEVE.NOM    AS NOM1,
+												  ELEVE.PRENOM AS PRENOM1,
+												  LECON.*
+												FROM MONITEUR
+												INNER JOIN ELEVE
+												ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR
+												INNER JOIN LECON
+												ON ELEVE.PK_ELEVE          = LECON.FK_ELEVE
+												WHERE LECON.DATE_LECON BETWEEN TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS')');	
+			
+				$qry->bindValue(1, $DEBUT, \PDO::PARAM_STR);
+				$qry->bindValue(2, $FIN, \PDO::PARAM_STR);
+
+				oci_execute($qry);
+					
+				//$return_qry = $qry->fetchAll();
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				oci_close($this->db);
+				return $res;		
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
 	}
 	?>
