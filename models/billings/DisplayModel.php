@@ -79,12 +79,13 @@
 		 */	
 		public function display_facturations() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT FACTURATION.DATE_FACTURE,
-													  FACTURATION.PRIX,
-													  FACTURATION.ETAT_FACTURE,
-													  ELEVE.NOM,
-													  ELEVE.PRENOM,
-													  TYPE_FACTURE.LIBELLE
+				$qry = oci_parse($this->db, 'SELECT FACTURATION.PK_FACTURATION,
+													FACTURATION.DATE_FACTURE,
+													FACTURATION.PRIX,
+													FACTURATION.ETAT_FACTURE,
+													ELEVE.NOM,
+													ELEVE.PRENOM,
+													TYPE_FACTURE.LIBELLE
 													FROM FACTURATION
 													INNER JOIN ELEVE
 													ON FACTURATION.PK_FACTURATION = ELEVE.FK_FACTURE

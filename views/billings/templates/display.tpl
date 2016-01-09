@@ -2,41 +2,42 @@
 	{%extends "layout.tpl" %}
 
 {% block title %}
-	Caravanes
+	billinges
 {% endblock %}
 	
 {% block header %}
-	Caravanes
+	billinges
 {% endblock %}
 
 {% block content %}
 	
-	<form method="post" ACTION="/Cas-M-Ping/caravans/renting">
-	<button type="submit" > Location d'une caravanes </button>
+	<form method="post" ACTION="/Cas-M-Ping/billings/renting">
+	<button type="submit" > Location d'une billinges </button>
 	</form>
 
-	<form method="post" ACTION="/Cas-M-Ping/caravans/return/all">
-	<button type="submit" > Retours des caravanes </button>
+	<form method="post" ACTION="/Cas-M-Ping/billings/return/all">
+	<button type="submit" > Retours des billinges </button>
 	</form>	
 	
 	<table class="table">
 		<tr>
-			<th> Identifiant </th>
-			<th> Société </th>
-			<th> Prix </th>
-			<th> Nombre de personnes </th>
-			<th> Emplacement </th>
-			<th></th>
+			<th> numero de facture </th>
+			<th> nom </th>
+			<th> prenom </th>
+			<th> libelle </th>
+			<th> prix </th>
+			<th> date de facturation </th>
 		</tr>
-	{% for caravan in caravans %}
+	{% for billing in billings %}
 		<tr>
-			<td>{{caravan.PK_MARQUE}}</td>
-			<td>{{caravan.NOM}}</td>
-			<td>{{caravan.car_price}}</td>
-			<td>{{caravan.car_nb_person}}</td>
-			<td>{{caravan.car_id_location}}</td>
+			<td>{{billing.PK_FACTURATION}}</td>
+			<td>{{billing.NOM}}</td>
+			<td>{{billing.PRENOM}}</td>
+			<td>{{billing.LIBELLE}}</td>
+			<td>{{billing.PRIX}}</td>
+			<td>{{billing.DATE_FACTURE}}</td>
 			<td>
-				<form method="post" ACTION="/Cas-M-Ping/caravans/return/{{caravan.car_id}}">
+				<form method="post" ACTION="/Cas-M-Ping/billings/return/{{billing.car_id}}">
 				<button type="submit" > Retour </button>
 				</form>
 			</td>

@@ -6,20 +6,20 @@
 {% endblock %}
 	
 {% block header %}
-	Location d'une caravane
+	
 {% endblock %}
 
 {% block content %}
 	
 	<form method="post" ACTION="/Cas-M-Ping/caravans/renting/confirm">
 		
-		<label for="compagny">Nom de la société : </label>
+		<label for="compagny">Nom de l'élève : </label>
 		<input class="form-control" id="compagny" name="name" >
 		
 		<label for="price">Prix : </label>
 		<input class="form-control" id="price" name="price" >
 		
-		<label for="size">Nombre de personne : </label>
+		<label for="size">Nombre d'heure : </label>
 		<input class="form-control" id="size" name="person" >
 		
 		<label for="location">Emplacement : </label>
