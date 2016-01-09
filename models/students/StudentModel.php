@@ -8,9 +8,9 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Eleve; 
+	namespace Student; 
 	 
-	class EleveModel {	
+	class StudentModel {	
 		
 		/**
 		 * Database object

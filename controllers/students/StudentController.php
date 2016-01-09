@@ -9,7 +9,7 @@
 	 * @copyright 2015 3iL
 	 */
 
-	abstract class SeasonController {
+	abstract class StudentController {
 		
 		/**
 		 * State of SeasonController
@@ -45,7 +45,7 @@
 					require_once(_TWIG_AUTOLOADER_);
 					Twig_Autoloader::register();
 				
-					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _SEASONS_VIEWS_)); 
+					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _STUDENTS_VIEWS_)); 
 					$this->twig = new Twig_Environment($loader, array(
 					  'cache' => _TWIG_CACHE_
 					));

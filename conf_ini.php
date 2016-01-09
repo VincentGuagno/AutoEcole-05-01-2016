@@ -37,12 +37,13 @@
 	 * Twig views's directories
 	 */
 	define('_BILLINGS_VIEWS_', _VIEWS_DIR_ .'/billings/templates'); 
+	define('_STUDENTS_VIEWS_', _VIEWS_DIR_ .'/students/templates'); 
+	
 	define('_CUSTOMERS_VIEWS_', _VIEWS_DIR_ .'/customers/templates'); 
 	define('_ERRORS_VIEWS_', _VIEWS_DIR_ .'/errors'); 
 	define('_HOME_VIEWS_', _VIEWS_DIR_ .'/home/templates'); 
 	define('_LOCATIONS_VIEWS_', _VIEWS_DIR_ .'/locations/templates'); 
 	define('_RENTALS_VIEWS_', _VIEWS_DIR_ .'/rentals/templates'); 
-	define('_SEASONS_VIEWS_', _VIEWS_DIR_ .'/seasons/templates'); 
 	define('_SECTORS_VIEWS_', _VIEWS_DIR_ .'/sectors/templates'); 
 	define('_VISITORS_VIEWS_', _VIEWS_DIR_ .'/visitors/templates'); 
 	
@@ -50,12 +51,13 @@
 	 * Models's directories
 	 */
 	define('_BILLINGS_MODELS_', _MODELS_DIR_ .'/billings'); 
+	define('_STUDENTS_MODELS_', _MODELS_DIR_ .'/students'); 
+	
 	define('_CUSTOMERS_MODELS_', _MODELS_DIR_ .'/customers'); 
 	define('_ERRORS_MODELS_', _MODELS_DIR_ .'/errors'); 
 	define('_HOME_MODELS_', _MODELS_DIR_ .'/home'); 
 	define('_LOCATIONS_MODELS_', _MODELS_DIR_ .'/locations'); 
 	define('_RENTALS_MODELS_', _MODELS_DIR_ .'/rentals'); 
-	define('_SEASONS_MODELS_', _MODELS_DIR_ .'/seasons'); 
 	define('_SECTORS_MODELS_', _MODELS_DIR_ .'/sectors'); 
 	define('_VISITORS_MODELS_', _MODELS_DIR_ .'/visitors'); 
 	

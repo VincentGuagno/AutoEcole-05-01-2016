@@ -9,9 +9,9 @@
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('SeasonController.php');
+	require_once('StudentController.php');
 	 
-	class DisplayController extends SeasonController {
+	class DisplayController extends StudentController {
 		
 		/**
 		 * Name of called model
@@ -49,34 +49,34 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'DisplayController') {
-					if (file_exists (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
-						if (file_exists (_SEASONS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
+					if (file_exists (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+						if (file_exists (_STUDENTS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
 							try {	
-								require_once (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php');
+								require_once (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php');
 								$id = Tools::getInstance()->getUrl_id($url);
 								
 								switch ($id) {
 									case 'all':
-										$data = \Season\DisplayModel::getInstance()->display_seasons();
+										$data = \Student\DisplayModel::getInstance()->display_seasons();
 										break;
 									default:
-										if(\Season\DisplayModel::getInstance()->has_season($id) == 1) {
-											$data = \Season\DisplayModel::getInstance()->display_season($id);
+										if(\Student\DisplayModel::getInstance()->has_season($id) == 1) {
+											$data = \Student\DisplayModel::getInstance()->display_season($id);
 										} else {
 											header('Location: /Cas-M-Ping/errors/404');
 										}
 										break;
 								}
-								echo $this->twig->render($this->view_name .'.tpl', array('seasons' => $data, 'bootstrapPath' => _BOOTSTRAP_FILE_));
+								echo $this->twig->render($this->view_name .'.tpl', array('students' => $data, 'bootstrapPath' => _BOOTSTRAP_FILE_));
 								
 							} catch (Exception $e) {
 								throw new Exception('Une erreur est survenue durant la récupération des données: '.$e->getMessage());
 							}
 						} else {
-							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._SEASONS_VIEWS_ .'"!');
+							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._STUDENTS_VIEWS_ .'"!');
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._SEASONS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._STUDENTS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');

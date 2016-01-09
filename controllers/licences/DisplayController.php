@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for Billings displays
-	 * This class handles the Billings displays
+	 * Controller for sector displays
+	 * This class handles the sector displays
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('BillingsController.php');
+	require_once('LeconController.php');
 	 
-	class DisplayController extends BillingsController {
+	class DisplayController extends SectorController {
 		
 		/**
 		 * Name of called model
@@ -49,35 +49,40 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'DisplayController') {
-					if (file_exists (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
-						if (file_exists (_BILLINGS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
+					if (file_exists (_SECTORS_MODELS_ .'/'. $this->model_name .'Model.php') && file_exists (_LOCATIONS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+						if (file_exists (_SECTORS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
 							try {	
-							echo _BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php';
-								require_once (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php');
+								require_once (_SECTORS_MODELS_ .'/'. $this->model_name .'Model.php');
+								require_once (_LOCATIONS_MODELS_ .'/'. $this->model_name .'Model.php');
 								$id = Tools::getInstance()->getUrl_id($url);
-
+								
 								switch ($id) {
 									case 'all':
-										$data = \Billings\DisplayModel::getInstance()->display_facturations();
+										$sectors = \Sector\DisplayModel::getInstance()->display_sectors();
+										$locations = \Location\DisplayModel::getInstance()->display_locationAll();
 										break;
 									default:
-										if(\Billings\DisplayModel::getInstance()->has_Billings($id) == 1) {
-											$data = \Billings\DisplayModel::getInstance()->display_facturation($id);
+										if(\Sector\DisplayModel::getInstance()->has_sector($id) == 1) {
+											$data = \Sector\DisplayModel::getInstance()->display_sector($id);
+											
+											$sectors = \Sector\DisplayModel::getInstance()->display_sector($id);
+										$locations = \Location\DisplayModel::getInstance()->display_locationAll();
 										} else {
 											header('Location: /Cas-M-Ping/errors/404');
 										}
 										break;
 								}
-								echo $this->twig->render($this->view_name .'.tpl', array('billings' => $data, 'bootstrapPath' => _BOOTSTRAP_FILE_));
+								
+								echo $this->twig->render($this->view_name .'.tpl', array('sectors' => $sectors, 'locations' => $locations, 'bootstrapPath' => _BOOTSTRAP_FILE_));
 								
 							} catch (Exception $e) {
 								throw new Exception('Une erreur est survenue durant la récupération des données: '.$e->getMessage());
 							}
 						} else {
-							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._BILLINGS_VIEWS_ .'"!');
+							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._SECTORS_VIEWS_ .'"!');
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._BILLINGS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._SECTORS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -88,7 +93,7 @@
 		}
 		
 		/**
-	     * @see BillingsController::checkAccess()
+	     * @see SectorController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -96,7 +101,7 @@
 	    }
 
 		/**
-		 * @see BillingsController::viewAccess()
+		 * @see SectorController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {
