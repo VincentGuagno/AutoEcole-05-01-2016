@@ -113,8 +113,8 @@
 													FROM ELEVE
 													INNER JOIN FORMULES
 													ON FORMULES.PK_FORMULE = ELEVE.FK_FORMULES
-													WHERE ELEVE.PK_ELEVE   = ?');	
-				$qry->bindValue(1, $car_id, \PDO::PARAM_INT);
+													WHERE ELEVE.PK_ELEVE   = '.$PK_ELEVE);	
+				//$qry->bindValue(1, $car_id, \PDO::PARAM_INT);
 
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 

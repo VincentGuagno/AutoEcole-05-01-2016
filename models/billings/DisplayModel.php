@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Facturation;	
-	require_once('FacturationModel.php'); 
+	namespace Billings;	
+	require_once('BillingsModel.php'); 
 	
-	class DisplayModel extends FacturationModel {
+	class DisplayModel extends BillingsModel {
 
 		/**
 		 * DisplayModel instance
@@ -24,6 +24,7 @@
 		 */
 		public function __construct() {
 			try {
+				echo 'I exist';
 				DisplayModel::init();
 			} catch(Exception $e) {
 				echo $e->getMessage();
@@ -88,12 +89,12 @@
 													INNER JOIN ELEVE
 													ON FACTURATION.PK_FACTURATION = ELEVE.FK_FACTURE
 													INNER JOIN TYPE_FACTURE
-													ON TYPE_FACTURE.PK_TYPE_FACTURE = FACTURATION.PK_FACTURATION');			
+													ON TYPE_FACTURE.PK_TYPE_FACTURE = FACTURATION.PK_FACTURATION');
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
-				
+				var_dump($res);
 				oci_close($this->db);
 				return $res;
 			} catch(Exception $e) {

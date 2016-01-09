@@ -8,9 +8,9 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Facturation; 
+	namespace Billings; 
 	 
-	class FacturationModel {
+	class BillingsModel {
 		
 
 
