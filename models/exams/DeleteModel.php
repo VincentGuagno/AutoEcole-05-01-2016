@@ -81,9 +81,11 @@
 		public function delete_examen($PK_EXAMEN) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.EXAMEN FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =?');	
-				$qry->bindValue(1, $PK_EXAMEN, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'DELETE AUTO.EXAMEN FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =:PK_EXAMEN');	
+				oci_bind_by_name($qry,":PK_EXAMEN",$PK_EXAMEN);
 				oci_execute($qry);
+				oci_close($this->db);
+
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();

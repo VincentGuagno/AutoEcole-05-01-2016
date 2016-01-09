@@ -84,17 +84,18 @@
 
 				//INSERT INTO "AUTO"."EXAMEN" (FK_PERMIS, FK_ELEVE, NOM, DATE_PASSAGE) VALUES ('1', '21', 'ghgh', TO_DATE('2017-01-20 18:44:27', 'YYYY-MM-DD HH24:MI:SS'))
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FORMULES ( NOM, DATE_PASSAGE) VALUES (?,?)');
-				$qry->bindValue(1, $NOM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $DATE_PASSAGE, \PDO::PARAM_STR);
-		
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FORMULES (NOM, DATE_PASSAGE) VALUES (:NOM,:DATE_PASSAGE)');
+				oci_bind_by_name($qry,":NOM",$NOM);
+				oci_bind_by_name($qry,":DATE_PASSAGE",$DATE_PASSAGE);
 
+						
 				oci_execute($qry);
 				oci_close($this->db);								
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}	
-	}
-	
+	}	
 ?>
+
+

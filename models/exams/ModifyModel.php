@@ -84,19 +84,28 @@
 			try {
 	
 				// UPDATE EXAMEN SET NOM = ' 1111', DATE_PASSAGE = TO_DATE('2016-01-14 09:26:23', 'YYYY-MM-DD HH24:MI:SS') WHERE PK_EXAMEN =1
-				$qry = oci_parse($this->db, ("UPDATE EXAMEN SET NOM = '?', DATE_PASSAGE = TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS') WHERE PK_EXAMEN =?");
+				$qry = oci_parse($this->db, ("UPDATE EXAMEN SET NOM = ':NOM', DATE_PASSAGE = TO_DATE(':DATE_PASSAGE', 'YYYY-MM-DD HH24:MI:SS') WHERE PK_EXAMEN =:PK_EXAMEN");
 				
-				$qry->bindValue(1, $NOM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $DATE_PASSAGE, \PDO::PARAM_STR);
-				$qry->bindValue(3, $PK_EXAMEN, \PDO::PARAM_INT);
+				oci_bind_by_name($qry,":NOM",$NOM);
+				oci_bind_by_name($qry,":DATE_PASSAGE",$DATE_PASSAGE);
+				oci_bind_by_name($qry,":PK_EXAMEN",$PK_EXAMEN);
 			
 				oci_execute($qry);
+				oci_close($this->db);
+				
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
-
 	}
-
 ?>
+
+
+	$qry = oci_parse($this->db, 'INSERT INTO AUTO.FACTURATION (DATE_FACTURE, PRIX, ETAT_FACTURE) VALUES (:DATE_FACTURE,:PRIX,:ETAT_FACTURE)');
+				oci_bind_by_name($qry,":DATE_FACTURE",$DATE_FACTURE);
+				oci_bind_by_name($qry,":PRIX",$PRIX);
+				oci_bind_by_name($qry,":ETAT_FACTURE",$ETAT_FACTURE);
+				
+				oci_execute($qry);
+				oci_close($this->db);

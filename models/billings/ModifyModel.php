@@ -85,14 +85,15 @@
 			try {
 
 				// UPDATE FACTURATION SET DATE_FACTURE = TO_DATE('2010-01-24', 'YYYY-MM-DD HH24:MI:SS'), PRIX = 1250, ETAT_FACTURE = 0 WHERE PK_FACTURATION = 1
-				$qry = oci_parse($this->db, ("UPDATE FACTURATION SET DATE_FACTURE = TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS'), PRIX = ?, ETAT_FACTURE = ? WHERE PK_FACTURATION = ?");
-				
-				$qry->bindValue(1, $DATE_FACTURE, \PDO::PARAM_STR);
-				$qry->bindValue(2, $PRIX, \PDO::PARAM_INT);
-				$qry->bindValue(3, $ETAT_FACTURE, \PDO::PARAM_INT);
-				$qry->bindValue(4, $PK_FACTURATION, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, ("UPDATE FACTURATION SET DATE_FACTURE = TO_DATE(':DATE_FACTURE', 'YYYY-MM-DD HH24:MI:SS'), PRIX = :PRIX, ETAT_FACTURE = :ETAT_FACTURE WHERE PK_FACTURATION = :PK_FACTURATION");
+					
+				oci_bind_by_name($qry,":DATE_FACTURE",$DATE_FACTURE);			
+				oci_bind_by_name($qry,":PRIX",$PRIX);			
+				oci_bind_by_name($qry,":ETAT_FACTURE",$ETAT_FACTURE);			
+				oci_bind_by_name($qry,":PK_FACTURATION",$PK_FACTURATION);			
 			
 				oci_execute($qry);
+				oci_close($this->db);
 				return 0;
 
 			} catch(Exception $e) {

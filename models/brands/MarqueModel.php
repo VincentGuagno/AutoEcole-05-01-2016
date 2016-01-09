@@ -34,15 +34,15 @@
 		public function has_marque($PK_MARQUE) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT AUTO.MARQUE FROM MARQUE WHERE MARQUE.PK_MARQUE =?');
-				$qry->bindValue(1, $PK_MARQUE, \PDO::PARAM_STR);				
+				$qry = oci_parse($this->db, 'SELECT AUTO.MARQUE FROM MARQUE WHERE MARQUE.PK_MARQUE =:PK_MARQUE');
+				oci_bind_by_name($qry,":PK_MARQUE",$PK_MARQUE);		
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);				
 				oci_close($this->db);
 				return $res;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
-		}
-		
+		}		
 	}
 ?>
+	

@@ -82,19 +82,17 @@
 		public function modify_marque($NOM, $PK_MARQUE) {
 			try {
 				//UPDATE MARQUE SET NOM = 'Citron' WHERE PK_MARQUE =1
-				$qry = oci_parse($this->db, ("UPDATE LECON SET NOM = '?' WHERE PK_MARQUE = ?");
+				$qry = oci_parse($this->db, ("UPDATE LECON SET NOM = ':NOM' WHERE PK_MARQUE = :PK_MARQUE");
 				
-				$qry->bindValue(1, $NOM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $PK_MARQUE, \PDO::PARAM_INT);
+				oci_bind_by_name($qry,":NOM",$NOM);
+				oci_bind_by_name($qry,":PK_MARQUE",$PK_MARQUE);
 			
 				oci_execute($qry);
-
+				oci_close($this->db);
 				return 0;				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
-
 	}
-
 ?>

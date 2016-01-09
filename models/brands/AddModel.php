@@ -75,13 +75,13 @@
 
 		/**
 		 * Modify all customer's informations from one customer 		
-		 * @param TYPE_FACTURE ,  customer's lasttName
+		 * @param PK_MARQUE ,  customer's lasttName
 		 */
-		public function add_marque($TYPE_FACTURE) {
+		public function add_marque($PK_MARQUE) {
 			try {		
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MARQUE (NOM) VALUES (?)');
-				$qry->bindValue(1, $TYPE_FACTURE, \PDO::PARAM_STR);
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MARQUE (NOM) VALUES (:PK_MARQUE)');
+				oci_bind_by_name($qry,":PK_MARQUE",$PK_MARQUE);
 
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
@@ -91,6 +91,5 @@
 				return $e->getMessage();
 			}
 		}	
-	}
-	
+	}	
 ?>

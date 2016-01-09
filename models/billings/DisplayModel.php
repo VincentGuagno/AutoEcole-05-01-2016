@@ -127,13 +127,18 @@
 													ON FACTURATION.PK_FACTURATION = ELEVE.FK_FACTURE
 													INNER JOIN TYPE_FACTURE
 													ON TYPE_FACTURE.PK_TYPE_FACTURE = FACTURATION.PK_FACTURATION
-													WHERE ELEVE.PK_ELEVE            = ?');	
-				$qry->bindValue(1, $PK_FACTURATION, \PDO::PARAM_INT);
+													WHERE ELEVE.PK_ELEVE            = :PK_FACTURATION');	
+
+				oci_bind_by_name($qry,":PK_FACTURATION",$PK_FACTURATION);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+
 				
+				oci_execute($qry);
+				oci_close($this->db);
+
 				oci_close($this->db);
 				return $res;		
 			} catch(Exception $e) {

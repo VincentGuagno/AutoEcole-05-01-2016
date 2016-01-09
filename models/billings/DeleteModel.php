@@ -81,9 +81,13 @@
 		public function delete_type_facture($PK_FACTURATION) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.FACTURATION FROM FACTURATION WHERE FACTURATION.PK_FACTURATION =?');	
-				$qry->bindValue(1, $PK_FACTURATION, \PDO::PARAM_INT);
-				oci_execute($qry);	
+				$qry = oci_parse($this->db, 'DELETE AUTO.FACTURATION FROM FACTURATION WHERE FACTURATION.PK_FACTURATION =:PK_FACTURATION');	
+				oci_bind_by_name($qry,":PK_FACTURATION",$PK_FACTURATION);
+				
+				oci_execute($qry);
+				oci_close($this->db);
+
+
 				return 0;				
 			} catch(Exception $e) {
 				return $e->getMessage();

@@ -104,8 +104,8 @@
 		public function display_examen($PK_EXAMEN) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT EXAMEN.DATE_PASSAGE, EXAMEN.NOM, EXAMEN.FK_ELEVE FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =?');	
-				$qry->bindValue(1, $PK_EXAMEN, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'SELECT EXAMEN.DATE_PASSAGE, EXAMEN.NOM, EXAMEN.FK_ELEVE FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =:PK_EXAMEN');	
+				oci_bind_by_name($qry,":PK_EXAMEN",$PK_EXAMEN);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -117,6 +117,7 @@
 				return $e->getMessage();
 			}
 		}
+
 
 		/**
 		 * Display all caravans's informations
@@ -130,11 +131,11 @@
 													FROM EXAMEN
 													INNER JOIN PERMIS
 													ON PERMIS.PK_PERMIS = EXAMEN.PK_EXAMEN 
-											WHERE EXAMEN.DATE_PASSAGE BETWEEN TO_DATE('2010-01-17', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE('2016-01-19', 'YYYY-MM-DD HH24:MI:SS')');			
+											WHERE EXAMEN.DATE_PASSAGE BETWEEN TO_DATE(':DEBUT', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(':FIN', 'YYYY-MM-DD HH24:MI:SS')');			
 				oci_execute($qry);
 
-				$qry->bindValue(1, $DEBUT, \PDO::PARAM_STR);
-				$qry->bindValue(2, $FIN, \PDO::PARAM_STR);	
+				oci_bind_by_name($qry,":DEBUT",$DEBUT);
+				oci_bind_by_name($qry,":FIN",$FIN);
 
 				//$return_qry = $qry->fetchAll();
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
@@ -144,7 +145,8 @@
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
-		}
-		
+		}		
 	}
-	?>
+?>
+
+

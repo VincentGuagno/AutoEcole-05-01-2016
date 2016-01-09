@@ -34,12 +34,13 @@
 		public function has_facturation($PK_FACTURATION) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT AUTO.FACTURATION FROM FACTURATION WHERE FACTURATION.PK_FACTURATION =?');		
+				$qry = oci_parse($this->db, 'SELECT AUTO.FACTURATION FROM FACTURATION WHERE FACTURATION.PK_FACTURATION =:PK_FACTURATION');		
 				//TODO Debug
-				//$qry->bindValue(1, $PK_FACTURATION, \PDO::PARAM_STR);					
+				oci_bind_by_name($qry,":PK_FACTURATION",$PK_FACTURATION);			
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);				
-				oci_close($this->db);
-				return $res;
+				oci_execute($qry);
+				oci_close($this->db);		
+
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
