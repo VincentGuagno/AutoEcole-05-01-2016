@@ -36,7 +36,7 @@
 	/**
 	 * Twig views's directories
 	 */
-	define('_CARAVANS_VIEWS_', _VIEWS_DIR_ .'/caravans/templates'); 
+	define('_BILLINGS_VIEWS_', _VIEWS_DIR_ .'/billings/templates'); 
 	define('_CUSTOMERS_VIEWS_', _VIEWS_DIR_ .'/customers/templates'); 
 	define('_ERRORS_VIEWS_', _VIEWS_DIR_ .'/errors'); 
 	define('_HOME_VIEWS_', _VIEWS_DIR_ .'/home/templates'); 
@@ -49,7 +49,7 @@
 	/**
 	 * Models's directories
 	 */
-	define('_CARAVANS_MODELS_', _MODELS_DIR_ .'/caravans'); 
+	define('_BILLINGS_MODELS_', _MODELS_DIR_ .'/billings'); 
 	define('_CUSTOMERS_MODELS_', _MODELS_DIR_ .'/customers'); 
 	define('_ERRORS_MODELS_', _MODELS_DIR_ .'/errors'); 
 	define('_HOME_MODELS_', _MODELS_DIR_ .'/home'); 

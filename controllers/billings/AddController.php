@@ -1,25 +1,25 @@
 <?php
 	
 	/*
-	 * Controller for new caravan
-	 * This class handles new caravan
+	 * Controller for new Billing
+	 * This class handles new Billing
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('CaravanController.php');
+	require_once('BillingController.php');
 	 
-	class RentingController extends CaravanController {
+	class AddController extends BillingController {
 		
 		/**
 		 * Name of called view
 		 */
-		private $view_name = 'renting';
+		private $view_name = 'add';
 		
 		/**
-		 * The constructor of RentingController
+		 * The constructor of AddController
 		 */
 		public function __construct() {
 			try {
@@ -30,7 +30,7 @@
 		}
 		
 		/**
-		 * Initialize the RentingController class and their parents
+		 * Initialize the AddController class and their parents
 		 */
 		public function init() {
 			try {
@@ -44,8 +44,8 @@
 				$url .= '&id=ukn';
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
-				if ($controller == 'RentingController') {		
-					if (file_exists (_CARAVANS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
+				if ($controller == 'AddController') {		
+					if (file_exists (_BILLINGS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
 						try {	
 							echo $this->twig->render($this->view_name .'.tpl', array('bootstrapPath' => _BOOTSTRAP_FILE_));
 							
@@ -53,7 +53,7 @@
 							throw new Exception('Une erreur est survenue durant l\'affichage des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._CARAVANS_VIEWS_ .'"!');
+						throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._BILLINGS_VIEWS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -64,7 +64,7 @@
 		}
 		
 		/**
-	     * @see CaravanController::checkAccess()
+	     * @see BillingController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -72,7 +72,7 @@
 	    }
 
 		/**
-		 * @see CaravanController::viewAccess()
+		 * @see BillingController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

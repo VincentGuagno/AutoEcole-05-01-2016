@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for confirm new caravan
-	 * This class handles news caravans
+	 * Controller for confirm new Billing
+	 * This class handles news Billings
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('CaravanController.php');
+	require_once('BillingController.php');
 	 
-	class ConfirmAddController extends CaravanController {
+	class ConfirmAddController extends BillingController {
 		
 		/**
 		 * Name of called model
@@ -45,24 +45,24 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ConfirmAddController') {
-					if (file_exists (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+					if (file_exists (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
 						try {	
-							require_once (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php');							
+							require_once (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php');							
 							Tools::getInstance()->createPost($_POST);
 							
 							if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['person']) && !empty($_POST['location'])) {
-								\Caravan\RentingModel::getInstance()->renting_caravan($_POST['name'], $_POST['price'], $_POST['person'], $_POST['location']);
-								header('Location: /Cas-M-Ping/caravans/show/all');
+								\Billing\RentingModel::getInstance()->renting_Billing($_POST['name'], $_POST['price'], $_POST['person'], $_POST['location']);
+								header('Location: /AutoEcole-05-01-2016/billings/show/all');
 								
 							} else {
-								header('Location: /Cas-M-Ping/caravans/renting');
+								header('Location: /AutoEcole-05-01-2016/billings/renting');
 							}
 
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la modification des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._CARAVANS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._BILLINGS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -73,7 +73,7 @@
 		}
 		
 		/**
-	     * @see CaravanController::checkAccess()
+	     * @see BillingController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -81,7 +81,7 @@
 	    }
 
 		/**
-		 * @see CaravanController::viewAccess()
+		 * @see BillingController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

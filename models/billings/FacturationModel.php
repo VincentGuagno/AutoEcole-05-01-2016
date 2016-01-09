@@ -35,7 +35,8 @@
 			try {
 
 				$qry = oci_parse($this->db, 'SELECT AUTO.FACTURATION FROM FACTURATION WHERE FACTURATION.PK_FACTURATION =?');		
-				$qry->bindValue(1, $PK_FACTURATION, \PDO::PARAM_STR);					
+				//TODO Debug
+				//$qry->bindValue(1, $PK_FACTURATION, \PDO::PARAM_STR);					
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);				
 				oci_close($this->db);
 				return $res;
