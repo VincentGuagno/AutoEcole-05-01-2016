@@ -85,9 +85,9 @@
 				//INSERT INTO "AUTO"."FACTURATION" (FK_TYPE_FACTURE, DATE_FACTURE, PRIX, ETAT_FACTURE) VALUES ('2', TO_DATE('2016-01-22 17:48:34', 'YYYY-MM-DD HH24:MI:SS'), '55', '1')
 
 				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FACTURATION (DATE_FACTURE, PRIX, ETAT_FACTURE) VALUES (?,?,?)');
-				$qry->bindValue(1, $TYPE_FACTURE, \PDO::PARAM_STR);?
-				$qry->bindValue(2, $PRIX, \PDO::PARAM_INT);?
-				$qry->bindValue(3, $ETAT_FACTURE, \PDO::PARAM_STR);?
+				$qry->bindValue(1, $TYPE_FACTURE, \PDO::PARAM_STR);
+				$qry->bindValue(2, $PRIX, \PDO::PARAM_INT);
+				$qry->bindValue(3, $ETAT_FACTURE, \PDO::PARAM_STR);
 
 				oci_execute($qry);
 				oci_close($this->db);	

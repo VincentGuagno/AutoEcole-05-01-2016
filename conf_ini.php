@@ -37,29 +37,35 @@
 	 * Twig views's directories
 	 */
 	define('_BILLINGS_VIEWS_', _VIEWS_DIR_ .'/billings/templates'); 
-	define('_STUDENTS_VIEWS_', _VIEWS_DIR_ .'/students/templates'); 
-	
-	define('_CUSTOMERS_VIEWS_', _VIEWS_DIR_ .'/customers/templates'); 
+	define('_STUDENTS_VIEWS_', _VIEWS_DIR_ .'/students/templates');
+	define('_BILLINGSTYPE_VIEWS_', _VIEWS_DIR_ .'/billingsType/templates');
+	define('_BRANDS_VIEWS_', _VIEWS_DIR_ .'/brands/templates'); 
+	define('_EXAMS_VIEWS_', _VIEWS_DIR_ .'/exams/templates'); 
+	define('_FORMULAS_VIEWS_', _VIEWS_DIR_ .'/fomulas/templates'); 
+	define('_INSTRUCTORS_VIEWS_', _VIEWS_DIR_ .'/instructors/templates'); 
+	define('_LECONS_VIEWS_', _VIEWS_DIR_ .'/lecons/templates');
+	define('_LICENCES_VIEWS_', _VIEWS_DIR_ .'/licences/templates');
+	define('_MODELS_VIEWS_', _VIEWS_DIR_ .'/models/templates');
+	define('_VEHICLES_VIEWS_', _VIEWS_DIR_ .'/vehicles/templates');
 	define('_ERRORS_VIEWS_', _VIEWS_DIR_ .'/errors'); 
-	define('_HOME_VIEWS_', _VIEWS_DIR_ .'/home/templates'); 
-	define('_LOCATIONS_VIEWS_', _VIEWS_DIR_ .'/locations/templates'); 
-	define('_RENTALS_VIEWS_', _VIEWS_DIR_ .'/rentals/templates'); 
-	define('_SECTORS_VIEWS_', _VIEWS_DIR_ .'/sectors/templates'); 
-	define('_VISITORS_VIEWS_', _VIEWS_DIR_ .'/visitors/templates'); 
+	define('_HOME_VIEWS_', _VIEWS_DIR_ .'/home/templates');
 	
 	/**
 	 * Models's directories
 	 */
 	define('_BILLINGS_MODELS_', _MODELS_DIR_ .'/billings'); 
 	define('_STUDENTS_MODELS_', _MODELS_DIR_ .'/students'); 
-	
-	define('_CUSTOMERS_MODELS_', _MODELS_DIR_ .'/customers'); 
-	define('_ERRORS_MODELS_', _MODELS_DIR_ .'/errors'); 
-	define('_HOME_MODELS_', _MODELS_DIR_ .'/home'); 
-	define('_LOCATIONS_MODELS_', _MODELS_DIR_ .'/locations'); 
-	define('_RENTALS_MODELS_', _MODELS_DIR_ .'/rentals'); 
-	define('_SECTORS_MODELS_', _MODELS_DIR_ .'/sectors'); 
-	define('_VISITORS_MODELS_', _MODELS_DIR_ .'/visitors'); 
+	define('_BILLINGSTYPE_MODELS_', _MODELS_DIR_ .'/billingsType');
+	define('_BRANDS_MODELS_', _MODELS_DIR_ .'/brands'); 
+	define('_EXAMS_MODELS_', _MODELS_DIR_ .'/exams'); 
+	define('_FORMULAS_MODELS_', _MODELS_DIR_ .'/fomulas'); 
+	define('_INSTRUCTORS_MODELS_', _MODELS_DIR_ .'/instructors');
+	define('_LECONS_MODELS_', _MODELS_DIR_ .'/lecons');
+	define('_LICENCES_MODELS_', _MODELS_DIR_ .'/licences');
+	define('_MODELS_MODELS_', _MODELS_DIR_ .'/models');
+	define('_VEHICLES_MODELS_', _MODELS_DIR_ .'/vehicles');
+	define('_ERRORS_MODELS_', _MODELS_DIR_ .'/errors');
+	define('_HOME_MODELS_', _MODELS_DIR_ .'/home');  
 	
 	/**
 	 * Database settings

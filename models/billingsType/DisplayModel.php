@@ -76,7 +76,7 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_type_factures() {
+		public function display_billingsType() {
 			try {								
 				$qry = oci_parse($this->db, 'SELECT AUTO.TYPE_FACTURE FROM TYPE_FACTURE');			
 				oci_execute($qry);

@@ -57,11 +57,11 @@
 								
 								switch ($id) {
 									case 'all':
-										$data = \Student\DisplayModel::getInstance()->display_seasons();
+										$data = \Student\DisplayModel::getInstance()->display_students();
 										break;
 									default:
 										if(\Student\DisplayModel::getInstance()->has_season($id) == 1) {
-											$data = \Student\DisplayModel::getInstance()->display_season($id);
+											$data = \Student\DisplayModel::getInstance()->display_student($id);
 										} else {
 											header('Location: /Cas-M-Ping/errors/404');
 										}

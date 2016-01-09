@@ -9,9 +9,9 @@
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('BillingController.php');
+	require_once('BillingsController.php');
 	 
-	class AddController extends BillingController {
+	class AddController extends BillingsController {
 		
 		/**
 		 * Name of called view
