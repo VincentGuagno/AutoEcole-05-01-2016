@@ -49,8 +49,10 @@
 						try {
 							echo _BILLINGSTYPE_MODELS_.'/DisplayModel.php';
 							require_once(_BILLINGSTYPE_MODELS_.'/DisplayModel.php');
+							require_once(_STUDENTS_MODELS_.'/DisplayModel.php');
 							$billingTypes = \BillingsType\DisplayModel::getInstance()->display_billingsType();
-							echo $this->twig->render($this->view_name .'.tpl', array('billingTypes'=>$billingTypes ,'bootstrapPath' => _BOOTSTRAP_FILE_));
+							$students = \Student\DisplayModel::getInstance()->display_Students();
+							echo $this->twig->render($this->view_name .'.tpl', array('billingTypes'=>$billingTypes ,'students'=>$students,'bootstrapPath' => _BOOTSTRAP_FILE_));
 							
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant l\'affichage des données: '.$e->getMessage());

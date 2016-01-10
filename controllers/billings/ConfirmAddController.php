@@ -50,8 +50,8 @@
 							require_once (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php');							
 							Tools::getInstance()->createPost($_POST);
 							var_dump($_POST);
-							if(!empty($_POST['DATE_FACTURE']) && !empty($_POST['PRIX']) && !empty($_POST['ETAT_FACTURE'])) {
-								\Billing\AddModel::getInstance()->add_Billing($_POST['DATE_FACTURE'], $_POST['PRIX'], $_POST['ETAT_FACTURE']);
+							if(!empty($_POST['DATE_FACTURE']) && !empty($_POST['PRIX']) && !empty($_POST['ETAT_FACTURE']) && !empty($_POST['FK_TYPE_FACTURE']) && !empty($_POST['FK_ELEVE'])) {
+								\Billings\AddModel::getInstance()->add_Billing($_POST['DATE_FACTURE'], $_POST['PRIX'], $_POST['ETAT_FACTURE'], $_POST['FK_TYPE_FACTURE'], $_POST['FK_ELEVE']);
 								header('Location: /AutoEcole-05-01-2016/billings/show/all');
 								
 							} else {

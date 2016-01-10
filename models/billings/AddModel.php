@@ -79,15 +79,16 @@
 		 * @param PRIX ,  
 		 * @param ETAT_FACTURE ,  
 		 */
-		public function add_billing($DATE_FACTURE, $PRIX, $ETAT_FACTURE) {
+		public function add_billing($DATE_FACTURE, $PRIX, $ETAT_FACTURE, $FK_TYPE_FACTURE, $FK_ELEVE) {
 			try {
 				//INSERT INTO "AUTO"."FACTURATION" (FK_TYPE_FACTURE, DATE_FACTURE, PRIX, ETAT_FACTURE) VALUES ('2', TO_DATE('2016-01-22 17:48:34', 'YYYY-MM-DD HH24:MI:SS'), '55', '1')
-
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FACTURATION (DATE_FACTURE, PRIX, ETAT_FACTURE, FK_TYPE_FACTURE) VALUES (\':DATE_FACTURE\',\':PRIX,:ETAT_FACTURE\',\':FK_TYPE_FACTURE\')');
+				echo "test";
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FACTURATION (DATE_FACTURE, PRIX, ETAT_FACTURE, FK_TYPE_FACTURE, FK_ELEVE) VALUES (to_date(:DATE_FACTURE,\'MM-DD-YYYY\'),:PRIX,:ETAT_FACTURE,:FK_TYPE_FACTURE,:FK_ELEVE)');
 				oci_bind_by_name($qry,":DATE_FACTURE",$DATE_FACTURE);
 				oci_bind_by_name($qry,":PRIX",$PRIX);
 				oci_bind_by_name($qry,":ETAT_FACTURE",$ETAT_FACTURE);
-				
+				oci_bind_by_name($qry,":FK_TYPE_FACTURE",$FK_TYPE_FACTURE);
+				oci_bind_by_name($qry,":FK_ELEVE",$FK_ELEVE);
 				oci_execute($qry);
 				oci_close($this->db);	
 			} catch(Exception $e) {

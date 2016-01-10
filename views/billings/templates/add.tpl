@@ -23,6 +23,13 @@
 		</select>
 		</br></br>
 		
+		<select id="FK_ELEVE" name="FK_ELEVE">
+		{% for student in students %}
+		<option value="{{student.PK_ELEVE}}">{{student.NOM}} {{student.PRENOM}}</option>
+		{% endfor %}
+		</select>
+		</br></br>
+		
 		<label for="PRIX">Prix : </label>
 		<input class="form-control" id="PRIX" name="PRIX" >
 		
