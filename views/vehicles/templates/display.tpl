@@ -11,38 +11,34 @@
 
 {% block content %}
 	
-	<form method="post" ACTION="/Cas-M-Ping/customers/add">
-	<button type="submit" > Ajout d'un client </button>
+	<form method="post" ACTION="/Cas-M-Ping/vehicules/add">
+	<button type="submit" > Ajout d'un vehicule </button>
 	</form>
 
-	<form method="post" ACTION="/Cas-M-Ping/customers/delete/all">
-	<button type="submit" > Suppression des clients </button>
+	<form method="post" ACTION="/Cas-M-Ping/vehicules/delete/all">
+	<button type="submit" > Suppression des vehicules </button>
 	</form>	
 	
 	<table class="table">
 		<tr>
-			<th> Numéro de dossier </th>
-			<th> Nom </th>
-			<th> Prénom </th>
-			<th> Code Postal </th>
-			<th> Ville </th>
-			<th> Téléphone </th>
+			<th> PK_VEHICULE </th>
+			<th> VEHICULE.NUMERO </th>
+			<th> MODELE.NOM_MODELE </th>
+			<th> MONITEUR.SURNOM </th>
 		</tr>
-	{% for customer in customers %}
+	{% for vehicle in vehicles %}
 		<tr>
-			<td>{{customer.VEHICULE.NUMERO}}</td>
-			<td>{{customer.NOM_MODELE}}</td>
-			<td>{{customer.SURNOM}}</td>
-			<td>{{customer.cust_postal_code}}</td>
-			<td>{{customer.cust_city}}</td>
-			<td>{{customer.cust_phone_number}}</td>
+			<td>{{vehicle.PK_VEHICULE}}</td>
+			<td>{{vehicle.NUMERO}}</td>
+			<td>{{vehicle.NOM_MODELE}}</td>
+			<td>{{vehicle.SURNOM}}</td>
 			<td> 
-				<form method="post" ACTION="/Cas-M-Ping/customers/modify/{{customer.cust_id}}">
+				<form method="post" ACTION="/Cas-M-Ping/vehicules/modify/{{vehicule.cust_id}}">
 				<button type="submit" > Modifier </button>
 				</form>
 			</td>
 			<td> 
-				<form method="post" ACTION="/Cas-M-Ping/customers/delete/{{customer.cust_id}}">
+				<form method="post" ACTION="/Cas-M-Ping/vehicules/delete/{{vehicule.cust_id}}">
 				<button type="submit" > Suppression </button>
 				</form>
 			</td>

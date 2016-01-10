@@ -8,7 +8,7 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Instructors; 
+	namespace Instructor; 
 	 
 	class InstructorModel {
 		

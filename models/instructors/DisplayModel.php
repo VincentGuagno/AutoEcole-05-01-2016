@@ -9,7 +9,7 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Instructors;	
+	namespace Instructor;	
 	require_once('InstructorModel.php'); 
 	
 	class DisplayModel extends InstructorModel {
@@ -76,7 +76,7 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_moniteurs() {
+		public function display_instructors() {
 			try {								
 				$qry = oci_parse($this->db, 'SELECT MONITEUR.* FROM MONITEUR');			
 				oci_execute($qry);
@@ -97,7 +97,7 @@
 		 * @param PK_MONITEUR, Eleve's id
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_moniteur($PK_MONITEUR) {
+		public function display_instructor($PK_MONITEUR) {
 			try {
 
 				$qry = oci_parse($this->db, 'SELECT * FROM AUTO.MONITEUR WHERE MONITEUR.PK_MONITEUR =:PK_MONITEUR');	
@@ -173,7 +173,7 @@
 												INNER JOIN LECON
 												ON ELEVE.PK_ELEVE          = LECON.FK_ELEVE
 												WHERE MONITEUR.PK_MONITEUR = :PK_MONITEUR
-												AND LECON.DATE_LECON BETWEEN TO_DATE(':DEBUT', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(':FIN', 'YYYY-MM-DD HH24:MI:SS')');	
+												AND LECON.DATE_LECON BETWEEN TO_DATE(\':DEBUT\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\':FIN\', \'YYYY-MM-DD HH24:MI:SS\')');	
 
 				oci_bind_by_name($qry,":PK_MONITEUR",$PK_MONITEUR);
 				oci_bind_by_name($qry,":DEBUT",$DEBUT);
@@ -212,7 +212,7 @@
 												ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR
 												INNER JOIN LECON
 												ON ELEVE.PK_ELEVE          = LECON.FK_ELEVE
-												WHERE LECON.DATE_LECON BETWEEN TO_DATE(':DEBUT', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(':FIN', 'YYYY-MM-DD HH24:MI:SS')');	
+												WHERE LECON.DATE_LECON BETWEEN TO_DATE(\':DEBUT\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\':FIN', 'YYYY-MM-DD HH24:MI:SS\')');	
 			
 				oci_bind_by_name($qry,":DEBUT",$DEBUT);
 				oci_bind_by_name($qry,":FIN",$FIN);

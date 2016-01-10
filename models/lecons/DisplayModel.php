@@ -78,7 +78,17 @@
 		 */	
 		public function display_lecons() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT * FROM LECON');			
+				$qry = oci_parse($this->db, 'SELECT LECON.PK_LECON,
+											  LECON.DATE_LECON,
+											  LECON.ETAT_LECON,
+											  ELEVE.NOM,
+											  ELEVE.PRENOM,
+											  MONITEUR.SURNOM
+											FROM LECON
+											INNER JOIN ELEVE
+											ON ELEVE.PK_ELEVE = LECON.FK_ELEVE
+											INNER JOIN MONITEUR
+											ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR');			
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -139,6 +149,8 @@
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
-		}	
+		}
+
+		
 	}
 ?>

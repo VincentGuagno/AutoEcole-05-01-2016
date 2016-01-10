@@ -78,7 +78,17 @@
 		 */	
 		public function display_students() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT ELEVE.* FROM ELEVE');
+				$qry = oci_parse($this->db, 'SELECT ELEVE.PK_ELEVE,
+											  ELEVE.NOM,
+											  ELEVE.PRENOM,
+											  ELEVE.ADRESSE,
+											  ELEVE.NUM_TEL,
+											  ELEVE.DATE_NAISSANCE,
+											  ELEVE.LIEU_ETUDE,
+											  FORMULES.LIBELLE
+											FROM ELEVE
+											INNER JOIN FORMULES
+											ON FORMULES.PK_FORMULE = ELEVE.FK_FORMULES');
 				oci_execute($qry);
 				
 				//$qry = $this->db->prepare('SELECT * FROM caravan ORDER BY caravan.car_id');	
@@ -109,7 +119,8 @@
 		public function display_student($PK_ELEVE) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT ELEVE.NOM,
+				$qry = oci_parse($this->db, 'SELECT PK_ELEVE,
+													  ELEVE.NOM,
 													  ELEVE.PRENOM,
 													  FORMULES.LIBELLE
 													FROM ELEVE

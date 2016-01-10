@@ -9,7 +9,7 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Instructors;
+	namespace Instructor;
 	require_once('InstructorModel.php'); 
 	
 	class ModifyModel extends InstructorModel{
