@@ -9,7 +9,7 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Students; 
+	namespace Student; 
 	require_once('StudentModel.php'); 
 	
 	class AddModel extends StudentModel{
@@ -88,14 +88,13 @@
 									 $ADRESSE, 
 									 $NUM_TEL, 
 									 $DATE_NAISSANCE, 									
-									 $LIEU_ETUDE
-									 $FK_FORMULES
-									 $FK_MONITEUR
-									 $FK_FACTURE) {
+									 $LIEU_ETUDE,
+									 $FK_FORMULES,
+									 $FK_MONITEUR,) {
 			try {
 				//UPDATE ELEVE SET FK_MONITEUR = '21', NOM = 'bi', PRENOM = 'jay', ADRESSE = 'no whi', NUM_TEL = 4, DATE_NAISSANCE = TO_DATE('2016-01-17', 'YYYY-MM-DD HH24:MI:SS'), LIEU_ETUDE = 'se' WHERE PK_ELEVE =21
-				$qry = oci_parse($this->db, ("INSERT INTO AUTO.ELEVE  (NOM, PRENOM, ADRESSE, NUM_TEL, DATE_NAISSANCE, LIEU_ETUDE, FK_FORMULES,FK_MONITEUR,FK_FACTURE)  
-				VALUES (:NOM, :PRENOM, :ADRESSE,:NUM_TEL, TO_DATE(:DATE_NAISSANCE, \'YYYY-MM-DD HH24:MI:SS\'),:LIEU_ETUDE,:FK_FORMULES,:FK_MONITEUR,:FK_FACTURE)");
+				$qry = oci_parse($this->db,"INSERT INTO AUTO.ELEVE  (NOM, PRENOM, ADRESSE, NUM_TEL, DATE_NAISSANCE, LIEU_ETUDE, FK_FORMULES,FK_MONITEUR)  
+				VALUES (:NOM, :PRENOM, :ADRESSE,:NUM_TEL, TO_DATE(:DATE_NAISSANCE, \'DD-MM-YYYY\'),:LIEU_ETUDE,:FK_FORMULES,:FK_MONITEUR)");
 							
 				oci_bind_by_name($qry,":NOM",$NOM);
 				oci_bind_by_name($qry,":PRENOM",$PRENOM);	
@@ -105,7 +104,6 @@
 				oci_bind_by_name($qry,":LIEU_ETUDE",$LIEU_ETUDE);
 				oci_bind_by_name($qry,":FK_FORMULES",$FK_FORMULES);
 				oci_bind_by_name($qry,":FK_MONITEUR",$FK_MONITEUR);
-				oci_bind_by_name($qry,":FK_FACTURE",$FK_FACTURE);
 
 				oci_execute($qry);
 				oci_close($this->db);

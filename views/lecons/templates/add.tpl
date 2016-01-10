@@ -1,4 +1,4 @@
-{# views/sectors/templates/display.tpl #}
+{# views/lecons/templates/display.tpl #}
 	{%extends "layout.tpl" %}
 
 {% block title %}

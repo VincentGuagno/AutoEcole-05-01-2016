@@ -293,6 +293,11 @@
 				'directory' => 'students/',
 				'url-formatter' => 'students/add'
 			),
+			'confirm-add-students' => array(
+				'controller' => 'ConfirmAddController',
+				'directory' => 'students/',
+				'url-formatter' => 'students/add/confirm'
+			),
 			'delete-students' => array(
 				'controller' => 'DeleteController',
 				'directory' => 'students/',
