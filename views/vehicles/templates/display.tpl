@@ -10,21 +10,17 @@
 {% endblock %}
 
 {% block content %}
-	
-	<form method="post" ACTION="/Cas-M-Ping/vehicules/add">
+
+	<form method="post" ACTION="/AutoEcole-05-01-2016/vehicules/add">
 	<button type="submit" > Ajout d'un vehicule </button>
 	</form>
-
-	<form method="post" ACTION="/Cas-M-Ping/vehicules/delete/all">
-	<button type="submit" > Suppression des vehicules </button>
-	</form>	
 	
 	<table class="table">
 		<tr>
-			<th> PK_VEHICULE </th>
-			<th> VEHICULE.NUMERO </th>
-			<th> MODELE.NOM_MODELE </th>
-			<th> MONITEUR.SURNOM </th>
+			<th> Numéro du véhicule </th>
+			<th> Immatricuation du véhicule </th>
+			<th> Nom du modèle </th>
+			<th> Surnom du moniteur </th>
 		</tr>
 	{% for vehicle in vehicles %}
 		<tr>
@@ -33,12 +29,12 @@
 			<td>{{vehicle.NOM_MODELE}}</td>
 			<td>{{vehicle.SURNOM}}</td>
 			<td> 
-				<form method="post" ACTION="/Cas-M-Ping/vehicules/modify/{{vehicule.cust_id}}">
+				<form method="post" ACTION="/AutoEcole-05-01-2016/vehicules/modify/{{vehicle.PK_VEHICULE}}">
 				<button type="submit" > Modifier </button>
 				</form>
 			</td>
 			<td> 
-				<form method="post" ACTION="/Cas-M-Ping/vehicules/delete/{{vehicule.cust_id}}">
+				<form method="post" ACTION="/AutoEcole-05-01-2016/vehicules/delete/{{vehicle.PK_VEHICULE}}">
 				<button type="submit" > Suppression </button>
 				</form>
 			</td>
