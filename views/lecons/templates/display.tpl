@@ -14,22 +14,18 @@
 		<h3>
 			Leçons
 		</h3>
-		<form method="post" ACTION="/Cas-M-Ping/lecons/add">
+		<form method="post" ACTION="/AutoEcole-05-01-2016/lecons/add">
 		<button type="submit" > Ajout d'une leçon </button>
 		</form>
-
-		<form method="post" ACTION="/Cas-M-Ping/lecons/delete/all">
-		<button type="submit" > Suppression d'une leçon </button>
-		</form>	
 		
 		<table class="table">
 			<tr>
-				<th>PK_LECON </th>
-				<th>DATE_LECON </th>
-				<th>ETAT_LECON </th>
-				<th>ELEVE.NOM</th>
-				<th>ELEVE.PRENOM</th>
-				<th>MONITEUR.SURNOM</th>
+				<th> Numéro de leçon </th>
+				<th> Date de la leçon  </th>
+				<th> Etat de la leçon </th>
+				<th> Nom </th>
+				<th> Prénom </th>
+				<th> Surnom du moniteur </th>
 			</tr>
 		{% for lecon in lecons %}
 			<tr>
@@ -40,14 +36,11 @@
 				<td>{{lecon.PRENOM}}</td>
 				<td>{{lecon.SURNOM}}</td>
 				<td>
-				<form method="post" ACTION="/Cas-M-Ping/lecons/delete/{{lecon.loc_id}}">
+				<form method="post" ACTION="/AutoEcole-05-01-2016/lecons/delete/{{lecon.PK_LECON}}">
 				<button type="submit" > Supprimer </button>
 				</form>	
 				</td>
-				<td>
-				<form method="post" ACTION="/Cas-M-Ping/lecons/modify/{{lecon.loc_id}}">
-				<button type="submit" > Modifier </button>
-				</form>	
+				<td>				
 				</td>
 			</tr>
 		{% endfor %}
@@ -63,19 +56,15 @@
 		<button type="submit" > Ajout d'un exams </button>
 		</form>
 
-		<form method="post" ACTION="/Cas-M-Ping/exams/delete/all">
-		<button type="submit" > Suppression d'un exams </button>
-		</form>	
-		
 		<table class="table">
 			<tr>
-				<th>PK_EXAMEN </th>
-				<th>ELEVE.NOM </th>
-				<th>ELEVE.PRENOM </th>
-				<th>MONITEUR.SURNOM</th>
-				<th>EXAMEN.NOMEXAM</th>
-				<th>EXAMEN.DATE_PASSAGE</th>
-				<th>PERMIS.NOMPERMIS</th>
+				<th>Numéro de l'examen </th>
+				<th>Nom de l'élève </th>
+				<th>Prénom de l'élève </th>
+				<th>Surnom du moniteur </th>
+				<th>Nom de l'examen </th>
+				<th>Date de l'examen</th>
+				<th>Nom du permis</th>
 			</tr>
 		{% for exam in exams %}
 			<tr>
@@ -87,14 +76,11 @@
 				<td>{{exam.DATE_PASSAGE}}</td>
 				<td>{{exam.NOMPERMIS}}</td>
 				<td>
-				<form method="post" ACTION="/Cas-M-Ping/exams/delete/{{exam.loc_id}}">
+				<form method="post" ACTION="//AutoEcole-05-01-2016/exams/delete/{{exam.PK_EXAMEN}}">
 				<button type="submit" > Supprimer </button>
 				</form>	
 				</td>
 				<td>
-				<form method="post" ACTION="/Cas-M-Ping/exams/modify/{{exam.loc_id}}">
-				<button type="submit" > Modifier </button>
-				</form>	
 				</td>
 			</tr>
 		{% endfor %}

@@ -2,22 +2,18 @@
 	{%extends "layout.tpl" %}
 
 {% block title %}
-	billings
+	Factures
 {% endblock %}
 	
 {% block header %}
-	billings
+	Factures
 {% endblock %}
 
 {% block content %}
-	
-	<form method="post" ACTION="/Cas-M-Ping/billings/renting">
-	<button type="submit" > Location d'une billinges </button>
-	</form>
 
-	<form method="post" ACTION="/Cas-M-Ping/billings/return/all">
-	<button type="submit" > Retours des billinges </button>
-	</form>	
+	<form method="post" ACTION="/AutoEcole-05-01-2016/billings/add">
+	<button type="submit" > Ajout d'une facturation </button>
+	</form>
 	
 	<table class="table">
 		<tr>
@@ -37,7 +33,7 @@
 			<td>{{billing.PRIX}}</td>
 			<td>{{billing.DATE_FACTURE}}</td>
 			<td>
-				<form method="post" ACTION="/Cas-M-Ping/billings/return/{{billing.car_id}}">
+				<form method="post" ACTION="/AutoEcole-05-01-2016/billings/return/{{billing.PK_FACTURATION}}">
 				<button type="submit" > Retour </button>
 				</form>
 			</td>

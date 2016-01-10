@@ -11,23 +11,19 @@
 
 {% block content %}
 	
-	<form method="post" ACTION="/Cas-M-Ping/instructors/add">
-	<button type="submit" > Ajout d'un client </button>
-	</form>
+	<form method="post" ACTION="/AutoEcole-05-01-2016/instructors/add">
 
-	<form method="post" ACTION="/Cas-M-Ping/instructors/delete/all">
-	<button type="submit" > Suppression des Moniteurs </button>
+	<button type="submit" > Ajout d'un client </button>
 	</form>	
-	
 	<table class="table">
 		<tr>
 			<th> Numéro de dossier </th>
 			<th> Nom </th>
 			<th> Prénom </th>
-			<th> ADRESSE </th>
-			<th> NUM_TEL </th>
-			<th> SURNOM </th>
-			<th> DATE_EMBAUCHE </th>
+			<th> Adresse </th>
+			<th> Numéro de téléphone </th>
+			<th> Surnom </th>
+			<th> Date d'embauche </th>
 		</tr>
 	{% for instructor in instructors %}
 		<tr>
@@ -40,12 +36,12 @@
 			<td>{{instructor.DATE_EMBAUCHE}}</td>
 			
 			<td> 
-				<form method="post" ACTION="/Cas-M-Ping/instructors/modify/{{instructor.cust_id}}">
+				<form method="post" ACTION="/AutoEcole-05-01-2016/instructors/modify/{{instructor.PK_MONITEUR}}">
 				<button type="submit" > Modifier </button>
 				</form>
 			</td>
 			<td> 
-				<form method="post" ACTION="/Cas-M-Ping/instructors/delete/{{instructor.cust_id}}">
+				<form method="post" ACTION="/AutoEcole-05-01-2016/instructors/delete/{{instructor.PK_MONITEUR}}">
 				<button type="submit" > Suppression </button>
 				</form>
 			</td>
