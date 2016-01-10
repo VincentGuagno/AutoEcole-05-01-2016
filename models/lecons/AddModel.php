@@ -75,19 +75,18 @@
 
 		/**
 		 * Modify all customer's informations from one customer 		
-		 * @param TYPE_MOTEUR ,  customer's lasttName
+		 * @param PK_LECON ,  customer's lasttName
 		 * @param PUISSANCE ,  customer's lasttName
 		 * @param NOM_MODELE ,  customer's lasttName
 		 */
-		public function add_lecon($TYPE_MOTEUR,$PUISSANCE, $NOM_MODELE) {
+		public function add_lecon($PK_LECON,$FK_ELEVE,$DATE_LECON,$ETAT_LECON) {
 			try {		
-				//INSERT INTO "AUTO"."MODELE" (TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES ('156', '8456', 'plll')
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MODELE (TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES (:TYPE_MOTEUR,:PUISSANCE,:NOM_MODELE)');
-				oci_bind_by_name($qry,":TYPE_MOTEUR",$TYPE_MOTEUR);
-				oci_bind_by_name($qry,":PUISSANCE",$PUISSANCE);
-				oci_bind_by_name($qry,":NOM_MODELE",$NOM_MODELE);
-
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.LECON (PK_LECON,FK_ELEVE,DATE_LECON,ETAT_LECON) VALUES (:PK_LECON,:FK_ELEVE,:DATE_LECON,:ETAT_LECON)');
+				oci_bind_by_name($qry,":PK_LECON",$PK_LECON);
+				oci_bind_by_name($qry,":FK_ELEVE",$FK_ELEVE);
+				oci_bind_by_name($qry,":DATE_LECON",$DATE_LECON);
+				oci_bind_by_name($qry,":ETAT_LECON",$ETAT_LECON);
 				oci_execute($qry);
 				oci_close($this->db);								
 			} catch(Exception $e) {
