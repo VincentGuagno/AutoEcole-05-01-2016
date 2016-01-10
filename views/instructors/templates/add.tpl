@@ -11,7 +11,7 @@ Ajout d'un client
 
 {% block content %}
 	
-	<form method="post" ACTION="/Cas-M-Ping/customers/add/confirm">
+	<form method="post" ACTION="/AutoEcole-05-01-2016/instructors/add/confirm">
 	
 		<label for="NOM">Nom : </label>
 		<input class="form-control" id="NOM"name="NOM" >

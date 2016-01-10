@@ -82,12 +82,12 @@
 		 * @param SURNOM ,  customer's lasttName	
 		 * @param DATE_EMBAUCHE ,  customer's lasttName
 		 */
-		public function add_moniteur($NOM, $PRENOM, $ADRESSE, $NUM_TEL, $SURNOM, $DATE_EMBAUCHE) {
+		public function add_instructor($NOM, $PRENOM, $ADRESSE, $NUM_TEL, $SURNOM, $DATE_EMBAUCHE) {
 			try {		
 
 				// INSERT INTO "AUTO"."MONITEUR" (NOM, PRENOM, ADRESSE, NUM_TEL, SURNOM, DATE_EMBAUCHE) VALUES ('hobbit', 'bilbo', 'eee', '555', 'orgi', TO_DATE('2016-01-11 18:08:51', 'YYYY-MM-DD HH24:MI:SS'))
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MONITEUR  (NOM, PRENOM, ADRESSE, NUM_TEL, SURNOM, DATE_EMBAUCHE) VALUES (:NOM,:PRENOM,:ADRESSE,:NUM_TEL,:SURNOM,:DATE_EMBAUCHE)');
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MONITEUR  (NOM, PRENOM, ADRESSE, NUM_TEL, SURNOM, DATE_EMBAUCHE) VALUES (:NOM,:PRENOM,:ADRESSE,:NUM_TEL,:SURNOM,TO_DATE(:DATE_EMBAUCHE,\'DD-MM-YYYY\'))');
 				oci_bind_by_name($qry,":NOM",$NOM);
 				oci_bind_by_name($qry,":PRENOM",$PRENOM);
 				oci_bind_by_name($qry,":ADRESSE",$ADRESSE);

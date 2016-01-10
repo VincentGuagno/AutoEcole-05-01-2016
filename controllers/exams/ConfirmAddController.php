@@ -9,14 +9,14 @@
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('BillingController.php');
+	require_once('ExamController.php');
 	 
-	class ConfirmAddController extends BillingController {
+	class ConfirmAddController extends ExamController {
 		
 		/**
 		 * Name of called model
 		 */
-		private $model_name = 'Renting';
+		private $model_name = 'Add';
 		
 		/**
 		 * The constructor of ConfirmAddController
@@ -45,13 +45,13 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ConfirmAddController') {
-					if (file_exists (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+					if (file_exists (_EXAMS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
 						try {	
-							require_once (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php');							
+							require_once (_EXAMS_MODELS_ .'/'. $this->model_name .'Model.php');							
 							Tools::getInstance()->createPost($_POST);
-							
-							if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['person']) && !empty($_POST['location'])) {
-								\Billing\RentingModel::getInstance()->renting_Billing($_POST['name'], $_POST['price'], $_POST['person'], $_POST['location']);
+							var_dump($_POST);
+							if(!empty($_POST['DATE_DE_PASSAGE']) && !empty($_POST['NOM']) && !empty($_POST['FK_PERMIS']) && !empty($_POST['FK_ELEVE'])) {
+								\Exam\AddModel::getInstance()->add_exam($_POST['NOM'], $_POST['DATE_DE_PASSAGE'], $_POST['FK_ELEVE'], $_POST['FK_PERMIS']);
 								header('Location: /AutoEcole-05-01-2016/billings/show/all');
 								
 							} else {

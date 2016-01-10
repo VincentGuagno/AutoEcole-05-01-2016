@@ -21,7 +21,7 @@
 		/**
 		 * Name of called view
 		 */
-		private $view_name = 'create';
+		private $view_name = 'add';
 		
 		/**
 		 * The constructor of CreateController
@@ -49,17 +49,13 @@
 				$url .= '&id=ukn';
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
-				if ($controller == 'CreateController') {
-					if (file_exists (_CUSTOMERS_MODELS_ .'/'. $this->model_name .'Model.php') && file_exists (_LOCATIONS_MODELS_ .'/'. $this->model_name .'Model.php')) {
+				if ($controller == 'AddController') {
+					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php')) {
 						if (file_exists (_INSTRUCTORS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
 							try {	
-								require_once (_CUSTOMERS_MODELS_ .'/'. $this->model_name .'Model.php');
-								require_once (_LOCATIONS_MODELS_ .'/'. $this->model_name .'Model.php');
 								
-								$customers = \Customer\DisplayModel::getInstance()->display_customers();
-								$locations = \Location\DisplayModel::getInstance()->display_locations();
 
-								echo $this->twig->render($this->view_name .'.tpl', array('customers' => $customers, 'locations' => $locations, 'bootstrapPath' => _BOOTSTRAP_FILE_));
+								echo $this->twig->render($this->view_name .'.tpl', array('bootstrapPath' => _BOOTSTRAP_FILE_));
 								
 							} catch (Exception $e) {
 								throw new Exception('Une erreur est survenue durant l\'affichage des données: '.$e->getMessage());
@@ -68,7 +64,7 @@
 							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._INSTRUCTORS_VIEWS_ .'"!');
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._CUSTOMERS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._INSTRUCTORS_MODELS_ .'"!');
 					}	
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');

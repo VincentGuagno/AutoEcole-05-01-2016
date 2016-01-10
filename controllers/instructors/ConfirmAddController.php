@@ -17,7 +17,7 @@
 		 * Name of called model
 		 */
 		private $model_nameDisplay = 'Display';
-		private $model_nameCreate = 'Create';
+		private $model_nameCreate = 'add';
 		
 		/**
 		 * The constructor of ConfirmAddController
@@ -46,34 +46,19 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ConfirmAddController') {
-					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php') && file_exists (_SEASONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php') && file_exists (_LOCATIONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php')) {			
-						try {	
-							require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php');
-							require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_nameCreate .'Model.php');
-							require_once (_SEASONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php');
-							require_once (_LOCATIONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php');
-							
+					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php')) {			
+						try {
+							require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_nameCreate .'Model.php');							
 							Tools::getInstance()->createPost($_POST);
 							
-							$datetime1 = new DateTime($_POST['beginDate']);
-							$datetime2 = new DateTime($_POST['endDate']);
-							$interval = $datetime1->diff($datetime2);
-							
-							if(!empty($_POST['rent_cust_id']) && !empty($_POST['rent_name']) && !empty($_POST['beginDate']) && 
-								!empty($_POST['location']) && !empty($_POST['endDate']) && !empty($_POST['person']) && !empty($_POST['price_c']) && !empty($_POST['val']) && $interval->days > 0
-							) {
-								$date = \Season\displayModel::getInstance()->display_seasonCoeff($_POST['beginDate']);
-								$price = \Location\DisplayModel::getInstance()->display_location($_POST['location']);								
-								$priceTT = ($date[0]['seas_coeff'] * $price[0]['type_location_price'] * $interval->days) + $_POST['price_c'];
-
-								\Instructor\CreateModel::getInstance()->create_instructor($_POST['rent_name'], $_POST['beginDate'], 
-										$_POST['endDate'], $_POST['person'],
-									 	'', $_POST['price_c'], $interval->days,
-										$priceTT , $_POST['rent_cust_id'], $_POST['val'], $_POST['location']);
-								header('Location: /Cas-M-Ping/instructors/show/all');
+							if(!empty($_POST['NOM']) && !empty($_POST['PRENOM']) && !empty($_POST['ADRESSE']) && 
+								!empty($_POST['NUM_TEL']) && !empty($_POST['SURNOM']) && !empty($_POST['DATE_EMBAUCHE'])){
+								\Instructor\AddModel::getInstance()->add_instructor($_POST['NOM'], $_POST['PRENOM'], 
+										$_POST['ADRESSE'], $_POST['NUM_TEL'], $_POST['SURNOM'], $_POST['DATE_EMBAUCHE']);
+								header('Location: /AutoEcole-05-01-2016/instructors/show/all');
 								
 							} else {
-								header('Location: /Cas-M-Ping/instructors/add');
+								header('Location: /AutoEcole-05-01-2016/instructors/add');
 							}
 
 						} catch (Exception $e) {

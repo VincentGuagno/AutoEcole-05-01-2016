@@ -217,6 +217,11 @@
 				'directory' => 'instructors/',
 				'url-formatter' => 'instructors/add'
 			),
+			'confirm-add-instructors' => array(
+				'controller' => 'ConfirmAddController',
+				'directory' => 'instructors/',
+				'url-formatter' => 'instructors/add/confirm'
+			),
 			'delete-instructors' => array(
 				'controller' => 'DeleteController',
 				'directory' => 'instructors/',

@@ -79,12 +79,12 @@
 		 * @param DATE_PASSAGE ,  customer's lasttName
 		 * @param LIBELLE ,  customer's lasttName
 		 */
-		public function add_examen($NOM,$DATE_PASSAGE,$FK_ELEVE,$FK_PERMIS) {
+		public function add_exam($NOM,$DATE_PASSAGE,$FK_ELEVE,$FK_PERMIS) {
 			try {		
 
 				//INSERT INTO "AUTO"."EXAMEN" (FK_PERMIS, FK_ELEVE, NOM, DATE_PASSAGE) VALUES ('1', '21', 'ghgh', TO_DATE('2017-01-20 18:44:27', 'YYYY-MM-DD HH24:MI:SS'))
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.EXAMEN (NOM, DATE_PASSAGE,FK_PERMIS,FK_ELEVE) VALUES (:NOM,TO_DATE(':DATE_PASSAGE', 'YYYY-MM-DD HH24:MI:SS'),:FK_PERMIS,:FK_ELEVE)');
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.EXAMEN (NOM, DATE_PASSAGE,FK_PERMIS,FK_ELEVE) VALUES (:NOM,to_date(:DATE_PASSAGE, \'MM-DD-YYYY HH24:MI:SS\'),:FK_PERMIS,:FK_ELEVE)');
 				oci_bind_by_name($qry,":NOM",$NOM);
 				oci_bind_by_name($qry,":DATE_PASSAGE",$DATE_PASSAGE);
 				oci_bind_by_name($qry,":FK_PERMIS",$FK_PERMIS);
