@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for caravans displays
-	 * This class handles the caravan displays
+	 * Controller for vehicles displays
+	 * This class handles the vehicle displays
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('CaravanController.php');
+	require_once('VehicleController.php');
 	 
-	class DisplayController extends CaravanController {
+	class DisplayController extends VehicleController {
 		
 		/**
 		 * Name of called model
@@ -49,34 +49,34 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'DisplayController') {
-					if (file_exists (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
-						if (file_exists (_CARAVANS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
+					if (file_exists (_VEHICLES_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+						if (file_exists (_VEHICLES_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
 							try {	
-								require_once (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php');
+								require_once (_VEHICLES_MODELS_ .'/'. $this->model_name .'Model.php');
 								$id = Tools::getInstance()->getUrl_id($url);
 
 								switch ($id) {
 									case 'all':
-										$data = \Caravan\DisplayModel::getInstance()->display_caravans();
+										$data = \Vehicle\DisplayModel::getInstance()->display_vehicles();
 										break;
 									default:
-										if(\Caravan\DisplayModel::getInstance()->has_Caravan($id) == 1) {
-											$data = \Caravan\DisplayModel::getInstance()->display_caravan($id);
+										if(\Vehicle\DisplayModel::getInstance()->has_vehicle($id) == 1) {
+											$data = \Vehicle\DisplayModel::getInstance()->display_vehicle($id);
 										} else {
 											header('Location: /Cas-M-Ping/errors/404');
 										}
 										break;
 								}
-								echo $this->twig->render($this->view_name .'.tpl', array('caravans' => $data, 'bootstrapPath' => _BOOTSTRAP_FILE_));
+								echo $this->twig->render($this->view_name .'.tpl', array('vehicles' => $data, 'bootstrapPath' => _BOOTSTRAP_FILE_));
 								
 							} catch (Exception $e) {
 								throw new Exception('Une erreur est survenue durant la récupération des données: '.$e->getMessage());
 							}
 						} else {
-							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._CARAVANS_VIEWS_ .'"!');
+							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._vehicleS_VIEWS_ .'"!');
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._CARAVANS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._vehicleS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -87,7 +87,7 @@
 		}
 		
 		/**
-	     * @see CaravanController::checkAccess()
+	     * @see VehicleController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -95,7 +95,7 @@
 	    }
 
 		/**
-		 * @see CaravanController::viewAccess()
+		 * @see VehicleController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

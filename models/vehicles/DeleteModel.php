@@ -9,7 +9,7 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Vehicles; 
+	namespace Vehicle; 
 	require_once('VehicleModel.php'); 
 	
 	class DeleteModel extends VehicleModel{

@@ -51,17 +51,10 @@
 				
 				if ($controller == 'DisplayController') {
 					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php') 
-						&& file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php')
-						&& file_exists (_LOCATIONS_MODELS_ .'/'. $this->model_name .'Model.php')
-						&& file_exists (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php')
-						&& file_exists (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php')
 					) {			
 						if (file_exists (_INSTRUCTORS_VIEWS_ .'/'. $this->view_nameAll .'.tpl') && file_exists (_INSTRUCTORS_VIEWS_ .'/'. $this->view_nameId .'.tpl')) {	
 							try {	
 								require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php');
-								require_once (_LOCATIONS_MODELS_ .'/'. $this->model_name .'Model.php');
-								require_once (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php');
-								require_once (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php');
 								$id = Tools::getInstance()->getUrl_id($url);
 								
 								switch ($id) {
@@ -72,26 +65,8 @@
 									default:
 										if(\Instructor\DisplayModel::getInstance()->has_instructor($id) == 1) {
 											$instructors = \Instructor\DisplayModel::getInstance()->display_instructor($id);
-											$seasons = array();
-											$caravans = array();
-											$locations = array();
-											$buffer = null;
-											
-											for($i=0; $i<count($instructors); $i++) {
-												$buffer = \Season\DisplayModel::getInstance()->get_SeasonByInstructor($instructors[$i]['rent_id']);											
-												if(count($buffer) > 0) $seasons = array_merge($seasons, $buffer);
-												$buffer = null;
-												
-												$buffer = \Caravan\DisplayModel::getInstance()->get_caravanByInstructor($instructors[$i]['rent_id']);											
-												if(count($buffer) > 0) $caravans = array_merge($caravans, $buffer);
-												$buffer = null;
-												
-												$buffer = \Location\DisplayModel::getInstance()->get_LocationByInstructor($instructors[$i]['rent_id']);											
-												if(count($buffer) > 0) $locations = array_merge($locations, $buffer);
-												$buffer = null;
-											}
 										
-											echo $this->twig->render($this->view_nameId .'.tpl', array('instructor' => $instructors, 'seasons' => $seasons, 'caravans' => $caravans, 'locations' => $locations, 'bootstrapPath' => _BOOTSTRAP_FILE_));
+											echo $this->twig->render($this->view_nameId .'.tpl', array('instructor' => $instructors, 'bootstrapPath' => _BOOTSTRAP_FILE_));
 										} else {
 											header('Location: /Cas-M-Ping/errors/404');
 										}	

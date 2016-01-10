@@ -1,18 +1,18 @@
 <?php
 	
 	/*
-	 * Caravan controller core
-	 * This class is above all caravan classes
+	 * vehicle controller core
+	 * This class is above all vehicle classes
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	abstract class CaravanController {
+	abstract class VehicleController {
 		
 		/**
-		 * State of CaravanController
+		 * State of VehicleController
 		 */
 		public static $initialized = false;
 		
@@ -32,7 +32,7 @@
 	    abstract protected function viewAccess();
 		
 		/**
-		 * Initialize the CaravanController class
+		 * Initialize the VehicleController class
 		 */
 		public function init() {
 			if (self::$initialized) {
@@ -45,7 +45,7 @@
 					require_once(_TWIG_AUTOLOADER_);
 					Twig_Autoloader::register();
 				
-					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _CARAVANS_VIEWS_)); 
+					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _VEHICLES_VIEWS_)); 
 					$this->twig = new Twig_Environment($loader, array(
 					  'cache' => _TWIG_CACHE_
 					));

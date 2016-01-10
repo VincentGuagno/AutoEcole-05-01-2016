@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for confirm new caravan
-	 * This class handles news caravans
+	 * Controller for confirm new Vehicle
+	 * This class handles news Vehicles
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('CaravanController.php');
+	require_once('VehicleController.php');
 	 
-	class ConfirmAddController extends CaravanController {
+	class ConfirmAddController extends VehicleController {
 		
 		/**
 		 * Name of called model
@@ -45,24 +45,24 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ConfirmAddController') {
-					if (file_exists (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+					if (file_exists (_VehicleS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
 						try {	
-							require_once (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php');							
+							require_once (_VehicleS_MODELS_ .'/'. $this->model_name .'Model.php');							
 							Tools::getInstance()->createPost($_POST);
 							
 							if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['person']) && !empty($_POST['location'])) {
-								\Caravan\RentingModel::getInstance()->renting_caravan($_POST['name'], $_POST['price'], $_POST['person'], $_POST['location']);
-								header('Location: /Cas-M-Ping/caravans/show/all');
+								\Vehicle\RentingModel::getInstance()->renting_Vehicle($_POST['name'], $_POST['price'], $_POST['person'], $_POST['location']);
+								header('Location: /Cas-M-Ping/Vehicles/show/all');
 								
 							} else {
-								header('Location: /Cas-M-Ping/caravans/renting');
+								header('Location: /Cas-M-Ping/Vehicles/renting');
 							}
 
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la modification des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._CARAVANS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._VehicleS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -73,7 +73,7 @@
 		}
 		
 		/**
-	     * @see CaravanController::checkAccess()
+	     * @see VehicleController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -81,7 +81,7 @@
 	    }
 
 		/**
-		 * @see CaravanController::viewAccess()
+		 * @see VehicleController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

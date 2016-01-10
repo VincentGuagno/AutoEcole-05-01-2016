@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for caravan deletions
-	 * This class handles the caravans deletions
+	 * Controller for vehicle deletions
+	 * This class handles the vehicles deletions
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('CaravanController.php');
+	require_once('VehicleController.php');
 	 
-	class ReturnController extends CaravanController {
+	class ReturnController extends VehicleController {
 		
 		/**
 		 * Name of called model
@@ -44,30 +44,30 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 
 				if ($controller == 'ReturnController') {
-					if (file_exists (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
+					if (file_exists (_vehicleS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
 						try {	
-							require_once (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php');
+							require_once (_vehicleS_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
 							
 							switch ($id) {
 								case 'all':
-									\Caravan\ReturnModel::getInstance()->delete_caravans();
+									\vehicle\ReturnModel::getInstance()->delete_vehicles();
 									break;
 								default:
-									if(\Caravan\ReturnModel::getInstance()->has_Caravan($id) == 1) {
-										\Caravan\ReturnModel::getInstance()->delete_caravan($id);	
+									if(\vehicle\ReturnModel::getInstance()->has_vehicle($id) == 1) {
+										\vehicle\ReturnModel::getInstance()->delete_vehicle($id);	
 									} else {
 										header('Location: /Cas-M-Ping/errors/404');
 									}	
 									break;
 							}
-							header('Location: /Cas-M-Ping/caravans/show/all');
+							header('Location: /Cas-M-Ping/vehicles/show/all');
 							
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la modification des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._CARAVANS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._vehicleS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -78,7 +78,7 @@
 		}
 		
 		/**
-	     * @see CaravanController::checkAccess()
+	     * @see VehicleController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -86,7 +86,7 @@
 	    }
 
 		/**
-		 * @see CaravanController::viewAccess()
+		 * @see VehicleController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

@@ -9,7 +9,7 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Vehicles;	
+	namespace Vehicle;
 	require_once('VehicleModel.php'); 
 	
 	class DisplayModel extends VehicleModel {
@@ -76,7 +76,7 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_vehicules() {
+		public function display_vehicles() {
 			try {								
 				$qry = oci_parse($this->db, 'SELECT	PK_VEHICULE, 
 													  VEHICULE.NUMERO,
@@ -107,7 +107,7 @@
 		 * @param PK_VEHICULE, Eleve's id
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_vehicule($PK_VEHICULE) {
+		public function display_vehicle($PK_VEHICULE) {
 			try {
 
 				$qry = oci_parse($this->db, 'SELECT VEHICULE.NUMERO,

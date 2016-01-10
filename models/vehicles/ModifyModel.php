@@ -9,7 +9,7 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Vehicles;
+	namespace Vehicle;
 	require_once('VehicleModel.php'); 
 	
 	class ModifyModel extends VehicleModel{
