@@ -18,7 +18,7 @@
 	<table class="table">
 		<tr>
 			<th> Numéro du véhicule </th>
-			<th> Immatricuation du véhicule </th>
+			<th> Immatriculation du véhicule </th>
 			<th> Nom du modèle </th>
 			<th> Surnom du moniteur </th>
 		</tr>
