@@ -12,24 +12,24 @@ Ajout d'un client
 {% block content %}
 	
 	<form method="post" ACTION="/Cas-M-Ping/customers/add/confirm">
+	
+		<label for="NOM">Nom : </label>
+		<input class="form-control" id="NOM"name="NOM" >
 		
-		<label for="firstName">Prénom : </label>
-		<input class="form-control" id="firstName" name="firstName" >
+		<label for="PRENOM">Prénom : </label>
+		<input class="form-control" id="PRENOM" name="PRENOM" >
 		
-		<label for="lastName">Nom : </label>
-		<input class="form-control" id="lastName"name="lastName" >
+		<label for="ADRESSEE">adresse : </label>
+		<input class="form-control" id="ADRESSE"name="ADRESSE" >
 		
-		<label for="adress">Adresse : </label>
-		<input class="form-control" id="adress"name="adress" >
+		<label for="NUM_TEL">numero de telephone : </label>
+		<input class="form-control" id="NUM_TEL"name="NUM_TEL" >
 		
-		<label for="zipCode">Code Postal : </label>
-		<input class="form-control" id="zipCode"name="zipCode" >
+		<label for="SURNOM">surnom : </label>
+		<input class="form-control" id="SURNOM"name="SURNOM" >
 		
-		<label for="city">Ville : </label>
-		<input class="form-control" id="city"name="city" >
-		
-		<label for="telephone">Téléphone : </label>
-		<input class="form-control" id="telephone"name="telephone" >
+		<label for="DATE_EMBAUCHE">date embauche : </label>
+		<input class="form-control" id="DATE_EMBAUCHE"name="DATE_EMBAUCHE" >
 		
 		<button type="submit" class="btn btn-default">Envoyer</button>
 	</form>
