@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for rental modifications
-	 * This class handles modifications rentals
+	 * Controller for instructor modifications
+	 * This class handles modifications instructors
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('RentalController.php');
+	require_once('InstructorController.php');
 	 
-	class ModifyController extends RentalController {
+	class ModifyController extends InstructorController {
 		
 		/**
 		 * Name of called model
@@ -49,23 +49,23 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ModifyController') {
-					if (file_exists (_RENTALS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
-						if (file_exists (_RENTALS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
+					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+						if (file_exists (_INSTRUCTORS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
 							try {	
-								require_once (_RENTALS_MODELS_ .'/'. $this->model_name .'Model.php');
+								require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php');
 								$id = Tools::getInstance()->getUrl_id($url);
 								
-								$data = \Rental\DisplayModel::getInstance()->display_rental($id);
-								echo $this->twig->render($this->view_name .'.tpl', array('rental' => $data[0], 'bootstrapPath' => _BOOTSTRAP_FILE_));
+								$data = \Instructor\DisplayModel::getInstance()->display_instructor($id);
+								echo $this->twig->render($this->view_name .'.tpl', array('instructor' => $data[0], 'bootstrapPath' => _BOOTSTRAP_FILE_));
 								
 							} catch (Exception $e) {
 								throw new Exception('Une erreur est survenue durant la récupération des données: '.$e->getMessage());
 							}
 						} else {
-							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._RENTALS_VIEWS_ .'"!');
+							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._INSTRUCTORS_VIEWS_ .'"!');
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._RENTALS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._INSTRUCTORS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -76,7 +76,7 @@
 		}
 		
 		/**
-	     * @see RentalController::checkAccess()
+	     * @see InstructorController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -84,7 +84,7 @@
 	    }
 
 		/**
-		 * @see RentalController::viewAccess()
+		 * @see InstructorController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

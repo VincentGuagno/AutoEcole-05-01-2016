@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Marque;	
-	require_once('MarqueModel.php'); 
+	namespace Brands;	
+	require_once('BrandsModel.php'); 
 	
-	class DisplayModel extends MarqueModel {
+	class DisplayModel extends BrandsModel {
 
 		/**
 		 * DisplayModel instance

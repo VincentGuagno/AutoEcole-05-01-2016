@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Formules; 
-	require_once('FormulesModel.php'); 
+	namespace Fomulas; 
+	require_once('FomulaModel.php'); 
 	
-	class AddModel extends FormulesModel{
+	class AddModel extends FomulaModel{
 
 		/**
 		 * AddModel instance
@@ -83,10 +83,10 @@
 		public function add_formule($PRIX_FM,$NB_LECON_PACK, $LIBELLE) {
 			try {		
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FORMULES (PRIX_FM, NB_LECON_PACK, LIBELLE) VALUES (?,?,?)');
-				$qry->bindValue(1, $PRIX_FM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $NB_LECON_PACK, \PDO::PARAM_STR);
-				$qry->bindValue(3, $LIBELLE, \PDO::PARAM_STR);
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FORMULES (PRIX_FM, NB_LECON_PACK, LIBELLE) VALUES (:PRIX_FM,:NB_LECON_PACK,:LIBELLE)');
+				oci_bind_by_name($qry,":PRIX_FM",$PRIX_FM);
+				oci_bind_by_name($qry,":NB_LECON_PACK",$NB_LECON_PACK);
+				oci_bind_by_name($qry,":LIBELLE",$LIBELLE);
 
 				oci_execute($qry);
 				oci_close($this->db);								
@@ -94,6 +94,5 @@
 				return $e->getMessage();
 			}
 		}	
-	}
-	
+	}	
 ?>

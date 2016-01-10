@@ -84,20 +84,21 @@
 			try {
 
 				// UPDATE LECON SET DATE_LECON = TO_DATE('2011-01-22', 'YYYY-MM-DD HH24:MI:SS'), ETAT_LECON = '0' WHERE PK_LECON = 4
-				$qry = oci_parse($this->db, ("UPDATE LECON SET DATE_LECON = TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS'), ETAT_LECON = ? WHERE PK_LECON = ?");
+				$qry = oci_parse($this->db, ("UPDATE LECON SET DATE_LECON = TO_DATE(':DATE_LECON', 'YYYY-MM-DD HH24:MI:SS'), ETAT_LECON = :ETAT_LECON WHERE PK_LECON = :PK_LECON");
 				
-				$qry->bindValue(1, $DATE_LECON, \PDO::PARAM_STR);
-				$qry->bindValue(2, $ETAT_LECON, \PDO::PARAM_INT);
-				$qry->bindValue(3, $PK_LECON, \PDO::PARAM_INT);
+				oci_bind_by_name($qry,":DATE_LECON",$DATE_LECON);
+				oci_bind_by_name($qry,":ETAT_LECON",$ETAT_LECON);
+				oci_bind_by_name($qry,":PK_LECON",$PK_LECON);
 			
 				oci_execute($qry);
-
+				oci_close($this->db);	
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
-
 	}
-
 ?>
+
+
+

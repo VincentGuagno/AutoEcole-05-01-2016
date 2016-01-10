@@ -9,7 +9,7 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Student;	
+	namespace Students;	
 	require_once('StudentModel.php'); 
 	
 	class DisplayModel extends StudentModel {
@@ -98,6 +98,8 @@
 			}
 		}
 
+
+
 		/**
 		 * All Eleve's informations from one Eleve 
 		 *
@@ -113,8 +115,9 @@
 													FROM ELEVE
 													INNER JOIN FORMULES
 													ON FORMULES.PK_FORMULE = ELEVE.FK_FORMULES
-													WHERE ELEVE.PK_ELEVE   = '.$PK_ELEVE);	
-				//$qry->bindValue(1, $car_id, \PDO::PARAM_INT);
+													WHERE ELEVE.PK_ELEVE   = :$PK_ELEVE');	
+				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
+				oci_execute($qry);
 
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
@@ -124,7 +127,6 @@
 				return $e->getMessage();
 			}
 		}
-
 
 		/**
 		 * All Eleve's informations from one Eleve 
@@ -152,9 +154,10 @@
 												ON ELEVE.PK_ELEVE = LECON.FK_ELEVE
 												INNER JOIN EXAMEN
 												ON ELEVE.PK_ELEVE    = EXAMEN.FK_ELEVE
-												WHERE ELEVE.PK_ELEVE = ?');	
+												WHERE ELEVE.PK_ELEVE = :PK_ELEVE');	
 				$qry->bindValue(1, $car_id, \PDO::PARAM_INT);
-
+				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
+				oci_execute($qry);
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
 				oci_close($this->db);
@@ -163,7 +166,6 @@
 				return $e->getMessage();
 			}
 		}
-
 
 		/**
 		 * All Eleve's informations from one Eleve 
@@ -182,7 +184,7 @@
 													INNER JOIN PERMIS
 													ON PERMIS.PK_PERMIS  = EXAMEN.PK_EXAMEN');	
 	
-
+				oci_execute($qry);
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
 				oci_close($this->db);
@@ -191,6 +193,7 @@
 				return $e->getMessage();
 			}
 		}
+		
 
 			/**
 		 * All Eleve's informations from one Eleve 
@@ -210,8 +213,11 @@
 													ON ELEVE.PK_ELEVE = EXAMEN.FK_ELEVE
 													INNER JOIN PERMIS
 													ON PERMIS.PK_PERMIS  = EXAMEN.PK_EXAMEN
-													WHERE ELEVE.PK_ELEVE = ?');	
-				$qry->bindValue(1, $PK_ELEVE, \PDO::PARAM_INT);
+													WHERE ELEVE.PK_ELEVE = :PK_ELEVE');	
+
+				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
+
+				oci_execute($qry);
 
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
@@ -240,12 +246,14 @@
 													ON ELEVE.PK_ELEVE = EXAMEN.FK_ELEVE
 													INNER JOIN PERMIS
 													ON PERMIS.PK_PERMIS  = EXAMEN.PK_EXAMEN
-													WHERE ELEVE.PK_ELEVE = ? 												
-													AND EXAMEN.DATE_PASSAGE BETWEEN TO_DATE(\'?\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\'?\', \'YYYY-MM-DD HH24:MI:SS\')');	
-				$qry->bindValue(1, $PK_ELEVE, \PDO::PARAM_INT);
-				$qry->bindValue(2, $DEBUT, \PDO::PARAM_STR);
-				$qry->bindValue(3, $FIN, \PDO::PARAM_STR);
+													WHERE ELEVE.PK_ELEVE = :PK_ELEVE 												
+													AND EXAMEN.DATE_PASSAGE BETWEEN TO_DATE(\':DEBUT\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\':FIN\', \'YYYY-MM-DD HH24:MI:SS\')');	
+			
+				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
+				oci_bind_by_name($qry,":DEBUT",$DEBUT);
+				oci_bind_by_name($qry,":FIN",$FIN);
 
+				oci_execute($qry);
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
 				oci_close($this->db);
@@ -274,10 +282,11 @@
 													ON ELEVE.PK_ELEVE = EXAMEN.FK_ELEVE
 													INNER JOIN PERMIS
 													ON PERMIS.PK_PERMIS  = EXAMEN.PK_EXAMEN											
-													AND EXAMEN.DATE_PASSAGE BETWEEN TO_DATE(\'?\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\'?\', \'YYYY-MM-DD HH24:MI:SS\')');	
-				$qry->bindValue(1, $DEBUT, \PDO::PARAM_STR);
-				$qry->bindValue(2, $FIN, \PDO::PARAM_STR);
+													AND EXAMEN.DATE_PASSAGE BETWEEN TO_DATE(\':DEBUT\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\':FIN\', \'YYYY-MM-DD HH24:MI:SS\')');	
+				oci_bind_by_name($qry,":DEBUT",$DEBUT);
+				oci_bind_by_name($qry,":FIN",$FIN);
 
+				oci_execute($qry);
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
 				oci_close($this->db);
@@ -287,6 +296,7 @@
 			}
 		}
 
+	
 
 		/**
 		 * All Eleve's informations from one Eleve 
@@ -306,12 +316,13 @@
 													ON ELEVE.PK_ELEVE = EXAMEN.FK_ELEVE
 													INNER JOIN PERMIS
 													ON PERMIS.PK_PERMIS  = EXAMEN.PK_EXAMEN
-													WHERE ELEVE.PK_ELEVE = ? 												
-													AND LECON.DATE_LECON BETWEEN TO_DATE(\'?\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\'?\', \'YYYY-MM-DD HH24:MI:SS\')');	
-				$qry->bindValue(1, $PK_ELEVE, \PDO::PARAM_INT);
-				$qry->bindValue(2, $DEBUT, \PDO::PARAM_STR);
-				$qry->bindValue(3, $FIN, \PDO::PARAM_STR);
+													WHERE ELEVE.PK_ELEVE = :PK_ELEVE 												
+													AND LECON.DATE_LECON BETWEEN TO_DATE(\':DEBUT\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\':FIN\', \'YYYY-MM-DD HH24:MI:SS\')');	
+				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
+				oci_bind_by_name($qry,":DEBUT",$DEBUT);
+				oci_bind_by_name($qry,":FIN",$FIN);
 
+				oci_execute($qry);
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
 				oci_close($this->db);
@@ -340,11 +351,12 @@
 													ON ELEVE.PK_ELEVE = EXAMEN.FK_ELEVE
 													INNER JOIN PERMIS
 													ON PERMIS.PK_PERMIS  = EXAMEN.PK_EXAMEN									
-													WHERE LECON.DATE_LECON BETWEEN TO_DATE(\'?\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\'?\', \'YYYY-MM-DD HH24:MI:SS\')');	
+													WHERE LECON.DATE_LECON BETWEEN TO_DATE(\':DEBUT\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\':FIN\', \'YYYY-MM-DD HH24:MI:SS\')');	
 		
-				$qry->bindValue(1, $DEBUT, \PDO::PARAM_STR);
-				$qry->bindValue(2, $FIN, \PDO::PARAM_STR);
+				oci_bind_by_name($qry,":DEBUT",$DEBUT);
+				oci_bind_by_name($qry,":FIN",$FIN);
 
+				oci_execute($qry);
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
 
 				oci_close($this->db);
@@ -355,6 +367,3 @@
 		}
 	}
 ?>
-
-	
-	

@@ -100,8 +100,8 @@
 		public function display_lecon($PK_LECON) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE LECON.PK_LECON =?');	
-				$qry->bindValue(1, $PK_LECON, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE LECON.PK_LECON =:PK_LECON');	
+				oci_bind_by_name($qry,":PK_LECON",$PK_LECON);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -114,6 +114,7 @@
 			}
 		}
 
+	
 		/**
 		 * All Eleve's informations from one Eleve 
 		 *
@@ -124,10 +125,10 @@
 		public function display_lecons_avec_date($DEBUT, $FIN)  {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE LECON.DATE_LECON BETWEEN TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS')');
+				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE LECON.DATE_LECON BETWEEN TO_DATE(':DEBUT', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(':FIN', 'YYYY-MM-DD HH24:MI:SS')');
 
-				$qry->bindValue(1, $DEBUT, \PDO::PARAM_STR);
-				$qry->bindValue(2, $FIN, \PDO::PARAM_STR);
+				oci_bind_by_name($qry,":DEBUT",$DEBUT);
+				oci_bind_by_name($qry,":FIN",$FIN);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -138,9 +139,6 @@
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
-		}
-
-
-	
+		}	
 	}
-	?>
+?>

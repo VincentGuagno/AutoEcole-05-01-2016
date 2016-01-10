@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Moniteur; 
-	require_once('MoniteurModel.php'); 
+	namespace Instructors; 
+	require_once('InstructorModel.php'); 
 	
-	class DeleteModel extends MoniteurModel{
+	class DeleteModel extends InstructorModel{
 
 		/**
 		 * DeleteModel instance
@@ -81,9 +81,10 @@
 		public function delete_moniteur($PK_MONITEUR) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.MONITEUR FROM MONITEUR WHERE MONITEUR.PK_MONITEUR =?');	
-				$qry->bindValue(1, $PK_MONITEUR, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'DELETE AUTO.MONITEUR FROM MONITEUR WHERE MONITEUR.PK_MONITEUR =:PK_MONITEUR');	
+				oci_bind_by_name($qry,":PK_MONITEUR",$PK_MONITEUR);
 				oci_execute($qry);
+				oci_close($this->db);	
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
@@ -100,12 +101,12 @@
 
 				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.MONITEUR');	
 				oci_execute($qry);	
-
+				oci_close($this->db);	
 				return 0;			
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
 	}
-
 ?>
+

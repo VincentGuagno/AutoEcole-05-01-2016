@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Modele; 
-	require_once('ModeleModel.php'); 
+	namespace Models; 
+	require_once('ModelModel.php'); 
 	
-	class AddModel extends ModeleModel{
+	class AddModel extends ModelModel{
 
 		/**
 		 * AddModel instance
@@ -79,16 +79,15 @@
 		 * @param PUISSANCE ,  customer's lasttName
 		 * @param NOM_MODELE ,  customer's lasttName
 		 */
-		public function add_modele($MARQUE,$PUISSANCE, $NOM_MODELE) {
+		public function add_modele(,$MARQUE,$PUISSANCE, $NOM_MODELE) {
 			try {		
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MODELE (PK_MODELE, TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES (?,?,?)');
-				$qry->bindValue(1, $MARQUE, \PDO::PARAM_STR);
-				$qry->bindValue(2, $PUISSANCE, \PDO::PARAM_STR);
-				$qry->bindValue(3, $NOM_MODELE, \PDO::PARAM_STR);
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MODELE (TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES (:TYPE_MOTEUR,:PUISSANCE,:NOM_MODELE)');
+				oci_bind_by_name($qry,":MARQUE",$MARQUE);
+				oci_bind_by_name($qry,":PUISSANCE",$PUISSANCE);
+				oci_bind_by_name($qry,":NOM_MODELE",$NOM_MODELE);	
 
 				oci_execute($qry);
-
 				oci_close($this->db);
 				return $res;				
 			} catch(Exception $e) {
@@ -98,3 +97,4 @@
 	}
 	
 ?>
+

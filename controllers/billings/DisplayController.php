@@ -58,11 +58,11 @@
 
 								switch ($id) {
 									case 'all':
-										$data = \Billings\DisplayModel::getInstance()->display_facturations();
+										$data = \Billings\DisplayModel::getInstance()->display_billings();
 										break;
 									default:
 										if(\Billings\DisplayModel::getInstance()->has_Billings($id) == 1) {
-											$data = \Billings\DisplayModel::getInstance()->display_facturation($id);
+											$data = \Billings\DisplayModel::getInstance()->display_billing($id);
 										} else {
 											header('Location: /Cas-M-Ping/errors/404');
 										}

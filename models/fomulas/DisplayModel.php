@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Lecon;	
-	require_once('LeconModel.php'); 
+	namespace Fomulas;	
+	require_once('FomulaModel.php'); 
 	
-	class DisplayModel extends LeconModel {
+	class DisplayModel extends FomulaModel {
 
 		/**
 		 * DisplayModel instance
@@ -100,8 +100,9 @@
 		public function display_formule($PK_LECON) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT FORMULES.* FROM FORMULES WHERE FORMULES.PK_FORMULES =?');	
-				$qry->bindValue(1, $PK_LECON, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'SELECT FORMULES.* FROM FORMULES WHERE FORMULES.PK_FORMULES =:PK_FORMULES');	
+				
+				oci_bind_by_name($qry,":DATE_FACTURE",$PK_FORMULES);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -114,4 +115,4 @@
 			}
 		}
 	}
-	?>
+?>

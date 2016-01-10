@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Modele; 
-	require_once('ModeleModel.php'); 
+	namespace Models; 
+	require_once('ModelModel.php'); 
 	
-	class DeleteModel extends ModeleModel{
+	class DeleteModel extends ModelModel{
 
 		/**
 		 * DeleteModel instance
@@ -81,9 +81,10 @@
 		public function delete_marque($PK_MODELE) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.MODELE FROM MODELE WHERE MODELE.PK_MODELE =?');	
-				$qry->bindValue(1, $PK_MODELE, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'DELETE AUTO.MODELE FROM MODELE WHERE MODELE.PK_MODELE =:PK_MODELE');	
+				oci_bind_by_name($qry,":PK_MODELE",$PK_MODELE);
 				oci_execute($qry);
+				oci_close($this->db);	
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
@@ -100,6 +101,7 @@
 
 				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.MODELE');	
 				oci_execute($qry);		
+				oci_close($this->db);	
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();

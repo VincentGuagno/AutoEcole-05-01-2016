@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Moniteur; 
-	require_once('MoniteurModel.php'); 
+	namespace Instructors; 
+	require_once('InstructorModel.php'); 
 	
-	class AddModel extends MoniteurModel{
+	class AddModel extends InstructorModel{
 
 		/**
 		 * AddModel instance
@@ -87,22 +87,20 @@
 
 				// INSERT INTO "AUTO"."MONITEUR" (NOM, PRENOM, ADRESSE, NUM_TEL, SURNOM, DATE_EMBAUCHE) VALUES ('hobbit', 'bilbo', 'eee', '555', 'orgi', TO_DATE('2016-01-11 18:08:51', 'YYYY-MM-DD HH24:MI:SS'))
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MONITEUR  (NOM, PRENOM, ADRESSE, NUM_TEL, SURNOM, DATE_EMBAUCHE) VALUES (?,?,?,?,?,?,?)');
-				$qry->bindValue(1, $NOM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $PRENOM, \PDO::PARAM_STR);
-				$qry->bindValue(3, $ADRESSE, \PDO::PARAM_STR);
-				$qry->bindValue(4, $NUM_TEL, \PDO::PARAM_STR);
-				$qry->bindValue(5, $SURNOM, \PDO::PARAM_STR);
-				$qry->bindValue(6, $DATE_EMBAUCHE, \PDO::PARAM_STR);	
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MONITEUR  (NOM, PRENOM, ADRESSE, NUM_TEL, SURNOM, DATE_EMBAUCHE) VALUES (:NOM,:PRENOM,:ADRESSE,:NUM_TEL,:SURNOM,:DATE_EMBAUCHE)');
+				oci_bind_by_name($qry,":NOM",$NOM);
+				oci_bind_by_name($qry,":PRENOM",$PRENOM);
+				oci_bind_by_name($qry,":ADRESSE",$ADRESSE);
+				oci_bind_by_name($qry,":NUM_TEL",$NUM_TEL);
+				oci_bind_by_name($qry,":SURNOM",$SURNOM);
+				oci_bind_by_name($qry,":DATE_EMBAUCHE",$DATE_EMBAUCHE);	
 
 				oci_execute($qry);
-
 				oci_close($this->db);
 				return $res;				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}	
-	}
-	
+	}	
 ?>

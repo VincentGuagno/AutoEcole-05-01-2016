@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Eleve;
-	require_once('EleveModel.php'); 
+	namespace Students;
+	require_once('StudentModel.php'); 
 	
-	class ModifyModel extends EleveModel{
+	class ModifyModel extends StudentModel{
 
 		/**
 		 * ModifyModel instance
@@ -89,24 +89,25 @@
 			try {
 
 				//UPDATE ELEVE SET FK_MONITEUR = '21', NOM = 'bi', PRENOM = 'jay', ADRESSE = 'no whi', NUM_TEL = 4, DATE_NAISSANCE = TO_DATE('2016-01-17', 'YYYY-MM-DD HH24:MI:SS'), LIEU_ETUDE = 'se' WHERE PK_ELEVE =21
-				$qry = oci_parse($this->db, ("UPDATE ELEVE SET FK_MONITEUR = ?, NOM = '?', PRENOM = '?', ADRESSE = '?', NUM_TEL = ?, DATE_NAISSANCE = TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS'), LIEU_ETUDE = '?' WHERE PK_ELEVE =?");
+				$qry = oci_parse($this->db, ("UPDATE ELEVE SET FK_MONITEUR = :FK_MONITEUR, NOM = ':NOM', PRENOM = ':PRENOM', ADRESSE = ':ADRESSE', NUM_TEL = :NUM_TEL, DATE_NAISSANCE = TO_DATE(':DATE_NAISSANCE', 'YYYY-MM-DD HH24:MI:SS'), LIEU_ETUDE = ':LIEU_ETUDE' WHERE PK_ELEVE =:PK_ELEVE");
+			
+
+				oci_bind_by_name($qry,":FK_MONITEUR",$FK_MONITEUR);
+				oci_bind_by_name($qry,":NOM",$NOM);
+				oci_bind_by_name($qry,":PRENOM",$PRENOM);					
+				oci_bind_by_name($qry,":ADRESSE",$ADRESSE);
+				oci_bind_by_name($qry,":NUM_TEL",$NUM_TEL);
+				oci_bind_by_name($qry,":DATE_NAISSANCE",$DATE_NAISSANCE);					
+				oci_bind_by_name($qry,":LIEU_ETUDE",$LIEU_ETUDE);
+				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
 				
-				$qry->bindValue(1, $FK_MONITEUR, \PDO::PARAM_INT);
-				$qry->bindValue(2, $NOM, \PDO::PARAM_STR);
-				$qry->bindValue(3, $PRENOM, \PDO::PARAM_STR);
-				$qry->bindValue(4, $ADRESSE, \PDO::PARAM_STR);
-				$qry->bindValue(5, $NUM_TEL, \PDO::PARAM_STR);
-				$qry->bindValue(6, $DATE_NAISSANCE, \PDO::PARAM_STR);
-				$qry->bindValue(7, $LIEU_ETUDE, \PDO::PARAM_STR);
-				$qry->bindValue(8, $PK_ELEVE, \PDO::PARAM_INT);
 			
 				oci_execute($qry);
+				oci_close($this->db);
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
-
 	}
-
 ?>

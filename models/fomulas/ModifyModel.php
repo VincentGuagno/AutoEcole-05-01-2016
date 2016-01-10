@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Formules;
-	require_once('FormulesModel.php'); 
+	namespace Fomulas;
+	require_once('FomulaModel.php'); 
 	
-	class ModifyModel extends FormulesModel{
+	class ModifyModel extends FomulaModel{
 
 		/**
 		 * ModifyModel instance
@@ -81,26 +81,25 @@
 		 * @param PK_FORMULE, customer's address
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function modify_formules($PRIX_FM, $NB_LECON_PACK, $PK_FORMULE) {
+		public function modify_formules($PRIX_FM, $NB_LECON_PACK, $PK_FORMULE, $LIBELLE) {
 			try {
 		
 				// UPDATE "AUTO"."FORMULES" SET PRIX_FM = '5124', NB_LECON_PACK = '40', LIBELLE = 'big noobie' WHERE ROWID = 'AAAE7mAABAAALDpAAB' AND ORA_ROWSCN = '643871'
 
-				$qry = oci_parse($this->db, ("UPDATE FORMULES SET PRIX_FM = ?, NB_LECON_PACK = ?, LIBELLE = '?' WHERE PK_FORMULE =?");	
-				$qry->bindValue(1, $PRIX_FM, \PDO::PARAM_INT);
-				$qry->bindValue(2, $NB_LECON_PACK, \PDO::PARAM_INT);
-				$qry->bindValue(3, $LIBELLE, \PDO::PARAM_STR);
-				$qry->bindValue(4, $PK_FORMULE, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, ("UPDATE FORMULES SET PRIX_FM = :PRIX_FM, NB_LECON_PACK = NB_LECON_PACK, LIBELLE = ':LIBELLE' WHERE PK_FORMULE =:PK_FORMULE");	
+				oci_bind_by_name($qry,":PRIX_FM",$PRIX_FM);
+				oci_bind_by_name($qry,":NB_LECON_PACK",$NB_LECON_PACK);
+				oci_bind_by_name($qry,":LIBELLE",$LIBELLE);
+				oci_bind_by_name($qry,":PK_FORMULE",$LIBELLE);
 			
 				oci_execute($qry);
-
+				oci_close($this->db);	
 				return 0;
 
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
-
 	}
-
 ?>
+

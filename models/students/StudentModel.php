@@ -8,7 +8,7 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Student; 
+	namespace Students; 
 	 
 	class StudentModel {	
 		
@@ -28,19 +28,10 @@
 		 * @param PK_ELEVE, eleve's id
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function has_customer($PK_ELEVE) {
+		public function has_student($PK_ELEVE) {
 			try {
-				/*
-				$qry = $this->db->prepare('SELECT ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =?');	
-				$qry->bindValue(1, $PK_ELEVE, \PDO::PARAM_STR);
-				$qry->execute();
-				$return_qry = $qry->fetch(\PDO::FETCH_OBJ);
-				$qry->closeCursor();
-				return (!empty($return_qry->PK_ELEVE)) ? 1 : 0;
-				*/
-
-				$qry = oci_parse($this->db, 'SELECT ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =?');	
-				$qry->bindValue(1, $PK_ELEVE, \PDO::PARAM_STR);
+				$qry = oci_parse($this->db, 'SELECT ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =:PK_ELEVE');	
+				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -56,3 +47,6 @@
 		}
 		
 	}
+?>
+
+

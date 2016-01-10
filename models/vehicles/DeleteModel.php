@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Vehicule; 
-	require_once('VehiculeModel.php'); 
+	namespace Vehicles; 
+	require_once('VehicleModel.php'); 
 	
-	class DeleteModel extends VehiculeModel{
+	class DeleteModel extends VehicleModel{
 
 		/**
 		 * DeleteModel instance
@@ -81,9 +81,10 @@
 		public function delete_vehicule($PK_VEHICULE) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.VEHICULE FROM MODELE WHERE VEHICULE.PK_VEHICULE =?');	
-				$qry->bindValue(1, $PK_VEHICULE, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'DELETE AUTO.VEHICULE FROM MODELE WHERE VEHICULE.PK_VEHICULE =:PK_VEHICULE');	
+				oci_bind_by_name($qry,":PK_VEHICULE",$PK_VEHICULE);
 				oci_execute($qry);
+				oci_close($this->db);
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
@@ -100,7 +101,7 @@
 
 				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.VEHICULE');	
 				oci_execute($qry);	
-
+				oci_close($this->db);
 				return 0;			
 			} catch(Exception $e) {
 				return $e->getMessage();

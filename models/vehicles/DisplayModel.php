@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Vehicule;	
-	require_once('VehiculeModel.php'); 
+	namespace Vehicles;	
+	require_once('VehicleModel.php'); 
 	
-	class DisplayModel extends VehiculeModel {
+	class DisplayModel extends VehicleModel {
 
 		/**
 		 * DisplayModel instance
@@ -127,8 +127,9 @@
 													ON MODELE.PK_MODELE = VEHICULE.FK_MODELE
 													INNER JOIN MONITEUR
 													ON MONITEUR.PK_MONITEUR    = VEHICULE.FK_MONITEUR
-													WHERE VEHICULE.PK_VEHICULE = ?');	
-				$qry->bindValue(1, $PK_VEHICULE, \PDO::PARAM_INT);
+													WHERE VEHICULE.PK_VEHICULE = :PK_VEHICULE');	
+				
+				oci_bind_by_name($qry,":PK_VEHICULE",$PK_VEHICULE);	
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -141,4 +142,7 @@
 			}
 		}
 	}
-	?>
+?>
+
+
+	

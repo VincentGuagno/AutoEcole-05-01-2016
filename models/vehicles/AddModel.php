@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Vehicule; 
-	require_once('VehiculeModel.php'); 
+	namespace Vehicles; 
+	require_once('VehicleModel.php'); 
 	
-	class AddModel extends VehiculeModel{
+	class AddModel extends VehicleModel{
 
 		/**
 		 * AddModel instance
@@ -82,19 +82,20 @@
 		 * @param DATE_ACHAT ,  customer's lasttName
 		 * @param PRIX_ACHAT ,  customer's lasttName
 		 */
-		public function add_vehicule($FK_MODELE, $PUISSANCE, $NUMERO, $KM, $DATE_ACHAT, $PRIX_ACHAT) {
+		public function add_vehicule($FK_MODELE, $FK_MONITEUR, $NUMERO, $KM, $DATE_ACHAT, $PRIX_ACHAT) {
 			try {		
 
 				// INSERT INTO "AUTO"."VEHICULE" (FK_MODELE, PUISSANCE, NUMERO, KM, DATE_ACHAT, PRIX_ACHAT) VALUES ('1', '1', '1', '44', '121', TO_DATE('2016-01-04 17:56:12', 'YYYY-MM-DD HH24:MI:SS'), '11')
 
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.VEHICULE (FK_MODELE, FK_MONITEUR, NUMERO, KM, DATE_ACHAT, PRIX_ACHAT) VALUES (?,?,?,?,?,?)');
-				$qry->bindValue(1, $FK_MODELE, \PDO::PARAM_STR);
-				$qry->bindValue(2, $PUISSANCE, \PDO::PARAM_STR);
-				$qry->bindValue(3, $NUMERO, \PDO::PARAM_INT);
-				$qry->bindValue(4, $KM, \PDO::PARAM_STR);
-				$qry->bindValue(5, $DATE_ACHAT, \PDO::PARAM_STR);
-				$qry->bindValue(6, $PRIX_ACHAT, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.VEHICULE (FK_MODELE, FK_MONITEUR, NUMERO, KM, DATE_ACHAT, PRIX_ACHAT) VALUES (:FK_MODELE,:FK_MONITEUR,:NUMERO,:KM,TO_DATE(':DATE_ACHAT', 'YYYY-MM-DD HH24:MI:SS'),:PRIX_ACHAT)');
+
+				oci_bind_by_name($qry,":FK_MODELE",$FK_MODELE);
+				oci_bind_by_name($qry,":FK_MONITEUR",$FK_MONITEUR);
+				oci_bind_by_name($qry,":NUMERO",$NUMERO);	
+				oci_bind_by_name($qry,":KM",$KM);
+				oci_bind_by_name($qry,":DATE_ACHAT",$DATE_ACHAT);
+				oci_bind_by_name($qry,":PRIX_ACHAT",$PRIX_ACHAT);	
 
 				oci_execute($qry);
 
@@ -104,6 +105,8 @@
 				return $e->getMessage();
 			}
 		}	
-	}
-	
+	}	
 ?>
+
+	
+	

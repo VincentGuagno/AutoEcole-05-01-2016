@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for confirm new rental
-	 * This class handles news rentals
+	 * Controller for confirm new instructor
+	 * This class handles news instructors
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('RentalController.php');
+	require_once('InstructorController.php');
 	 
-	class ConfirmAddController extends RentalController {
+	class ConfirmAddController extends InstructorController {
 		
 		/**
 		 * Name of called model
@@ -46,10 +46,10 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ConfirmAddController') {
-					if (file_exists (_RENTALS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php') && file_exists (_SEASONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php') && file_exists (_LOCATIONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php')) {			
+					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php') && file_exists (_SEASONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php') && file_exists (_LOCATIONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php')) {			
 						try {	
-							require_once (_RENTALS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php');
-							require_once (_RENTALS_MODELS_ .'/'. $this->model_nameCreate .'Model.php');
+							require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php');
+							require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_nameCreate .'Model.php');
 							require_once (_SEASONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php');
 							require_once (_LOCATIONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php');
 							
@@ -66,21 +66,21 @@
 								$price = \Location\DisplayModel::getInstance()->display_location($_POST['location']);								
 								$priceTT = ($date[0]['seas_coeff'] * $price[0]['type_location_price'] * $interval->days) + $_POST['price_c'];
 
-								\Rental\CreateModel::getInstance()->create_rental($_POST['rent_name'], $_POST['beginDate'], 
+								\Instructor\CreateModel::getInstance()->create_instructor($_POST['rent_name'], $_POST['beginDate'], 
 										$_POST['endDate'], $_POST['person'],
 									 	'', $_POST['price_c'], $interval->days,
 										$priceTT , $_POST['rent_cust_id'], $_POST['val'], $_POST['location']);
-								header('Location: /Cas-M-Ping/rentals/show/all');
+								header('Location: /Cas-M-Ping/instructors/show/all');
 								
 							} else {
-								header('Location: /Cas-M-Ping/rentals/add');
+								header('Location: /Cas-M-Ping/instructors/add');
 							}
 
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant l\'ajout des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_nameDisplay .'" n\'existe pas dans "'._RENTALS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_nameDisplay .'" n\'existe pas dans "'._INSTRUCTORS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -91,7 +91,7 @@
 		}
 		
 		/**
-	     * @see RentalController::checkAccess()
+	     * @see InstructorController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -99,7 +99,7 @@
 	    }
 
 		/**
-		 * @see RentalController::viewAccess()
+		 * @see InstructorController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

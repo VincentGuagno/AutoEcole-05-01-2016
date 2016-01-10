@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Formules; 
-	require_once('FormulesModel.php'); 
+	namespace Exams; 
+	require_once('ExamsModel.php'); 
 	
-	class AddModel extends FormulesModel{
+	class AddModel extends ExamsModel{
 
 		/**
 		 * AddModel instance
@@ -79,12 +79,12 @@
 		 * @param DATE_PASSAGE ,  customer's lasttName
 		 * @param LIBELLE ,  customer's lasttName
 		 */
-		public function add_formule($NOM,$DATE_PASSAGE) {
+		public function add_examen($NOM,$DATE_PASSAGE) {
 			try {		
 
 				//INSERT INTO "AUTO"."EXAMEN" (FK_PERMIS, FK_ELEVE, NOM, DATE_PASSAGE) VALUES ('1', '21', 'ghgh', TO_DATE('2017-01-20 18:44:27', 'YYYY-MM-DD HH24:MI:SS'))
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FORMULES (NOM, DATE_PASSAGE) VALUES (:NOM,:DATE_PASSAGE)');
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.EXAMEN (NOM, DATE_PASSAGE) VALUES (:NOM,TO_DATE(':DATE_PASSAGE', 'YYYY-MM-DD HH24:MI:SS'))');
 				oci_bind_by_name($qry,":NOM",$NOM);
 				oci_bind_by_name($qry,":DATE_PASSAGE",$DATE_PASSAGE);
 
@@ -97,5 +97,3 @@
 		}	
 	}	
 ?>
-
-

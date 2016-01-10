@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace PermisModel;
-	require_once('PermisModel.php'); 
+	namespace License;
+	require_once('LicencesModel.php'); 
 	
-	class ModifyModel extends PermisModel{
+	class ModifyModel extends LicencesModel{
 
 		/**
 		 * ModifyModel instance
@@ -83,18 +83,18 @@
 			try {
 				// UPDATE PERMIS SET NOM = 'permis b' WHERE PK_PERMIS = 21
 			
-				$qry = oci_parse($this->db, ('UPDATE PERMIS SET NOM =? WHERE PK_PERMIS =?');	
-				$qry->bindValue(1, $NOM, \PDO::PARAM_STR);
-				$qry->bindValue(2, $PK_PERMIS, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, ('UPDATE PERMIS SET NOM =:NOM WHERE PK_PERMIS =:PK_PERMIS');	
+				oci_bind_by_name($qry,":NOM",$NOM);
+				oci_bind_by_name($qry,":PK_PERMIS",$PK_PERMIS);
 			
 				oci_execute($qry);
+				oci_close($this->db);	
 
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
-
 	}
-
 ?>
+

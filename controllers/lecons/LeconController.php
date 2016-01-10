@@ -1,7 +1,7 @@
 <?php
 	
 	/*
-	 * Sector controller core
+	 * Lecon controller core
 	 * This class is above all sector classes
 	 *
 	 * @author Jérémie LIECHTI
@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 
-	abstract class SectorController {
+	abstract class LeconController {
 		
 		/**
-		 * State of SectorController
+		 * State of LeconController
 		 */
 		public static $initialized = false;
 		
@@ -32,7 +32,7 @@
 	    abstract protected function viewAccess();
 		
 		/**
-		 * Initialize the SectorController class
+		 * Initialize the LeconController class
 		 */
 		public function init() {
 			if (self::$initialized) {
@@ -45,7 +45,7 @@
 					require_once(_TWIG_AUTOLOADER_);
 					Twig_Autoloader::register();
 				
-					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _SECTORS_VIEWS_)); 
+					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _LECONS_VIEWS_)); 
 					$this->twig = new Twig_Environment($loader, array(
 					  'cache' => _TWIG_CACHE_
 					));

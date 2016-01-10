@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for rental displays
-	 * This class handles the rental displays
+	 * Controller for instructor displays
+	 * This class handles the instructor displays
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('RentalController.php');
+	require_once('InstructorController.php');
 	 
-	class DisplayController extends RentalController {
+	class DisplayController extends InstructorController {
 		
 		/**
 		 * Name of called model
@@ -50,15 +50,15 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'DisplayController') {
-					if (file_exists (_RENTALS_MODELS_ .'/'. $this->model_name .'Model.php') 
-						&& file_exists (_RENTALS_MODELS_ .'/'. $this->model_name .'Model.php')
+					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php') 
+						&& file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php')
 						&& file_exists (_LOCATIONS_MODELS_ .'/'. $this->model_name .'Model.php')
 						&& file_exists (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php')
 						&& file_exists (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php')
 					) {			
-						if (file_exists (_RENTALS_VIEWS_ .'/'. $this->view_nameAll .'.tpl') && file_exists (_RENTALS_VIEWS_ .'/'. $this->view_nameId .'.tpl')) {	
+						if (file_exists (_INSTRUCTORS_VIEWS_ .'/'. $this->view_nameAll .'.tpl') && file_exists (_INSTRUCTORS_VIEWS_ .'/'. $this->view_nameId .'.tpl')) {	
 							try {	
-								require_once (_RENTALS_MODELS_ .'/'. $this->model_name .'Model.php');
+								require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php');
 								require_once (_LOCATIONS_MODELS_ .'/'. $this->model_name .'Model.php');
 								require_once (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php');
 								require_once (_CARAVANS_MODELS_ .'/'. $this->model_name .'Model.php');
@@ -66,32 +66,32 @@
 								
 								switch ($id) {
 									case 'all':
-										$data = \Rental\DisplayModel::getInstance()->display_rentals();
-										echo $this->twig->render($this->view_nameAll .'.tpl', array('rentals' => $data, 'bootstrapPath' => _BOOTSTRAP_FILE_));
+										$data = \Instructor\DisplayModel::getInstance()->display_instructors();
+										echo $this->twig->render($this->view_nameAll .'.tpl', array('instructors' => $data, 'bootstrapPath' => _BOOTSTRAP_FILE_));
 										break;
 									default:
-										if(\Rental\DisplayModel::getInstance()->has_rental($id) == 1) {
-											$rentals = \Rental\DisplayModel::getInstance()->display_rental($id);
+										if(\Instructor\DisplayModel::getInstance()->has_instructor($id) == 1) {
+											$instructors = \Instructor\DisplayModel::getInstance()->display_instructor($id);
 											$seasons = array();
 											$caravans = array();
 											$locations = array();
 											$buffer = null;
 											
-											for($i=0; $i<count($rentals); $i++) {
-												$buffer = \Season\DisplayModel::getInstance()->get_SeasonByRental($rentals[$i]['rent_id']);											
+											for($i=0; $i<count($instructors); $i++) {
+												$buffer = \Season\DisplayModel::getInstance()->get_SeasonByInstructor($instructors[$i]['rent_id']);											
 												if(count($buffer) > 0) $seasons = array_merge($seasons, $buffer);
 												$buffer = null;
 												
-												$buffer = \Caravan\DisplayModel::getInstance()->get_caravanByRental($rentals[$i]['rent_id']);											
+												$buffer = \Caravan\DisplayModel::getInstance()->get_caravanByInstructor($instructors[$i]['rent_id']);											
 												if(count($buffer) > 0) $caravans = array_merge($caravans, $buffer);
 												$buffer = null;
 												
-												$buffer = \Location\DisplayModel::getInstance()->get_LocationByRental($rentals[$i]['rent_id']);											
+												$buffer = \Location\DisplayModel::getInstance()->get_LocationByInstructor($instructors[$i]['rent_id']);											
 												if(count($buffer) > 0) $locations = array_merge($locations, $buffer);
 												$buffer = null;
 											}
 										
-											echo $this->twig->render($this->view_nameId .'.tpl', array('rental' => $rentals, 'seasons' => $seasons, 'caravans' => $caravans, 'locations' => $locations, 'bootstrapPath' => _BOOTSTRAP_FILE_));
+											echo $this->twig->render($this->view_nameId .'.tpl', array('instructor' => $instructors, 'seasons' => $seasons, 'caravans' => $caravans, 'locations' => $locations, 'bootstrapPath' => _BOOTSTRAP_FILE_));
 										} else {
 											header('Location: /Cas-M-Ping/errors/404');
 										}	
@@ -101,10 +101,10 @@
 								throw new Exception('Une erreur est survenue durant la récupération des données: '.$e->getMessage());
 							}
 						} else {
-							throw new Exception('Le template "'.$this->view_nameAll .'" ou "'.$this->view_nameId .'" n\'existe pas dans "'._RENTALS_VIEWS_ .'"!');
+							throw new Exception('Le template "'.$this->view_nameAll .'" ou "'.$this->view_nameId .'" n\'existe pas dans "'._INSTRUCTORS_VIEWS_ .'"!');
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._RENTALS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._INSTRUCTORS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -115,7 +115,7 @@
 		}
 		
 		/**
-	     * @see RentalController::checkAccess()
+	     * @see InstructorController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -123,7 +123,7 @@
 	    }
 
 		/**
-		 * @see RentalController::viewAccess()
+		 * @see InstructorController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

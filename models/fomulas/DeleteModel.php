@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Formules; 
-	require_once('FormulesModel.php'); 
+	namespace Fomulas; 
+	require_once('FomulaModel.php'); 
 	
-	class DeleteModel extends FormulesModel{
+	class DeleteModel extends FomulaModel{
 
 		/**
 		 * DeleteModel instance
@@ -81,15 +81,16 @@
 		public function delete_lecon($PK_LECON) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.LECON FROM LECON WHERE LECON.PK_LECON =?');	
-				$qry->bindValue(1, $PK_LECON, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'DELETE AUTO.LECON FROM LECON WHERE LECON.PK_LECON =:PK_LECON');	
+				oci_bind_by_name($qry,":PK_LECON",$PK_LECON);
+
 				oci_execute($qry);
+					oci_close($this->db);	
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}		
-
 		/**
 		 * Delete all Eleve
 		 *	
@@ -100,11 +101,11 @@
 
 				$qry = oci_parse($this->db, 'DELETE * FROM AUTO.LECON');	
 				oci_execute($qry);		
+				oci_close($this->db);	
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
 	}
-
 ?>

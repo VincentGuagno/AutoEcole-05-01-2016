@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Modele;	
-	require_once('ModeleModel.php'); 
+	namespace Models;	
+	require_once('ModelModel.php'); 
 	
-	class DisplayModel extends ModeleModel {
+	class DisplayModel extends ModelModel {
 
 		/**
 		 * DisplayModel instance
@@ -100,8 +100,8 @@
 		public function display_marque($PK_MODELE) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT AUTO.MODELE FROM MODELE WHERE MODELE.PK_MODELE =?');	
-				$qry->bindValue(1, $PK_MODELE, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'SELECT AUTO.MODELE FROM MODELE WHERE MODELE.PK_MODELE =:PK_MODELE');	
+				oci_bind_by_name($qry,":PK_MODELE",$PK_MODELE);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -114,4 +114,5 @@
 			}
 		}
 	}
-	?>
+?>
+

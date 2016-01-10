@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Permis;	
-	require_once('PermisModel.php'); 
+	namespace License;	
+	require_once('LicencesModel.php'); 
 	
-	class DisplayModel extends PermisModel {
+	class DisplayModel extends LicencesModel {
 
 		/**
 		 * DisplayModel instance
@@ -100,11 +100,11 @@
 		public function display_Permis($PK_PERMIS) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT AUTO.PERMIS FROM PERMIS WHERE PERMIS.PK_PERMIS =?');	
-				$qry->bindValue(1, $PK_PERMIS, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'SELECT AUTO.PERMIS FROM PERMIS WHERE PERMIS.PK_PERMIS =:PK_PERMIS');	
+				oci_bind_by_name($qry,":PK_PERMIS",$PK_PERMIS);
 
+				oci_execute($qry);
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
-
 				oci_close($this->db);
 				return $res;				
 			} catch(Exception $e) {
@@ -112,4 +112,6 @@
 			}
 		}
 	}
-	?>
+?>
+
+

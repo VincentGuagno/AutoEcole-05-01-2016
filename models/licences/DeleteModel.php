@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Permis; 
-	require_once('PermisModel.php'); 
+	namespace License; 
+	require_once('LicencesModel.php'); 
 	
-	class DeleteModel extends PermisModel{
+	class DeleteModel extends LicencesModel{
 
 		/**
 		 * DeleteModel instance
@@ -78,14 +78,15 @@
 		 * @param PK_ELEVE, Eleve's id
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function delete_Eleve($PK_ELEVE) {
+		public function delete_permis($PK_PERMIS) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =?');	
-				$qry->bindValue(1, $cust_lastName, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'DELETE AUTO.PERMIS FROM PERMIS WHERE PERMIS.PK_PERMIS =:PK_PERMIS');	
+				oci_bind_by_name($qry,":PK_PERMIS",$PK_PERMIS);
 				oci_execute($qry);
-
-				return 0;
+				oci_close($this->db);	
+				return 0;	
+			
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -99,10 +100,11 @@
 		public function delete_Eleves() {
 			try {								
 
-				$qry = oci_parse($this->db, 'DELETE * FROM ELEVE');	
-				oci_execute($qry);		
-				
-				return 0;
+				$qry = oci_parse($this->db, 'DELETE AUTO.* FROM PERMIS');	
+				oci_bind_by_name($qry,":PK_PERMIS",$PK_PERMIS);
+				oci_execute($qry);
+				oci_close($this->db);	
+				return 0;	
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -110,3 +112,6 @@
 	}
 
 ?>
+
+
+

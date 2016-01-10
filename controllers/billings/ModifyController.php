@@ -60,7 +60,7 @@
 								//$sectors = \Sector\DisplayModel::getInstance()->display_sectors();
 								$type_billings = \billingsType\DisplayModel::getInstance()->display_billingsType();
 								$data = \billings\DisplayModel::getInstance()->display_billing($id);
-								echo $this->twig->render($this->view_name .'.tpl', array('sectors' => $sectors, 'typeLocations' => $type_billings, 'id' => $data[0], 'bootstrapPath' => _BOOTSTRAP_FILE_));
+								echo $this->twig->render($this->view_name .'.tpl', array('sectors' => $data, 'typeLocations' => $type_billings, 'id' => $data[0], 'bootstrapPath' => _BOOTSTRAP_FILE_));
 								
 							} catch (Exception $e) {
 								throw new Exception('Une erreur est survenue durant l\'affichage des données: '.$e->getMessage());

@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Moniteur;	
-	require_once('MoniteurModel.php'); 
+	namespace Instructors;	
+	require_once('InstructorModel.php'); 
 	
-	class DisplayModel extends MoniteurModel {
+	class DisplayModel extends InstructorModel {
 
 		/**
 		 * DisplayModel instance
@@ -100,8 +100,8 @@
 		public function display_moniteur($PK_MONITEUR) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT * FROM AUTO.MONITEUR WHERE MONITEUR.PK_MONITEUR =?');	
-				$qry->bindValue(1, $PK_MONITEUR, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'SELECT * FROM AUTO.MONITEUR WHERE MONITEUR.PK_MONITEUR =:PK_MONITEUR');	
+				oci_bind_by_name($qry,":PK_MONITEUR",$PK_MONITEUR);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -113,6 +113,9 @@
 				return $e->getMessage();
 			}
 		}
+
+
+
 
 			/**
 		 * All Eleve's informations from one Eleve 
@@ -134,8 +137,8 @@
 												ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR
 												INNER JOIN LECON
 												ON ELEVE.PK_ELEVE          = LECON.FK_ELEVE
-												WHERE MONITEUR.PK_MONITEUR = ?');	
-				$qry->bindValue(1, $PK_MONITEUR, \PDO::PARAM_INT);
+												WHERE MONITEUR.PK_MONITEUR = :PK_MONITEUR');	
+				oci_bind_by_name($qry,":PK_MONITEUR",$PK_MONITEUR);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -148,7 +151,8 @@
 			}
 		}
 
-			/**
+
+		/**
 		 * All Eleve's informations from one Eleve 
 		 *
 		 * @param PK_MONITEUR, Eleve's id
@@ -168,12 +172,12 @@
 												ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR
 												INNER JOIN LECON
 												ON ELEVE.PK_ELEVE          = LECON.FK_ELEVE
-												WHERE MONITEUR.PK_MONITEUR = ?
-												AND LECON.DATE_LECON BETWEEN TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS')');	
+												WHERE MONITEUR.PK_MONITEUR = :PK_MONITEUR
+												AND LECON.DATE_LECON BETWEEN TO_DATE(':DEBUT', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(':FIN', 'YYYY-MM-DD HH24:MI:SS')');	
 
-				$qry->bindValue(1, $PK_MONITEUR, \PDO::PARAM_INT);
-				$qry->bindValue(2, $DEBUT, \PDO::PARAM_STR);
-				$qry->bindValue(3, $FIN, \PDO::PARAM_STR);
+				oci_bind_by_name($qry,":PK_MONITEUR",$PK_MONITEUR);
+				oci_bind_by_name($qry,":DEBUT",$DEBUT);
+				oci_bind_by_name($qry,":FIN",$FIN);
 
 				oci_execute($qry);
 					
@@ -208,10 +212,10 @@
 												ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR
 												INNER JOIN LECON
 												ON ELEVE.PK_ELEVE          = LECON.FK_ELEVE
-												WHERE LECON.DATE_LECON BETWEEN TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS')');	
+												WHERE LECON.DATE_LECON BETWEEN TO_DATE(':DEBUT', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(':FIN', 'YYYY-MM-DD HH24:MI:SS')');	
 			
-				$qry->bindValue(1, $DEBUT, \PDO::PARAM_STR);
-				$qry->bindValue(2, $FIN, \PDO::PARAM_STR);
+				oci_bind_by_name($qry,":DEBUT",$DEBUT);
+				oci_bind_by_name($qry,":FIN",$FIN);
 
 				oci_execute($qry);
 					
@@ -225,4 +229,4 @@
 			}
 		}
 	}
-	?>
+?>

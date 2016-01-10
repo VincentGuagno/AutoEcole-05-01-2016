@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Facture;
-	require_once('FactureModel.php'); 
+	namespace Brands;
+	require_once('BrandsModel.php'); 
 	
-	class ModifyModel extends FactureModel{
+	class ModifyModel extends BrandsModel{
 
 		/**
 		 * ModifyModel instance

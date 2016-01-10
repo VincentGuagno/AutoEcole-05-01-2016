@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for confirm rental modifications
-	 * This class handles modifications rentals
+	 * Controller for confirm instructor modifications
+	 * This class handles modifications instructors
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('RentalController.php');
+	require_once('InstructorController.php');
 	 
-	class ConfirmModifyController extends RentalController {
+	class ConfirmModifyController extends InstructorController {
 		
 		/**
 		 * Name of called model
@@ -44,9 +44,9 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ConfirmModifyController') {
-					if (file_exists (_RENTALS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
 						try {	
-							require_once (_RENTALS_MODELS_ .'/'. $this->model_name .'Model.php');
+							require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
 							
 							$datetime1 = new DateTime($_POST['beginDate']);
@@ -58,22 +58,22 @@
 							if(!empty($_POST['name']) && !empty($_POST['beginDate']) && !empty($_POST['endDate']) &&
 								!empty($_POST['peopleNumber']) && $interval->days > 0 && !empty($_POST['paymentState'])
 							) {
-								\Rental\ModifyModel::getInstance()->modify_model(
+								\Instructor\ModifyModel::getInstance()->modify_model(
 									$_POST['name'], $_POST['beginDate'], $_POST['endDate'],
 									$_POST['peopleNumber'], '', $_POST['paymentState'],
 									$interval->days, $_POST['deposit'], $id
 								);
-								header('Location: /Cas-M-Ping/rentals/show/'.$id);
+								header('Location: /Cas-M-Ping/instructors/show/'.$id);
 								
 							} else {
-								header('Location: /Cas-M-Ping/rentals/modify/'.$id);
+								header('Location: /Cas-M-Ping/instructors/modify/'.$id);
 							}
 
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la modification des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._RENTALS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._INSTRUCTORS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -84,7 +84,7 @@
 		}
 		
 		/**
-	     * @see RentalController::checkAccess()
+	     * @see InstructorController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -92,7 +92,7 @@
 	    }
 
 		/**
-		 * @see RentalController::viewAccess()
+		 * @see InstructorController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

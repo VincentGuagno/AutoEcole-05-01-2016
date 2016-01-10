@@ -9,9 +9,9 @@
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('SectorController.php');
+	require_once('LeconController.php');
 	 
-	class DeleteController extends SectorController {
+	class DeleteController extends LeconController {
 		
 		/**
 		 * Name of called model
@@ -44,18 +44,18 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'DeleteController') {
-					if (file_exists (_SECTORS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
+					if (file_exists (_LECONS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
 						try {	
-							require_once (_SECTORS_MODELS_ .'/'. $this->model_name .'Model.php');
+							require_once (_LECONS_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
 							
 							switch ($id) {
 								case 'all':
-									\Sector\DeleteModel::getInstance()->delete_sectors();
+									\Lecon\DeleteModel::getInstance()->delete_sectors();
 									break;
 								default:
-									if(\Sector\DeleteModel::getInstance()->has_sector($id) == 1) {
-										\Sector\DeleteModel::getInstance()->delete_sector($id);	
+									if(\Lecon\DeleteModel::getInstance()->has_sector($id) == 1) {
+										\Lecon\DeleteModel::getInstance()->delete_sector($id);	
 									} else {
 										header('Location: /Cas-M-Ping/errors/404');
 									}	
@@ -67,7 +67,7 @@
 							throw new Exception('Une erreur est survenue durant la suppression des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._SECTORS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._LECONS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -78,7 +78,7 @@
 		}
 		
 		/**
-	     * @see SectorController::checkAccess()
+	     * @see LeconController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -86,7 +86,7 @@
 	    }
 
 		/**
-		 * @see SectorController::viewAccess()
+		 * @see LeconController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

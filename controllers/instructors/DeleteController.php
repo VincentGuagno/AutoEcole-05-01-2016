@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for rental deletions
-	 * This class handles the rentals deletions
+	 * Controller for instructor deletions
+	 * This class handles the instructors deletions
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('RentalController.php');
+	require_once('InstructorController.php');
 	 
-	class DeleteController extends RentalController {
+	class DeleteController extends InstructorController {
 		
 		/**
 		 * Name of called model
@@ -44,30 +44,30 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'DeleteController') {
-					if (file_exists (_RENTALS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
+					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
 						try {	
-							require_once (_RENTALS_MODELS_ .'/'. $this->model_name .'Model.php');
+							require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
 							
 							switch ($id) {
 								case 'all':
-									\Rental\DeleteModel::getInstance()->delete_rentals();
+									\Instructor\DeleteModel::getInstance()->delete_instructors();
 									break;
 								default:
-									if(\Rental\DeleteModel::getInstance()->has_rental($id) == 1) {
-										\Rental\DeleteModel::getInstance()->delete_rental($id);	
+									if(\Instructor\DeleteModel::getInstance()->has_instructor($id) == 1) {
+										\Instructor\DeleteModel::getInstance()->delete_instructor($id);	
 									} else {
 										header('Location: /Cas-M-Ping/errors/404');
 									}	
 									break;
 							}
-							header('Location: /Cas-M-Ping/rentals/show/all');
+							header('Location: /Cas-M-Ping/instructors/show/all');
 							
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la suppression des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._RENTALS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._INSTRUCTORS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');

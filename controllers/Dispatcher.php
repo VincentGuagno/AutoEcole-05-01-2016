@@ -48,12 +48,11 @@
 				'directory' => 'lecons/',
 				'url-formatter' => 'lecons/show/{id|all}'
 			),
-			/*'add-lecons' => array(
+			'add-lecons' => array(
 				'controller' => 'AddController',
 				'directory' => 'lecons/',
 				'url-formatter' => 'lecons/add'
-				'url-formatter' => 'lecons/add'
-			),*/
+			),
 			'confirm-add-lecons' => array(
 				'controller' => 'ConfirmAddController',
 				'directory' => 'lecons/',
@@ -65,36 +64,36 @@
 				'url-formatter' => 'lecons/return/{id|all}'
 			),
 			
-			// billings routes
-			'add-billings' => array(
+			// exams routes
+			'add-exams' => array(
 				'controller' => 'AddController',
-				'directory' => 'billings/',
-				'url-formatter' => 'billings/add'
+				'directory' => 'exams/',
+				'url-formatter' => 'exams/add'
 			),
-			'confirm-add-billings' => array(
+			'confirm-add-exams' => array(
 				'controller' => 'ConfirmAddController',
-				'directory' => 'billings/',
-				'url-formatter' => 'billings/add/confirm'
+				'directory' => 'exams/',
+				'url-formatter' => 'exams/add/confirm'
 			),
-			'delete-billings' => array(
+			'delete-exams' => array(
 				'controller' => 'DeleteController',
-				'directory' => 'billings/',
-				'url-formatter' => 'billings/delete/{id|all}'
+				'directory' => 'exams/',
+				'url-formatter' => 'exams/delete/{id|all}'
 			),
-			'display-billings' => array(
+			'display-exams' => array(
 				'controller' => 'DisplayController',
-				'directory' => 'billings/',
-				'url-formatter' => 'billings/show/{id|all}'
+				'directory' => 'exams/',
+				'url-formatter' => 'exams/show/{id|all}'
 			),
-			'modify-billings' => array(
+			'modify-exams' => array(
 				'controller' => 'ModifyController',
-				'directory' => 'billings/',
-				'url-formatter' => 'billings/modify/{id}'
+				'directory' => 'exams/',
+				'url-formatter' => 'exams/modify/{id}'
 			),
-			'confirm-modify-billings' => array(
+			'confirm-modify-exams' => array(
 				'controller' => 'ConfirmModifyController',
-				'directory' => 'billings/',
-				'url-formatter' => 'billings/modify/confirm/{id}'
+				'directory' => 'exams/',
+				'url-formatter' => 'exams/modify/confirm/{id}'
 			),
 			
 			// Home routes
@@ -104,26 +103,26 @@
 				'url-formatter' => 'home'
 			),
 			
-			// billingsType routes
-			'add-billingsType' => array(
+			// examsType routes
+			'add-examsType' => array(
 				'controller' => 'AddController',
-				'directory' => 'billingsType/',
-				'url-formatter' => 'billingsType/add'
+				'directory' => 'examsType/',
+				'url-formatter' => 'examsType/add'
 			),
-			'confirm-add-billingsType' => array(
+			'confirm-add-examsType' => array(
 				'controller' => 'ConfirmAddController',
-				'directory' => 'billingsType/',
-				'url-formatter' => 'billingsType/add/confirm/{id}'
+				'directory' => 'examsType/',
+				'url-formatter' => 'examsType/add/confirm/{id}'
 			),
-			'delete-billingsType' => array(
+			'delete-examsType' => array(
 				'controller' => 'DeleteController',
-				'directory' => 'billingsType/',
-				'url-formatter' => 'billingsType/delete/{id|all}'
+				'directory' => 'examsType/',
+				'url-formatter' => 'examsType/delete/{id|all}'
 			),
-			'display-billingsType' => array(
+			'display-examsType' => array(
 				'controller' => 'DisplayController',
-				'directory' => 'billingsType/',
-				'url-formatter' => 'billingsType/show/{id|all}'
+				'directory' => 'examsType/',
+				'url-formatter' => 'examsType/show/{id|all}'
 			),
 			
 			// brands routes

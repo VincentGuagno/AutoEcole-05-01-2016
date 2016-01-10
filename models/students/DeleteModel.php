@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Eleve; 
-	require_once('EleveModel.php'); 
+	namespace Students; 
+	require_once('StudentModel.php'); 
 	
-	class DeleteModel extends EleveModel{
+	class DeleteModel extends StudentModel{
 
 		/**
 		 * DeleteModel instance
@@ -81,9 +81,11 @@
 		public function delete_eleve($PK_ELEVE) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =?');	
-				$qry->bindValue(1, $cust_lastName, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'DELETE ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =:PK_ELEVE');	
+				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
+
 				oci_execute($qry);
+				oci_close($this->db);	
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
@@ -108,3 +110,4 @@
 	}
 
 ?>
+

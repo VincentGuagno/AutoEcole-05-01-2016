@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Modele;
-	require_once('ModeleModel.php'); 
+	namespace Models;
+	require_once('ModelModel.php'); 
 	
-	class ModifyModel extends ModeleModel{
+	class ModifyModel extends ModelModel{
 
 		/**
 		 * ModifyModel instance
@@ -85,21 +85,25 @@
 			try {
 
 				// UPDATE "AUTO"."MODELE" SET TYPE_MOTEUR = '2.54', PUISSANCE = '450cv4', NOM_MODELE = 'porche4' WHERE ROWID = 'AAAE7SAABAAAK/pAAB' AND ORA_ROWSCN = '667602'
-				$qry = oci_parse($this->db, ("UPDATE MODELE SET TYPE_MOTEUR = '?', PUISSANCE = '?', NOM_MODELE = '?' WHERE PK_MODELE = ?");
+				$qry = oci_parse($this->db, ("UPDATE MODELE SET TYPE_MOTEUR = ':TYPE_MOTEUR', PUISSANCE = ':PUISSANCE', NOM_MODELE = ':NOM_MODELE' WHERE PK_MODELE = :PK_MODELE");
 				
 				$qry->bindValue(1, $TYPE_MOTEUR, \PDO::PARAM_STR);
 				$qry->bindValue(2, $PUISSANCE, \PDO::PARAM_STR);
 				$qry->bindValue(3, $NOM_MODELE, \PDO::PARAM_STR);
 				$qry->bindValue(4, $PK_MODELE, \PDO::PARAM_INT);
+				oci_bind_by_name($qry,":TYPE_MOTEUR",$TYPE_MOTEUR);
+				oci_bind_by_name($qry,":PUISSANCE",$PUISSANCE);
+				oci_bind_by_name($qry,":NOM_MODELE",$NOM_MODELE);
+				oci_bind_by_name($qry,":PK_MODELE",$PK_MODELE);
 			
 				oci_execute($qry);
-
+				oci_close($this->db);	
 				return 0;				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
-
 	}
 
 ?>
+

@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Vehicule;
-	require_once('VehiculeModel.php'); 
+	namespace Vehicles;
+	require_once('VehicleModel.php'); 
 	
-	class ModifyModel extends VehiculeModel{
+	class ModifyModel extends VehicleModel{
 
 		/**
 		 * ModifyModel instance
@@ -85,14 +85,13 @@
 		public function modify_vehicule($NUMERO, $KM, $DATE_ACHAT, $PRIX_ACHAT, $PK_VEHICULE) {
 			try {
 				// UPDATE VEHICULE SET NUMERO = 008, KM = 13165444456, DATE_ACHAT = TO_DATE('2016-01-05', 'YYYY-MM-DD HH24:MI:SS'), PRIX_ACHAT = 555545 WHERE PK_VEHICULE=6
-				$qry = oci_parse($this->db, ("UPDATE VEHICULE SET NUMERO = ?, KM = ?, DATE_ACHAT = TO_DATE('?', 'YYYY-MM-DD HH24:MI:SS'), PRIX_ACHAT = ? WHERE PK_VEHICULE=?");
+				$qry = oci_parse($this->db, ("UPDATE VEHICULE SET NUMERO = :NUMERO, KM = :KM, DATE_ACHAT = TO_DATE(':DATE_ACHAT', 'YYYY-MM-DD HH24:MI:SS'), PRIX_ACHAT = :PRIX_ACHAT WHERE PK_VEHICULE=:PK_VEHICULE");
 				
-				$qry->bindValue(1, $NUMERO, \PDO::PARAM_INT);
-				$qry->bindValue(2, $KM, \PDO::PARAM_INT);
-				$qry->bindValue(3, $DATE_ACHAT, \PDO::PARAM_STR);
-				$qry->bindValue(4, $PRIX_ACHAT, \PDO::PARAM_INT);
-				$qry->bindValue(5, $PK_VEHICULE, \PDO::PARAM_INT);
-			
+				oci_bind_by_name($qry,":NUMERO",$NUMERO);
+				oci_bind_by_name($qry,":KM",$KM);
+				oci_bind_by_name($qry,":DATE_ACHAT",$DATE_ACHAT);	
+				oci_bind_by_name($qry,":PRIX_ACHAT",$PRIX_ACHAT);
+				oci_bind_by_name($qry,":PK_VEHICULE",$PK_VEHICULE);		
 				oci_execute($qry);
 				return 0;
 
@@ -100,7 +99,5 @@
 				return $e->getMessage();
 			}
 		}
-
 	}
-
 ?>

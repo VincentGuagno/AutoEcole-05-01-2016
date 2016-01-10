@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Permis; 
-	require_once('PermisModel.php'); 
+	namespace License; 
+	require_once('LicencesModel.php'); 
 	
-	class AddModel extends PermisModel{
+	class AddModel extends LicencesModel{
 
 		/**
 		 * AddModel instance
@@ -79,8 +79,8 @@
 		 */
 		public function add_permis($PERMIS) {
 			try {				
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.PERMIS (NOM) VALUES (?)');
-				$qry->bindValue(1, $car_id, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.PERMIS (NOM) VALUES (:PERMIS)');
+				oci_bind_by_name($qry,":PERMIS",$PERMIS);
 
 				oci_execute($qry);
 
@@ -89,11 +89,5 @@
 				return $e->getMessage();
 			}
 		}
-
-
-
-	//je cherche si il existe un CLI_ID dans CLIENT ou CLI_NOM = param et CLI_PRENOM = param2. Si il existe je le crée pas et j'utilise cet id pour l'insérer dans LOCATION. Sinon je le crée et je récupère son CLI_ID que je met dans LOCATION.
-	
-	}
-	
+	}	
 ?>

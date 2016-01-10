@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Examen;
-	require_once('ExamenModel.php'); 
+	namespace Exams;
+	require_once('ExamsModel.php'); 
 	
-	class ModifyModel extends ExamenModel{
+	class ModifyModel extends ExamsModel{
 
 		/**
 		 * ModifyModel instance
@@ -92,7 +92,7 @@
 			
 				oci_execute($qry);
 				oci_close($this->db);
-				
+
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
@@ -100,12 +100,3 @@
 		}
 	}
 ?>
-
-
-	$qry = oci_parse($this->db, 'INSERT INTO AUTO.FACTURATION (DATE_FACTURE, PRIX, ETAT_FACTURE) VALUES (:DATE_FACTURE,:PRIX,:ETAT_FACTURE)');
-				oci_bind_by_name($qry,":DATE_FACTURE",$DATE_FACTURE);
-				oci_bind_by_name($qry,":PRIX",$PRIX);
-				oci_bind_by_name($qry,":ETAT_FACTURE",$ETAT_FACTURE);
-				
-				oci_execute($qry);
-				oci_close($this->db);

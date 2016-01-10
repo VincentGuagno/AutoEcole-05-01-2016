@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Examen; 
-	require_once('ExamenModel.php'); 
+	namespace Exams; 
+	require_once('ExamsModel.php'); 
 	
-	class DeleteModel extends ExamenModel{
+	class DeleteModel extends ExamsModel{
 
 		/**
 		 * DeleteModel instance

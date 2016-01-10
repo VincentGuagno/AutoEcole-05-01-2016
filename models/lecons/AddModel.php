@@ -79,14 +79,14 @@
 		 * @param PUISSANCE ,  customer's lasttName
 		 * @param NOM_MODELE ,  customer's lasttName
 		 */
-		public function add_modele($TYPE_MOTEUR,$PUISSANCE, $NOM_MODELE) {
+		public function add_lecon($TYPE_MOTEUR,$PUISSANCE, $NOM_MODELE) {
 			try {		
 				//INSERT INTO "AUTO"."MODELE" (TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES ('156', '8456', 'plll')
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MODELE (TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES (?,?,?)');
-				$qry->bindValue(1, $TYPE_MOTEUR, \PDO::PARAM_STR);
-				$qry->bindValue(2, $PUISSANCE, \PDO::PARAM_STR);
-				$qry->bindValue(3, $NOM_MODELE, \PDO::PARAM_STR);
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.MODELE (TYPE_MOTEUR, PUISSANCE, NOM_MODELE) VALUES (:TYPE_MOTEUR,:PUISSANCE,:NOM_MODELE)');
+				oci_bind_by_name($qry,":TYPE_MOTEUR",$TYPE_MOTEUR);
+				oci_bind_by_name($qry,":PUISSANCE",$PUISSANCE);
+				oci_bind_by_name($qry,":NOM_MODELE",$NOM_MODELE);
 
 				oci_execute($qry);
 				oci_close($this->db);								
@@ -94,6 +94,6 @@
 				return $e->getMessage();
 			}
 		}	
-	}
-	
+	}	
 ?>
+

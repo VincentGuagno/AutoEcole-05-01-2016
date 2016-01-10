@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Eleve; 
-	require_once('EleveModel.php'); 
+	namespace Students; 
+	require_once('StudentModel.php'); 
 	
-	class AddModel extends EleveModel{
+	class AddModel extends StudentModel{
 
 		/**
 		 * AddModel instance
@@ -75,48 +75,40 @@
 		/**
 		 * Modify all customer's informations from one customer 
 		 *
-		 * @param cust_id, customer's id
-		 * @param cust_firstName, customer's firstName
-		 * @param cust_lastName ,  customer's lasttName
-		 * @param cust_address, customer's address
-		 * @param cust_zipCode, customer's zip code
-		 * @param cust_city, customer's city
-		 * @param cust_phoneNumber, customer's phone number		
+		 * @param NOM, customer's id
+		 * @param PRENOM, customer's firstName
+		 * @param ADRESSE ,  customer's lasttName
+		 * @param NUM_TEL, customer's address
+		 * @param DATE_NAISSANCE, customer's zip code
+		 * @param LIEU_ETUDE, customer's city
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function add_customer($cust_lastName,
-									 $cust_address,
-									 $cust_zipCode, 
-									 $cust_city, 
-									 $cust_phoneNumber, 									
-									 $cust_firstName) {
+		public function add_eleve($NOM,
+									 $PRENOM,
+									 $ADRESSE, 
+									 $NUM_TEL, 
+									 $DATE_NAISSANCE, 									
+									 $LIEU_ETUDE) {
 			try {
-				$qry = $this->db->prepare('INSERT INTO camping.customer (cust_lastName,
-																		 cust_address, 
-																		 cust_postal_code, 
-																		 cust_city, 
-																		 cust_phone_number, 
-																		 cust_record_number, 
-																		 cust_firstName) VALUES (?, ?, ?, ?, ?, UUID(), ?)');
-				$qry->bindValue(1, $cust_lastName, \PDO::PARAM_STR);
-				$qry->bindValue(2, $cust_address, \PDO::PARAM_STR);
-				$qry->bindValue(3, $cust_zipCode, \PDO::PARAM_STR);
-				$qry->bindValue(4, $cust_city, \PDO::PARAM_STR);
-				$qry->bindValue(5, $cust_phoneNumber, \PDO::PARAM_STR);			
-				$qry->bindValue(6, $cust_firstName, \PDO::PARAM_STR);
-				
-				$qry->execute();
-				$qry->closeCursor();
-				return 0;
+				//UPDATE ELEVE SET FK_MONITEUR = '21', NOM = 'bi', PRENOM = 'jay', ADRESSE = 'no whi', NUM_TEL = 4, DATE_NAISSANCE = TO_DATE('2016-01-17', 'YYYY-MM-DD HH24:MI:SS'), LIEU_ETUDE = 'se' WHERE PK_ELEVE =21
+				$qry = oci_parse($this->db, ("INSERT INTO AUTO.ELEVE  (NOM, PRENOM, ADRESSE, NUM_TEL, DATE_NAISSANCE, LIEU_ETUDE)  VALUES (':NOM', ':PRENOM', ':ADRESSE',:NUM_TEL, TO_DATE(':DATE_NAISSANCE', 'YYYY-MM-DD HH24:MI:SS'),':LIEU_ETUDE')");
+							
+				oci_bind_by_name($qry,":NOM",$NOM);
+				oci_bind_by_name($qry,":PRENOM",$PRENOM);	
+				oci_bind_by_name($qry,":ADRESSE",$ADRESSE);
+				oci_bind_by_name($qry,":NUM_TEL",$NUM_TEL);
+				oci_bind_by_name($qry,":DATE_NAISSANCE",$DATE_NAISSANCE);	
+				oci_bind_by_name($qry,":LIEU_ETUDE",$LIEU_ETUDE);
+
+				oci_execute($qry);
+				oci_close($this->db);
+				return $res;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
-
-
-
-	//je cherche si il existe un CLI_ID dans CLIENT ou CLI_NOM = param et CLI_PRENOM = param2. Si il existe je le crée pas et j'utilise cet id pour l'insérer dans LOCATION. Sinon je le crée et je récupère son CLI_ID que je met dans LOCATION.
-	
 	}
 	
 ?>
+
+
