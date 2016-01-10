@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for confirm new sector
-	 * This class handles news sectors
+	 * Controller for confirm new license
+	 * This class handles news licenses
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('SectorController.php');
+	require_once('LicenseController.php');
 	 
-	class ConfirmAddController extends SectorController {
+	class ConfirmAddController extends LicenseController {
 		
 		/**
 		 * Name of called model
@@ -45,24 +45,24 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ConfirmAddController') {
-					if (file_exists (_SECTORS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+					if (file_exists (_LICENSES_MODELS_ .'/'. $this->model_name .'Model.php')) {			
 						try {	
-							require_once (_SECTORS_MODELS_ .'/'. $this->model_name .'Model.php');						
+							require_once (_LICENSES_MODELS_ .'/'. $this->model_name .'Model.php');						
 							Tools::getInstance()->createPost($_POST);
 							
 							if(!empty($_POST['sec_name'])) {
-								\Sector\AddModel::getInstance()->add_sector($_POST['sec_name']);
-								header('Location: /Cas-M-Ping/sectors/show/all');
+								\License\AddModel::getInstance()->add_license($_POST['sec_name']);
+								header('Location: /Cas-M-Ping/licenses/show/all');
 								
 							} else {
-								header('Location: /Cas-M-Ping/sectors/add');
+								header('Location: /Cas-M-Ping/licenses/add');
 							}
 
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la modification des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._SECTORS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._LICENSES_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -73,7 +73,7 @@
 		}
 		
 		/**
-	     * @see SectorController::checkAccess()
+	     * @see LicenseController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -81,7 +81,7 @@
 	    }
 
 		/**
-		 * @see SectorController::viewAccess()
+		 * @see LicenseController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

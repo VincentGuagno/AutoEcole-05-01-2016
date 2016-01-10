@@ -12,7 +12,7 @@
 	abstract class StudentController {
 		
 		/**
-		 * State of SeasonController
+		 * State of StudentController
 		 */
 		public static $initialized = false;
 		
@@ -32,7 +32,7 @@
 	    abstract protected function viewAccess();
 		
 		/**
-		 * Initialize the SeasonController class
+		 * Initialize the StudentController class
 		 */
 		public function init() {
 			if (self::$initialized) {

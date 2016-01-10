@@ -9,7 +9,7 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Students;	
+	namespace Student;	
 	require_once('StudentModel.php'); 
 	
 	class DisplayModel extends StudentModel {

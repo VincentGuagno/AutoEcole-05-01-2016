@@ -87,7 +87,7 @@
 		}
 		
 		/**
-	     * @see SeasonController::checkAccess()
+	     * @see StudentController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -95,7 +95,7 @@
 	    }
 
 		/**
-		 * @see SeasonController::viewAccess()
+		 * @see StudentController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

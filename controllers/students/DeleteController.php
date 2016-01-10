@@ -9,9 +9,9 @@
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('SeasonController.php');
+	require_once('StudentController.php');
 	 
-	class DeleteController extends SeasonController {
+	class DeleteController extends StudentController {
 		
 		/**
 		 * Name of called model
@@ -44,9 +44,9 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'DeleteController') {
-					if (file_exists (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
+					if (file_exists (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
 						try {	
-							require_once (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php');
+							require_once (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
 							
 							switch ($id) {
@@ -67,7 +67,7 @@
 							throw new Exception('Une erreur est survenue durant la suppression des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._SEASONS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._STUDENTS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -78,7 +78,7 @@
 		}
 		
 		/**
-	     * @see SeasonController::checkAccess()
+	     * @see StudentController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -86,7 +86,7 @@
 	    }
 
 		/**
-		 * @see SeasonController::viewAccess()
+		 * @see StudentController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

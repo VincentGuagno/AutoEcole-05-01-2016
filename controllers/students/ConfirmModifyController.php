@@ -1,17 +1,17 @@
 <?php
 
 	/*
-	 * Controller for confirm season modifications
-	 * This class handles modifications seasons
+	 * Controller for confirm student modifications
+	 * This class handles modifications students
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('SeasonController.php');
+	require_once('StudentController.php');
 	 
-	class ConfirmModifyController extends SeasonController {
+	class ConfirmModifyController extends StudentController {
 		
 		/**
 		 * Name of called model
@@ -49,9 +49,9 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ConfirmModifyController') {
-					if (file_exists (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+					if (file_exists (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
 						try {	
-							require_once (_SEASONS_MODELS_ .'/'. $this->model_name .'Model.php');
+							require_once (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
 							
 							$datetime1 = new DateTime($_POST['beginDate']);
@@ -64,18 +64,18 @@
 								
 								$_POST['coefficient'] = ($_POST['coefficient'] > 1) ? 1 : $_POST['coefficient'];
 								$_POST['coefficient'] = ($_POST['coefficient'] <= 0) ? 0.1 : $_POST['coefficient'];
-								\Season\ModifyModel::getInstance()->modify_season($id, $_POST['name'], $_POST['beginDate'], $_POST['endDate'], $_POST['coefficient']);
-								header('Location: /Cas-M-Ping/seasons/show/'.$id);
+								\Student\ModifyModel::getInstance()->modify_student($id, $_POST['name'], $_POST['beginDate'], $_POST['endDate'], $_POST['coefficient']);
+								header('Location: /Cas-M-Ping/students/show/'.$id);
 								
 							} else {
-								header('Location: /Cas-M-Ping/seasons/modify/'.$id);
+								header('Location: /Cas-M-Ping/students/modify/'.$id);
 							}
 
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la modification des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._SEASONS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._STUDENTS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -86,7 +86,7 @@
 		}
 		
 		/**
-	     * @see SeasonController::checkAccess()
+	     * @see StudentController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -94,7 +94,7 @@
 	    }
 
 		/**
-		 * @see SeasonController::viewAccess()
+		 * @see StudentController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

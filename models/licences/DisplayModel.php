@@ -9,7 +9,7 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace License;	
+	namespace Licence;	
 	require_once('LicencesModel.php'); 
 	
 	class DisplayModel extends LicencesModel {

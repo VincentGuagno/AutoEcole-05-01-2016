@@ -1,18 +1,18 @@
 <?php
 	
 	/*
-	 * Sector controller core
-	 * This class is above all sector classes
+	 * License controller core
+	 * This class is above all license classes
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	abstract class SectorController {
+	abstract class LicenseController {
 		
 		/**
-		 * State of SectorController
+		 * State of LicenseController
 		 */
 		public static $initialized = false;
 		
@@ -32,7 +32,7 @@
 	    abstract protected function viewAccess();
 		
 		/**
-		 * Initialize the SectorController class
+		 * Initialize the LicenseController class
 		 */
 		public function init() {
 			if (self::$initialized) {
@@ -45,7 +45,7 @@
 					require_once(_TWIG_AUTOLOADER_);
 					Twig_Autoloader::register();
 				
-					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _SECTORS_VIEWS_)); 
+					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _LICENSES_VIEWS_)); 
 					$this->twig = new Twig_Environment($loader, array(
 					  'cache' => _TWIG_CACHE_
 					));

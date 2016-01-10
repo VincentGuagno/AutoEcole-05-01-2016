@@ -44,7 +44,7 @@
 	define('_FORMULAS_VIEWS_', _VIEWS_DIR_ .'/fomulas/templates'); 
 	define('_INSTRUCTORS_VIEWS_', _VIEWS_DIR_ .'/instructors/templates'); 
 	define('_LECONS_VIEWS_', _VIEWS_DIR_ .'/lecons/templates');
-	define('_LICENCES_VIEWS_', _VIEWS_DIR_ .'/licences/templates');
+	define('_LICENSES_VIEWS_', _VIEWS_DIR_ .'/licences/templates');
 	define('_MODELS_VIEWS_', _VIEWS_DIR_ .'/models/templates');
 	define('_VEHICLES_VIEWS_', _VIEWS_DIR_ .'/vehicles/templates');
 	define('_ERRORS_VIEWS_', _VIEWS_DIR_ .'/errors'); 
@@ -61,7 +61,7 @@
 	define('_FORMULAS_MODELS_', _MODELS_DIR_ .'/fomulas'); 
 	define('_INSTRUCTORS_MODELS_', _MODELS_DIR_ .'/instructors');
 	define('_LECONS_MODELS_', _MODELS_DIR_ .'/lecons');
-	define('_LICENCES_MODELS_', _MODELS_DIR_ .'/licences');
+	define('_LICENSES_MODELS_', _MODELS_DIR_ .'/licences');
 	define('_MODELS_MODELS_', _MODELS_DIR_ .'/models');
 	define('_VEHICLES_MODELS_', _MODELS_DIR_ .'/vehicles');
 	define('_ERRORS_MODELS_', _MODELS_DIR_ .'/errors');

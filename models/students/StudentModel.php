@@ -8,7 +8,7 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Students; 
+	namespace Student; 
 	 
 	class StudentModel {	
 		
