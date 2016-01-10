@@ -78,7 +78,8 @@
 		 */	
 		public function display_vehicules() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT VEHICULE.NUMERO,
+				$qry = oci_parse($this->db, 'SELECT	PK_VEHICULE, 
+													  VEHICULE.NUMERO,
 													  MODELE.NOM_MODELE,
 													  MONITEUR.SURNOM
 													FROM VEHICULE

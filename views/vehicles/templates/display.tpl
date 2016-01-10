@@ -2,11 +2,11 @@
 	{%extends "layout.tpl" %}
 
 {% block title %}
-	Clients
+	Vehicule
 {% endblock %}
 	
 {% block header %}
-	Clients
+	Vehicule
 {% endblock %}
 
 {% block content %}
@@ -30,9 +30,9 @@
 		</tr>
 	{% for customer in customers %}
 		<tr>
-			<td>{{customer.cust_record_number}}</td>
-			<td>{{customer.cust_lastName}}</td>
-			<td>{{customer.cust_firstName}}</td>
+			<td>{{customer.VEHICULE.NUMERO}}</td>
+			<td>{{customer.NOM_MODELE}}</td>
+			<td>{{customer.SURNOM}}</td>
 			<td>{{customer.cust_postal_code}}</td>
 			<td>{{customer.cust_city}}</td>
 			<td>{{customer.cust_phone_number}}</td>

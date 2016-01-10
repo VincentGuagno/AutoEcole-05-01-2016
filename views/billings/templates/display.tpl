@@ -2,11 +2,11 @@
 	{%extends "layout.tpl" %}
 
 {% block title %}
-	billinges
+	billings
 {% endblock %}
 	
 {% block header %}
-	billinges
+	billings
 {% endblock %}
 
 {% block content %}
