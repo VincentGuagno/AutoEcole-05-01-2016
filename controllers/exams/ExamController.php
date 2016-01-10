@@ -45,7 +45,7 @@
 					require_once(_TWIG_AUTOLOADER_);
 					Twig_Autoloader::register();
 				
-					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _BILLINGS_VIEWS_)); 
+					$loader = new Twig_Loader_Filesystem(array(_DEPENDENCIES_DIR_, _EXAMS_VIEWS_)); 
 					$this->twig = new Twig_Environment($loader, array(
 					  'cache' => _TWIG_CACHE_
 					));

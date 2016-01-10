@@ -10,9 +10,9 @@
 	 */
 	
 	namespace Licence;	
-	require_once('LicencesModel.php'); 
+	require_once('LicenceModel.php'); 
 	
-	class DisplayModel extends LicencesModel {
+	class DisplayModel extends LicenceModel {
 
 		/**
 		 * DisplayModel instance
@@ -76,7 +76,7 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_Permis() {
+		public function display_Licenses() {
 			try {								
 				$qry = oci_parse($this->db, 'SELECT * FROM PERMIS');
 				oci_execute($qry);
@@ -97,7 +97,7 @@
 		 * @param PK_PERMIS, Eleve's id
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_Permis($PK_PERMIS) {
+		public function display_License($PK_PERMIS) {
 			try {
 
 				$qry = oci_parse($this->db, 'SELECT AUTO.PERMIS FROM PERMIS WHERE PERMIS.PK_PERMIS =:PK_PERMIS');	

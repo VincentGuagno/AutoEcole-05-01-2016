@@ -10,7 +10,7 @@
 	 
 	namespace Licence; 
 	 
-	class LicencesModel {
+	class LicenceModel {
 				
 		/**
 		 * Database object
