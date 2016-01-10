@@ -2,7 +2,7 @@
 	{%extends "layout.tpl" %}
 
 {% block title %}
-	Location d'une caravane
+	Facturation
 {% endblock %}
 	
 {% block header %}
@@ -11,19 +11,21 @@
 
 {% block content %}
 	
-	<form method="post" ACTION="/Cas-M-Ping/caravans/renting/confirm">
+	<form method="post" ACTION="/Cas-M-Ping/billings/add/confirm">
 		
-		<label for="compagny">Nom de l'élève : </label>
-		<input class="form-control" id="compagny" name="name" >
+		<strong>Date de facturation </strong></br>
+		<input class="form-control" type="text" id="beginDate" name="DATE_FACTURE" value=""></br>
 		
-		<label for="price">Prix : </label>
-		<input class="form-control" id="price" name="price" >
+		<select id="FK_TYPE_FACTURE" name="TypeFacturations">
+		{% for billingType in bllingTypes %}
+		<option value="{{billingType.PK_TYPE_FACTURATION}}">{{billingType.LIBELLE}}</option>
+		{% endfor %}
 		
-		<label for="size">Nombre d'heure : </label>
-		<input class="form-control" id="size" name="person" >
+		<label for="PRIX">Prix : </label>
+		<input class="form-control" id="PRIX" name="PRIX" >
 		
-		<label for="location">Emplacement : </label>
-		<input class="form-control" id="location" name="location" >
+		<label for="ETAT_FACTURE">Etat de paiement : </label>
+		<input class="form-control" id="ETAT_FACTURE" name="ETAT_FACTURE" >
 		
 		<button type="submit" class="btn btn-default">Envoyer</button>
 	</form>

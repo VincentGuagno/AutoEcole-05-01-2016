@@ -46,7 +46,10 @@
 				
 				if ($controller == 'AddController') {		
 					if (file_exists (_BILLINGS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
-						try {	
+						try {
+							echo _BILLINGSTYPE_MODELS_.'/DisplayModel.php';
+							require_once(_BILLINGSTYPE_MODELS_.'/DisplayModel.php');
+							$billingTypes = \BillingsType\DisplayModel::getInstance()->display_billing_types();
 							echo $this->twig->render($this->view_name .'.tpl', array('bootstrapPath' => _BOOTSTRAP_FILE_));
 							
 						} catch (Exception $e) {
