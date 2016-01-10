@@ -12,24 +12,14 @@ Ajout d'un client
 {% block content %}
 	
 	<form method="post" ACTION="/Cas-M-Ping/customers/add/confirm">
-		
-		<label for="firstName">Prénom : </label>
-		<input class="form-control" id="firstName" name="firstName" >
-		
-		<label for="lastName">Nom : </label>
-		<input class="form-control" id="lastName"name="lastName" >
-		
-		<label for="adress">Adresse : </label>
-		<input class="form-control" id="adress"name="adress" >
-		
-		<label for="zipCode">Code Postal : </label>
-		<input class="form-control" id="zipCode"name="zipCode" >
-		
-		<label for="city">Ville : </label>
-		<input class="form-control" id="city"name="city" >
-		
-		<label for="telephone">Téléphone : </label>
-		<input class="form-control" id="telephone"name="telephone" >
+	
+		<label for="lastName firstName">Nom : </label>
+		<input class="form-control" id="Name"name="lastName" >
+		<select id="FK_TYPE_FACTURE" name="TypeFacturations">
+		{% for student in students %}
+		<option value="{{student.PK_TYPE_FACTURATION}}">{{student.NOM}} {{student.PRENOM}}</option>
+		{% endfor %}		
+		<input class="form-control" type="text" id="beginDate" name="DATE_FACTURE" value="">
 		
 		<button type="submit" class="btn btn-default">Envoyer</button>
 	</form>
