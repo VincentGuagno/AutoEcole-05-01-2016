@@ -9,7 +9,7 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Exams; 
+	namespace Exam; 
 	require_once('ExamsModel.php'); 
 	
 	class DeleteModel extends ExamsModel{

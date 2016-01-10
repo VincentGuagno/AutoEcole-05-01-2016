@@ -58,23 +58,21 @@
 								
 								switch ($id) {
 									case 'all':
-										$sectors = \Lecon\DisplayModel::getInstance()->display_lecons();
-										$locations = \Location\DisplayModel::getInstance()->display_exams();
+										$lecons = \Lecon\DisplayModel::getInstance()->display_lecons();
+										$exams = \Exam\DisplayModel::getInstance()->display_exams();
 										break;
 									default:
 										if(\Lecon\DisplayModel::getInstance()->has_sector($id) == 1) {
 											$data = \Lecon\DisplayModel::getInstance()->display_lecon($id);
 											
-										$sectors = \Lecon\DisplayModel::getInstance()->display_lecon($id);
-										$locations = \Location\DisplayModel::getInstance()->display_exams();
+										$lecons = \Lecon\DisplayModel::getInstance()->display_lecon($id);
+										$exams = \Exam\DisplayModel::getInstance()->display_exams();
 										} else {
 											header('Location: /Cas-M-Ping/errors/404');
 										}
 										break;
 								}
-								
-								echo $this->twig->render($this->view_name .'.tpl', array('lecons' => $sectors, 'exams' => $locations, 'bootstrapPath' => _BOOTSTRAP_FILE_));
-								
+								echo $this->twig->render($this->view_name .'.tpl', array('lecons' => $lecons, 'exams' => $exams, 'bootstrapPath' => _BOOTSTRAP_FILE_));
 							} catch (Exception $e) {
 								throw new Exception('Une erreur est survenue durant la récupération des données: '.$e->getMessage());
 							}

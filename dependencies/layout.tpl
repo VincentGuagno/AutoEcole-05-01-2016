@@ -1,9 +1,9 @@
-﻿{# templates/layout.twig #}
+{# templates/layout.twig #}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Cas-M-Ping - {% block title %}{% endblock %} </title>
-	<meta charset="iso-8859-1">
+	<meta charset="utf-8">
 	{% block stylesheets %}
 		<link rel="stylesheet" href="{{bootstrapPath}}">
 		<link rel="stylesheet" href="/AutoEcole-05-01-2016/dependencies/styles/layout.css">

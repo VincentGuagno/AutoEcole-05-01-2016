@@ -24,7 +24,6 @@
 		 */
 		public function __construct() {
 			try {
-				echo 'I exist';
 				DisplayModel::init();
 			} catch(Exception $e) {
 				echo $e->getMessage();
@@ -95,7 +94,6 @@
 					
 				//$return_qry = $qry->fetchAll();
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
-				var_dump($res);
 				oci_close($this->db);
 				return $res;
 			} catch(Exception $e) {

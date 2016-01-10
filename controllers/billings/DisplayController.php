@@ -51,8 +51,7 @@
 				if ($controller == 'DisplayController') {
 					if (file_exists (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
 						if (file_exists (_BILLINGS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
-							try {	
-							echo _BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php';
+							try {
 								require_once (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php');
 								$id = Tools::getInstance()->getUrl_id($url);
 

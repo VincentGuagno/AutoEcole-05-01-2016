@@ -125,7 +125,7 @@
 		public function display_lecons_avec_date($DEBUT, $FIN)  {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE LECON.DATE_LECON BETWEEN TO_DATE(':DEBUT', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(':FIN', 'YYYY-MM-DD HH24:MI:SS')');
+				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE LECON.DATE_LECON BETWEEN TO_DATE(\':DEBUT\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\':FIN\', \'YYYY-MM-DD HH24:MI:SS\')');
 
 				oci_bind_by_name($qry,":DEBUT",$DEBUT);
 				oci_bind_by_name($qry,":FIN",$FIN);

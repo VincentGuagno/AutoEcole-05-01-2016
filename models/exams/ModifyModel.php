@@ -9,7 +9,7 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Exams;
+	namespace Exam;
 	require_once('ExamsModel.php'); 
 	
 	class ModifyModel extends ExamsModel{

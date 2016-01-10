@@ -9,7 +9,7 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Exams;	
+	namespace Exam;	
 	require_once('ExamsModel.php'); 
 	
 	class DisplayModel extends ExamsModel {
@@ -76,7 +76,7 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_examens() {
+		public function display_exams() {
 			try {								
 				$qry = oci_parse($this->db, 'SELECT EXAMEN.*,
 													  PERMIS.*
@@ -101,7 +101,7 @@
 		 * @param PK_EXAMEN, Eleve's id
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_examen($PK_EXAMEN) {
+		public function display_exam($PK_EXAMEN) {
 			try {
 
 				$qry = oci_parse($this->db, 'SELECT EXAMEN.DATE_PASSAGE, EXAMEN.NOM, EXAMEN.FK_ELEVE FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =:PK_EXAMEN');	
@@ -124,14 +124,14 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_examens_avec_dates($DEBUT, $FIN)  {
+		public function display_exams_avec_dates($DEBUT, $FIN)  {
 			try {								
 				$qry = oci_parse($this->db, 'SELECT EXAMEN.*,
 													  PERMIS.*
 													FROM EXAMEN
 													INNER JOIN PERMIS
 													ON PERMIS.PK_PERMIS = EXAMEN.PK_EXAMEN 
-											WHERE EXAMEN.DATE_PASSAGE BETWEEN TO_DATE(':DEBUT', 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(':FIN', 'YYYY-MM-DD HH24:MI:SS')');			
+											WHERE EXAMEN.DATE_PASSAGE BETWEEN TO_DATE(\':DEBUT\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\':FIN\', \'YYYY-MM-DD HH24:MI:SS\')');			
 				oci_execute($qry);
 
 				oci_bind_by_name($qry,":DEBUT",$DEBUT);
