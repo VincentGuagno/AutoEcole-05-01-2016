@@ -41,7 +41,7 @@
 	define('_BILLINGSTYPE_VIEWS_', _VIEWS_DIR_ .'/billingsType/templates');
 	define('_BRANDS_VIEWS_', _VIEWS_DIR_ .'/brands/templates'); 
 	define('_EXAMS_VIEWS_', _VIEWS_DIR_ .'/exams/templates'); 
-	define('_FORMULAS_VIEWS_', _VIEWS_DIR_ .'/fomulas/templates'); 
+	define('_FORMULAS_VIEWS_', _VIEWS_DIR_ .'/formulas/templates'); 
 	define('_INSTRUCTORS_VIEWS_', _VIEWS_DIR_ .'/instructors/templates'); 
 	define('_LECONS_VIEWS_', _VIEWS_DIR_ .'/lecons/templates');
 	define('_LICENSES_VIEWS_', _VIEWS_DIR_ .'/licences/templates');
@@ -58,7 +58,7 @@
 	define('_BILLINGSTYPE_MODELS_', _MODELS_DIR_ .'/billingsType');
 	define('_BRANDS_MODELS_', _MODELS_DIR_ .'/brands'); 
 	define('_EXAMS_MODELS_', _MODELS_DIR_ .'/exams'); 
-	define('_FORMULAS_MODELS_', _MODELS_DIR_ .'/fomulas'); 
+	define('_FORMULAS_MODELS_', _MODELS_DIR_ .'/formulas'); 
 	define('_INSTRUCTORS_MODELS_', _MODELS_DIR_ .'/instructors');
 	define('_LECONS_MODELS_', _MODELS_DIR_ .'/lecons');
 	define('_LICENSES_MODELS_', _MODELS_DIR_ .'/licences');

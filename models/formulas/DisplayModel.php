@@ -9,10 +9,10 @@
 	 * @copyright 2016 3iL
 	 */
 	
-	namespace Fomulas;	
-	require_once('FomulaModel.php'); 
+	namespace Formulas;	
+	require_once('FormulaModel.php'); 
 	
-	class DisplayModel extends FomulaModel {
+	class DisplayModel extends FormulaModel {
 
 		/**
 		 * DisplayModel instance
@@ -76,7 +76,7 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_formules() {
+		public function display_formulas() {
 			try {								
 				$qry = oci_parse($this->db, 'SELECT FORMULES.* FROM FORMULES');			
 				oci_execute($qry);

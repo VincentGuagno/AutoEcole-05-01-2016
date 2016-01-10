@@ -47,7 +47,12 @@
 				if ($controller == 'AddController') {		
 					if (file_exists (_STUDENTS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
 						try {	
-							echo $this->twig->render($this->view_name .'.tpl', array('bootstrapPath' => _BOOTSTRAP_FILE_));
+							
+							require_once (_FORMULAS_MODELS_ .'/DisplayModel.php');
+							require_once (_INSTRUCTORS_MODELS_ .'/DisplayModel.php');
+							$formulas = \Formulas\DisplayModel::getInstance()->display_formulas();
+							$instructors = \Instructor\DisplayModel::getInstance()->display_instructors();
+							echo $this->twig->render($this->view_name .'.tpl', array('formulas'=>$formulas,'instructors'=>$instructors,'bootstrapPath' => _BOOTSTRAP_FILE_));
 							
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant l\'affichage des données: '.$e->getMessage());

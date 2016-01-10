@@ -8,9 +8,9 @@
 	 * @copyright 2016 3iL
 	 */
 	 
-	namespace Fomulas; 
+	namespace Formulas; 
 	 
-	class FomulaModel {
+	class FormulaModel {
 		
 
 
