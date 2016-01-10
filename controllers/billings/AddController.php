@@ -49,8 +49,8 @@
 						try {
 							echo _BILLINGSTYPE_MODELS_.'/DisplayModel.php';
 							require_once(_BILLINGSTYPE_MODELS_.'/DisplayModel.php');
-							$billingTypes = \BillingsType\DisplayModel::getInstance()->display_billing_types();
-							echo $this->twig->render($this->view_name .'.tpl', array('bootstrapPath' => _BOOTSTRAP_FILE_));
+							$billingTypes = \BillingsType\DisplayModel::getInstance()->display_billingsType();
+							echo $this->twig->render($this->view_name .'.tpl', array('billingTypes'=>$billingTypes ,'bootstrapPath' => _BOOTSTRAP_FILE_));
 							
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant l\'affichage des données: '.$e->getMessage());

@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Facture;
-	require_once('FactureModel.php'); 
+	namespace BillingTypes;
+	require_once('BillingTypesModel.php'); 
 	
-	class ModifyModel extends FactureModel{
+	class ModifyModel extends BillingTypesModel{
 
 		/**
 		 * ModifyModel instance
@@ -79,23 +79,21 @@
 		 * @param PK_TYPE_FACTURE, customer's name
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function modify_type_facture($LIBELLE, $PK_TYPE_FACTURE, $cust_firstName, $cust_address, $cust_zipCode, $cust_city, $cust_phoneNumber, $cust_addNumber) {
+		public function modify_type_facture($LIBELLE, $PK_TYPE_FACTURE) {
 			try {
 			
 				// UPDATE TYPE_FACTURE SET LIBELLE = 'useless' WHERE PK_TYPE_FACTURE = 3
-				$qry = oci_parse($this->db, ("UPDATE MODELE SET LIBELLE = '?' WHERE PK_TYPE_FACTURE = ?");
+				$qry = oci_parse($this->db, ("UPDATE MODELE SET LIBELLE = ':LIBELLE' WHERE PK_TYPE_FACTURE = :PK_TYPE_FACTURE");
 				
-				$qry->bindValue(1, $LIBELLE, \PDO::PARAM_STR);
-				$qry->bindValue(2, $PK_TYPE_FACTURE, \PDO::PARAM_INT);
+				oci_bind_by_name($qry,":LIBELLE",$LIBELLE);
+				oci_bind_by_name($qry,":PK_TYPE_FACTURE",$PK_TYPE_FACTURE);
 			
 				oci_execute($qry);
-
+			    oci_close($this->db);
 				return 0;				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
-
 	}
-
 ?>

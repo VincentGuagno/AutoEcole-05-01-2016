@@ -9,14 +9,14 @@
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('BillingController.php');
+	require_once('BillingsController.php');
 	 
-	class ConfirmAddController extends BillingController {
+	class ConfirmAddController extends BillingsController {
 		
 		/**
 		 * Name of called model
 		 */
-		private $model_name = 'Renting';
+		private $model_name = 'Add';
 		
 		/**
 		 * The constructor of ConfirmAddController
@@ -49,13 +49,13 @@
 						try {	
 							require_once (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php');							
 							Tools::getInstance()->createPost($_POST);
-							
-							if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['person']) && !empty($_POST['location'])) {
-								\Billing\RentingModel::getInstance()->renting_Billing($_POST['name'], $_POST['price'], $_POST['person'], $_POST['location']);
+							var_dump($_POST);
+							if(!empty($_POST['DATE_FACTURE']) && !empty($_POST['PRIX']) && !empty($_POST['ETAT_FACTURE'])) {
+								\Billing\AddModel::getInstance()->add_Billing($_POST['DATE_FACTURE'], $_POST['PRIX'], $_POST['ETAT_FACTURE']);
 								header('Location: /AutoEcole-05-01-2016/billings/show/all');
 								
 							} else {
-								header('Location: /AutoEcole-05-01-2016/billings/renting');
+								header('Location: /AutoEcole-05-01-2016/billings/show/all');
 							}
 
 						} catch (Exception $e) {

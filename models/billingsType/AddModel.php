@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Facture; 
-	require_once('FactureModel.php'); 
+	namespace BillingTypes; 
+	require_once('BillingTypesModel.php'); 
 	
-	class AddModel extends FactureModel{
+	class AddModel extends BillingTypesModel{
 
 		/**
 		 * AddModel instance
@@ -40,9 +40,8 @@
 				self::$instance = new AddModel();
 			}
 			return self::$instance;
-		}
-		
-		/**
+		}		
+
 		/**
 		 * Initialize the DisplayModel class
 		 */
@@ -79,11 +78,12 @@
 		 */
 		public function add_type_facture($TYPE_FACTURE) {
 			try {				
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.TYPE_FACTURE (LIBELLE) VALUES (?)');
-				$qry->bindValue(1, $TYPE_FACTURE, \PDO::PARAM_STR);
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.TYPE_FACTURE (LIBELLE) VALUES (:TYPE_FACTURE)');
+					oci_bind_by_name($qry,":TYPE_FACTURE",$TYPE_FACTURE);
 
 				oci_execute($qry);
 				oci_close($this->db);	
+
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

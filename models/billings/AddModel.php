@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Facturation; 
-	require_once('FacturationModel.php'); 
+	namespace Billings; 
+	require_once('BillingsModel.php'); 
 	
-	class AddModel extends FacturationModel{
+	class AddModel extends BillingsModel{
 
 		/**
 		 * AddModel instance
@@ -75,26 +75,24 @@
 
 		/**
 		 * Modify all customer's informations from one customer 		
-		 * @param DATE_FACTURE ,  customer's lasttName
-		 * @param PRIX ,  customer's lasttName
-		 * @param ETAT_FACTURE ,  customer's lasttName
+		 * @param DATE_FACTURE ,  
+		 * @param PRIX ,  
+		 * @param ETAT_FACTURE ,  
 		 */
-		public function add_facturation($DATE_FACTURE, $PRIX, $ETAT_FACTURE) {
-			try {				
-
+		public function add_billing($DATE_FACTURE, $PRIX, $ETAT_FACTURE) {
+			try {
 				//INSERT INTO "AUTO"."FACTURATION" (FK_TYPE_FACTURE, DATE_FACTURE, PRIX, ETAT_FACTURE) VALUES ('2', TO_DATE('2016-01-22 17:48:34', 'YYYY-MM-DD HH24:MI:SS'), '55', '1')
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FACTURATION (DATE_FACTURE, PRIX, ETAT_FACTURE) VALUES (?,?,?)');
-				$qry->bindValue(1, $TYPE_FACTURE, \PDO::PARAM_STR);
-				$qry->bindValue(2, $PRIX, \PDO::PARAM_INT);
-				$qry->bindValue(3, $ETAT_FACTURE, \PDO::PARAM_STR);
-
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.FACTURATION (DATE_FACTURE, PRIX, ETAT_FACTURE, FK_TYPE_FACTURE) VALUES (\':DATE_FACTURE\',\':PRIX,:ETAT_FACTURE\',\':FK_TYPE_FACTURE\')');
+				oci_bind_by_name($qry,":DATE_FACTURE",$DATE_FACTURE);
+				oci_bind_by_name($qry,":PRIX",$PRIX);
+				oci_bind_by_name($qry,":ETAT_FACTURE",$ETAT_FACTURE);
+				
 				oci_execute($qry);
 				oci_close($this->db);	
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}	
-	}
-	
+	}	
 ?>

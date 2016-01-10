@@ -9,10 +9,10 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Facture; 
-	require_once('FactureModel.php'); 
+	namespace BillingTypes; 
+	require_once('BillingTypesModel.php'); 
 	
-	class DeleteModel extends FactureModel{
+	class DeleteModel extends BillingTypesModel{
 
 		/**
 		 * DeleteModel instance
@@ -81,10 +81,10 @@
 		public function delete_type_facture($PK_TYPE_FACTURE) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.TYPE_FACTURE FROM TYPE_FACTURE WHERE TYPE_FACTURE.PK_TYPE_FACTURE =?');	
-				$qry->bindValue(1, $PK_TYPE_FACTURE, \PDO::PARAM_INT);
+				$qry = oci_parse($this->db, 'DELETE AUTO.TYPE_FACTURE FROM TYPE_FACTURE WHERE TYPE_FACTURE.PK_TYPE_FACTURE =:PK_TYPE_FACTURE');	
+				oci_bind_by_name($qry,":PK_TYPE_FACTURE",$PK_TYPE_FACTURE);
 				oci_execute($qry);
-
+				oci_close($this->db);	
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
