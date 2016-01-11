@@ -61,7 +61,7 @@
 			'delete-lecons' => array(
 				'controller' => 'DeleteController',
 				'directory' => 'lecons/',
-				'url-formatter' => 'lecons/return/{id|all}'
+				'url-formatter' => 'lecons/delete/{id|all}'
 			),
 			
 			// billings routes

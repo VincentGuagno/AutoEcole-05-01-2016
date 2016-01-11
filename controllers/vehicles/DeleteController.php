@@ -11,12 +11,12 @@
 
 	require_once('VehicleController.php');
 	 
-	class ReturnController extends VehicleController {
+	class DeleteController extends VehicleController {
 		
 		/**
 		 * Name of called model
 		 */
-		private $model_name = 'Return';
+		private $model_name = 'Delete';
 		
 		/**
 		 * The constructor of ReturnController
@@ -43,25 +43,25 @@
 				$url = Tools::getInstance()->request_url;
 				$controller = Tools::getInstance()->getUrl_controller($url);
 
-				if ($controller == 'ReturnController') {
-					if (file_exists (_vehicleS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
+				if ($controller == 'DeleteController') {
+					if (file_exists (_VEHICLES_MODELS_ .'/'. $this->model_name .'Model.php')) {				
 						try {	
-							require_once (_vehicleS_MODELS_ .'/'. $this->model_name .'Model.php');
+							require_once (_VEHICLES_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
 							
 							switch ($id) {
 								case 'all':
-									\vehicle\ReturnModel::getInstance()->delete_vehicles();
+									\vehicle\DeleteModel::getInstance()->delete_vehicles();
 									break;
 								default:
-									if(\vehicle\ReturnModel::getInstance()->has_vehicle($id) == 1) {
-										\vehicle\ReturnModel::getInstance()->delete_vehicle($id);	
+									if(\vehicle\DeleteModel::getInstance()->has_vehicle($id) >= 1) {
+										\vehicle\DeleteModel::getInstance()->delete_vehicle($id);	
 									} else {
-										header('Location: /Cas-M-Ping/errors/404');
+										header('Location: /AutoEcole-05-01-2016/errors/404');
 									}	
 									break;
 							}
-							header('Location: /Cas-M-Ping/vehicles/show/all');
+							header('Location: /AutoEcole-05-01-2016/vehicles/show/all');
 							
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la modification des données: '.$e->getMessage());

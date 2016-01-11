@@ -51,17 +51,17 @@
 							
 							switch ($id) {
 								case 'all':
-									\Lecon\DeleteModel::getInstance()->delete_sectors();
+									\Lecon\DeleteModel::getInstance()->delete_lecons();
 									break;
 								default:
-									if(\Lecon\DeleteModel::getInstance()->has_sector($id) == 1) {
-										\Lecon\DeleteModel::getInstance()->delete_sector($id);	
+									if(\Lecon\DeleteModel::getInstance()->has_lecon($id) >= 1) {
+										\Lecon\DeleteModel::getInstance()->delete_lecon($id);	
 									} else {
-										header('Location: /Cas-M-Ping/errors/404');
+										header('Location: /AutoEcole-05-01-2016/errors/404');
 									}	
 									break;
 							}
-							header('Location: /Cas-M-Ping/sectors/show/all');
+							header('Location: /AutoEcole-05-01-2016/lecons/show/all');
 							
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la suppression des données: '.$e->getMessage());

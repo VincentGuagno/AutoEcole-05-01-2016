@@ -9,7 +9,7 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Students; 
+	namespace Student; 
 	require_once('StudentModel.php'); 
 	
 	class DeleteModel extends StudentModel{
@@ -78,10 +78,11 @@
 		 * @param PK_ELEVE, Eleve's id
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function delete_eleve($PK_ELEVE) {
+		public function delete_student($PK_ELEVE) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE ELEVE.PK_ELEVE FROM ELEVE WHERE ELEVE.PK_ELEVE =:PK_ELEVE');	
+				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
+				$qry = oci_parse($this->db, 'DELETE ELEVE WHERE ELEVE.PK_ELEVE =:PK_ELEVE');	
 				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
 
 				oci_execute($qry);

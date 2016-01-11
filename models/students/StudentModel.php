@@ -39,7 +39,7 @@
 				//var_dump($res);
 				
 				oci_close($this->db);
-				return $res;
+				return $nrows;
 
 			} catch(Exception $e) {
 				return $e->getMessage();

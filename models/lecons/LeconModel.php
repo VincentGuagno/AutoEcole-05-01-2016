@@ -34,8 +34,9 @@
 		public function has_lecon($PK_LECON) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT AUTO.LECON FROM LECON WHERE LECON.PK_LECON =:PK_LECON');		
+				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE LECON.PK_LECON =:PK_LECON');		
 				oci_bind_by_name($qry,":PK_LECON",$PK_LECON);		
+				oci_execute($qry);
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);				
 				oci_close($this->db);
 				return $res;

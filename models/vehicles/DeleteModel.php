@@ -78,10 +78,11 @@
 		 * @param PK_VEHICULE, Eleve's id
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function delete_vehicule($PK_VEHICULE) {
+		public function delete_vehicle($PK_VEHICULE) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.VEHICULE FROM MODELE WHERE VEHICULE.PK_VEHICULE =:PK_VEHICULE');	
+				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
+				$qry = oci_parse($this->db, 'DELETE AUTO.VEHICULE WHERE VEHICULE.PK_VEHICULE =:PK_VEHICULE');	
 				oci_bind_by_name($qry,":PK_VEHICULE",$PK_VEHICULE);
 				oci_execute($qry);
 				oci_close($this->db);

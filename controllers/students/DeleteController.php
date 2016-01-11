@@ -51,17 +51,17 @@
 							
 							switch ($id) {
 								case 'all':
-									\Season\DeleteModel::getInstance()->delete_seasons();
+									\Student\DeleteModel::getInstance()->delete_students();
 									break;
 								default:
-									if(\Season\DeleteModel::getInstance()->has_season($id) == 1) {
-										\Season\DeleteModel::getInstance()->delete_season($id);	
+									if(\Student\DeleteModel::getInstance()->has_student($id) >= 1) {
+										\Student\DeleteModel::getInstance()->delete_student($id);	
 									} else {
-										header('Location: /Cas-M-Ping/errors/404');
+										header('Location: /AutoEcole-05-01-2016/errors/404');
 									}	
 									break;
 							}
-							header('Location: /Cas-M-Ping/seasons/show/all');
+							header('Location: /AutoEcole-05-01-2016/students/show/all');
 							
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la suppression des données: '.$e->getMessage());
