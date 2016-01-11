@@ -37,6 +37,12 @@
 			<td>{{student.DATE_NAISSANCE}}</td>
 			<td>{{student.LIEU_ETUDE}}</td>
 			<td>{{student.LIBELLE}}</td>
+
+				<td> 
+				<form method="post" ACTION="/AutoEcole-05-01-2016/students/planning/{{student.PK_ELEVE}}">
+				<button type="submit" > Planning </button>
+				</form>
+			</td>
 			
 			<td> 
 				<form method="post" ACTION="/AutoEcole-05-01-2016/students/modify/{{student.PK_ELEVE}}">

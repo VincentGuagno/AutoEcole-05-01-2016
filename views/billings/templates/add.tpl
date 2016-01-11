@@ -16,10 +16,14 @@
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
-  $(function() {
-    $( "#DATE_FACTURE" ).datepicker();
-  });
+   
+   <script>
+   jQuery(function()
+		{
+		//formattage de la date dans le format du la bdd       
+		jQuery('#DATE_FACTURE').datepicker({ dateFormat: "dd/mm/yy"}).val();   
+		}
+	); 
   </script>
 </head>
 
