@@ -24,17 +24,31 @@ Ajout d'un véhicule
 		
 		<label for="PRIX_ACHAT">Prix achat : </label>
 		<input class="form-control" id="PRIX_ACHAT"name="PRIX_ACHAT" >
-		
+
+       
+		<br/>
+		<br/>
+		<strong> Marque </strong>		
 		<select id="FK_MARQUE" name="FK_MARQUE">
 		{% for brand in brands %}
 		<option value="{{brand.PK_MARQUE}}">{{brand.NOM}}</option>
 		{% endfor %}
 		</select>
+
+
+		<br/>
+		<br/>
+		<strong> Modèle </strong>
 		<select id="FK_MODELE" name="FK_MODELE">
 		{% for model in models %}
 		<option value="{{model.PK_MODELE}}">{{model.NOM_MODELE}}</option>
 		{% endfor %}
 		</select>
+
+	
+		<br/>
+		<br/>
+		<strong> Moniteur </strong>
 		<select id="FK_MONITEUR" name="FK_MONITEUR">
 		{% for instructor in instructors %}
 		<option value="{{instructor.PK_MONITEUR}}">{{instructor.SURNOM}}</option>
