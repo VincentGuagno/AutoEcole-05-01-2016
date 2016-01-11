@@ -88,7 +88,7 @@
 											  FORMULES.LIBELLE
 											FROM ELEVE
 											INNER JOIN FORMULES
-											ON FORMULES.PK_FORMULE = ELEVE.FK_FORMULES');
+											ON FORMULES.PK_FORMULE = ELEVE.FK_FORMULES ORDER BY NOM');
 				oci_execute($qry);
 				
 				//$qry = $this->db->prepare('SELECT * FROM caravan ORDER BY caravan.car_id');	
