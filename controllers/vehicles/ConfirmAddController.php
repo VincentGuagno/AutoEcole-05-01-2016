@@ -16,7 +16,7 @@
 		/**
 		 * Name of called model
 		 */
-		private $model_name = 'Renting';
+		private $model_name = 'add';
 		
 		/**
 		 * The constructor of ConfirmAddController
@@ -45,17 +45,18 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'ConfirmAddController') {
-					if (file_exists (_VehicleS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+					if (file_exists (_VEHICLES_MODELS_ .'/'. $this->model_name .'Model.php')) {			
 						try {	
-							require_once (_VehicleS_MODELS_ .'/'. $this->model_name .'Model.php');							
+							require_once (_VEHICLES_MODELS_ .'/'. $this->model_name .'Model.php');							
 							Tools::getInstance()->createPost($_POST);
-							
-							if(!empty($_POST['name']) && !empty($_POST['price']) && !empty($_POST['person']) && !empty($_POST['location'])) {
-								\Vehicle\RentingModel::getInstance()->renting_Vehicle($_POST['name'], $_POST['price'], $_POST['person'], $_POST['location']);
-								header('Location: /Cas-M-Ping/Vehicles/show/all');
+							var_dump($_POST);
+							if(!empty($_POST['FK_MODELE']) && !empty($_POST['FK_MONITEUR']) && !empty($_POST['NUMERO']) && !empty($_POST['KM'])
+													 && !empty($_POST['DATE_ACHAT']) && !empty($_POST['PRIX_ACHAT'])&& !empty($_POST['FK_MARQUE'])) {
+								\Vehicle\AddModel::getInstance()->add_vehicle($_POST['FK_MODELE'], $_POST['FK_MONITEUR'],$_POST['FK_MARQUE'], $_POST['NUMERO'], $_POST['KM'], $_POST['DATE_ACHAT'], $_POST['PRIX_ACHAT']);
+								header('Location: /AutoEcole-05-01-2016/vehicles/show/all');
 								
 							} else {
-								header('Location: /Cas-M-Ping/Vehicles/renting');
+								header('Location: /AutoEcole-05-01-2016/vehicles/add');
 							}
 
 						} catch (Exception $e) {

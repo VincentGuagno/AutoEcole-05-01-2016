@@ -82,16 +82,17 @@
 		 * @param DATE_ACHAT ,  customer's lasttName
 		 * @param PRIX_ACHAT ,  customer's lasttName
 		 */
-		public function add_vehicule($FK_MODELE, $FK_MONITEUR, $NUMERO, $KM, $DATE_ACHAT, $PRIX_ACHAT) {
+		public function add_vehicle($FK_MODELE, $FK_MONITEUR, $FK_MARQUE, $NUMERO, $KM, $DATE_ACHAT, $PRIX_ACHAT) {
 			try {		
 
 				// INSERT INTO "AUTO"."VEHICULE" (FK_MODELE, PUISSANCE, NUMERO, KM, DATE_ACHAT, PRIX_ACHAT) VALUES ('1', '1', '1', '44', '121', TO_DATE('2016-01-04 17:56:12', 'YYYY-MM-DD HH24:MI:SS'), '11')
 
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.VEHICULE (FK_MODELE, FK_MONITEUR, NUMERO, KM, DATE_ACHAT, PRIX_ACHAT) VALUES (:FK_MODELE,:FK_MONITEUR,:NUMERO,:KM,TO_DATE(:DATE_ACHAT, \'YYYY-MM-DD HH24:MI:SS\'),:PRIX_ACHAT)');
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.VEHICULE (FK_MODELE, FK_MONITEUR, FK_MARQUE, NUMERO, KM, DATE_ACHAT, PRIX_ACHAT) VALUES (:FK_MODELE,:FK_MONITEUR,:FK_MARQUE,:NUMERO,:KM,TO_DATE(:DATE_ACHAT, \'DD-MM-YYYY HH24:MI:SS\'),:PRIX_ACHAT)');
 
 				oci_bind_by_name($qry,":FK_MODELE",$FK_MODELE);
 				oci_bind_by_name($qry,":FK_MONITEUR",$FK_MONITEUR);
+				oci_bind_by_name($qry,":FK_MARQUE",$FK_MARQUE);
 				oci_bind_by_name($qry,":NUMERO",$NUMERO);	
 				oci_bind_by_name($qry,":KM",$KM);
 				oci_bind_by_name($qry,":DATE_ACHAT",$DATE_ACHAT);
@@ -99,8 +100,7 @@
 
 				oci_execute($qry);
 
-				oci_close($this->db);
-				return $res;				
+				oci_close($this->db);			
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

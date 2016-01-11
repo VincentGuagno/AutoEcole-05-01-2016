@@ -76,9 +76,9 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_marques() {
+		public function display_models() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT AUTO.MODELE FROM PK_MODELE');			
+				$qry = oci_parse($this->db, 'SELECT * FROM AUTO.MODELE ');			
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();

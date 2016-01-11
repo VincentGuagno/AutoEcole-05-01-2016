@@ -325,6 +325,11 @@
 				'directory' => 'vehicles/',
 				'url-formatter' => 'vehicles/add'
 			),
+			'confirm-add-vehicles' => array(
+				'controller' => 'ConfirmAddController',
+				'directory' => 'vehicles/',
+				'url-formatter' => 'vehicles/add/confirm'
+			),
 			'delete-vehicles' => array(
 				'controller' => 'DeleteController',
 				'directory' => 'vehicles/',

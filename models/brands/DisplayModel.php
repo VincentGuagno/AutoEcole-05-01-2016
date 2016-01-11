@@ -10,7 +10,7 @@
 	 */
 	
 	namespace Brands;	
-	require_once('BrandsModel.php'); 
+	require_once('BrandModel.php'); 
 	
 	class DisplayModel extends BrandsModel {
 
@@ -76,9 +76,9 @@
 		 *		
 		 * @return return_qry : result into an object, exception message any others cases
 		 */	
-		public function display_marques() {
+		public function display_brands() {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT AUTO.MARQUE FROM PK_MARQUE');			
+				$qry = oci_parse($this->db, 'SELECT * FROM AUTO.MARQUE');			
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
