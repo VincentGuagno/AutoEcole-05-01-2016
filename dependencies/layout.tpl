@@ -25,7 +25,7 @@
 		  <ul>
 			<li><a href="/AutoEcole-05-01-2016/students/show/all">Eleves</a></li>
 			<li><a href="/AutoEcole-05-01-2016/instructors/show/all">Moniteurs</a></li>
-			<li><a href="/AutoEcole-05-01-2016/lecons/show/all">Leçons</a></li>
+			<li><a href="/AutoEcole-05-01-2016/lecons/show/all">Planning</a></li>
 			<li><a href="/AutoEcole-05-01-2016/vehicles/show/all">Véhicules</a></li>
 			<li><a href="/AutoEcole-05-01-2016/billings/show/all">Factures</a></li>
 		  </ul>
