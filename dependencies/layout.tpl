@@ -28,7 +28,6 @@
 			<li><a href="/AutoEcole-05-01-2016/lecons/show/all">Leçons</a></li>
 			<li><a href="/AutoEcole-05-01-2016/vehicles/show/all">Véhicules</a></li>
 			<li><a href="/AutoEcole-05-01-2016/billings/show/all">Factures</a></li>
-			<li><a href="/AutoEcole-05-01-2016/exams/show/all">Examens</a></li>
 		  </ul>
 		</nav>
 	  </header>

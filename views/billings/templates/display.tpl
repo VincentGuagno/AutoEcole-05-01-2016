@@ -22,7 +22,7 @@
 			<th> numero de facture </th>
 			<th> nom </th>
 			<th> prenom </th>
-			<th> libelle </th>
+			<th> Etat de la facture </th>
 			<th> prix </th>
 			<th> date de facturation </th>
 		</tr>
@@ -31,12 +31,12 @@
 			<td>{{billing.PK_FACTURATION}}</td>
 			<td>{{billing.NOM}}</td>
 			<td>{{billing.PRENOM}}</td>
-			<td>{{billing.LIBELLE}}</td>
+			<td>{{billing.ETAT_FACTURE}}</td>
 			<td>{{billing.PRIX}}</td>
 			<td>{{billing.DATE_FACTURE}}</td>
 			
 			<td> 
-				<form method="post" ACTION="/AutoEcole-05-01-2016/billings/return/{{billing.PK_FACTURATION}}">
+				<form method="post" ACTION="/AutoEcole-05-01-2016/billings/delete/{{billing.PK_FACTURATION}}">
 				<button type="submit" > Suppression </button>
 				</form>
 			</td>
