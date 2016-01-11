@@ -154,9 +154,38 @@
 		public function display_lecons_student($FK_ELEVE)  {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE FK_ELEVE = :FK_ELEVE');
+				$qry = oci_parse($this->db, 'SELECT LECON.PK_LECON,
+											  LECON.DATE_LECON,
+											  LECON.ETAT_LECON,
+											  ELEVE.NOM,
+											  ELEVE.PRENOM,
+											  MONITEUR.SURNOM
+											FROM LECON
+											INNER JOIN ELEVE
+											ON ELEVE.PK_ELEVE = LECON.FK_ELEVE
+											INNER JOIN MONITEUR
+											ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR WHERE FK_ELEVE = :FK_ELEVE ORDER BY DATE_LECON');
 
 				oci_bind_by_name($qry,":FK_ELEVE",$FK_ELEVE);
+				oci_execute($qry);
+					
+				//$return_qry = $qry->fetchAll();
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				oci_close($this->db);
+				return $res;		
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+		
+		public function ticket_lecon($id)  {
+			try {
+
+				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
+				$qry = oci_parse($this->db, 'UPDATE LECON SET ETAT_LECON = 1 WHERE LECON.PK_LECON = :PK_LECON ');
+
+				oci_bind_by_name($qry,":PK_LECON",$id);
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();

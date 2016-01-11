@@ -79,13 +79,13 @@
 		 * @param PUISSANCE ,  customer's lasttName
 		 * @param NOM_MODELE ,  customer's lasttName
 		 */
-		public function add_lecon($FK_ELEVE,$DATE_LECON,$ETAT_LECON) {
+		public function add_lecon($FK_ELEVE,$DATE_LECON) {
 			try {		
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.LECON (FK_ELEVE,DATE_LECON,ETAT_LECON) VALUES (:FK_ELEVE,to_date(:DATE_LECON,\'DD/MM/YYYY\'),:ETAT_LECON)');
+				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.LECON (FK_ELEVE,DATE_LECON,ETAT_LECON) VALUES (:FK_ELEVE,to_date(:DATE_LECON,\'DD/MM/YYYY\'),0)');
 				oci_bind_by_name($qry,":FK_ELEVE",$FK_ELEVE);
 				oci_bind_by_name($qry,":DATE_LECON",$DATE_LECON);
-				oci_bind_by_name($qry,":ETAT_LECON",$ETAT_LECON);
 				oci_execute($qry);
 				oci_close($this->db);								
 			} catch(Exception $e) {

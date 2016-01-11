@@ -50,10 +50,10 @@
 						try {
 							require_once (_LECONS_MODELS_ .'/'. $this->model_nameCreate .'Model.php');							
 							Tools::getInstance()->createPost($_POST);
-							var_dump($_POST);
-							if(!empty($_POST['FK_ELEVE']) && !empty($_POST['DATE_LECON']) && !empty($_POST['ETAT_LECON'])){
-								\Lecon\AddModel::getInstance()->add_lecon($_POST['FK_ELEVE'], $_POST['DATE_LECON'], 
-										$_POST['ETAT_LECON']);
+							$nrows = \Lecon\AddModel::getInstance()->has_lecon_date($_POST['DATE_LECON'],$_POST['FK_ELEVE']);
+							
+							if(!empty($_POST['FK_ELEVE']) && !empty($_POST['DATE_LECON']) && $nrows == 0){
+								\Lecon\AddModel::getInstance()->add_lecon($_POST['FK_ELEVE'], $_POST['DATE_LECON']);
 								header('Location: /AutoEcole-05-01-2016/lecons/show/all');
 								
 							} else {

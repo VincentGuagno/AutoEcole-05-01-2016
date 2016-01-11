@@ -39,7 +39,22 @@
 				oci_execute($qry);
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);				
 				oci_close($this->db);
-				return $res;
+				return $nrows;
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+		public function has_lecon_date($DATE_LECON,$FK_ELEVE) {
+			try {
+
+				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE (LECON.DATE_LECON =to_date(:DATE_LECON ,\'DD/MM/YYYY\') and LECON.FK_ELEVE =:FK_ELEVE )');		
+				oci_bind_by_name($qry,":FK_ELEVE",$FK_ELEVE);
+				oci_bind_by_name($qry,":DATE_LECON",$DATE_LECON);				
+				oci_execute($qry);
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);				
+				oci_close($this->db);
+				return $nrows;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

@@ -48,25 +48,19 @@
 						try {	
 							require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
-							
-							$datetime1 = new DateTime($_POST['beginDate']);
-							$datetime2 = new DateTime($_POST['endDate']);
-							$interval = $datetime1->diff($datetime2);
+							//$NOM, $PRENOM, $ADRESSE, $NUM_TEL, $SURNOM, $DATE_EMBAUCHE, $PK_MONITEUR
 							
 							Tools::getInstance()->createPost($_POST);
 							
-							if(!empty($_POST['name']) && !empty($_POST['beginDate']) && !empty($_POST['endDate']) &&
-								!empty($_POST['peopleNumber']) && $interval->days > 0 && !empty($_POST['paymentState'])
-							) {
-								\Instructor\ModifyModel::getInstance()->modify_model(
-									$_POST['name'], $_POST['beginDate'], $_POST['endDate'],
-									$_POST['peopleNumber'], '', $_POST['paymentState'],
-									$interval->days, $_POST['deposit'], $id
-								);
-								header('Location: /Cas-M-Ping/instructors/show/'.$id);
+							if(!empty($_POST['NOM']) && !empty($_POST['PRENOM']) && !empty($_POST['ADRESSE']) &&
+										!empty($_POST['NUM_TEL']) && !empty($_POST['SURNOM']) && !empty($_POST['DATE_EMBAUCHE'])) {
+								\Instructor\ModifyModel::getInstance()->modify_instructor(
+									$_POST['NOM'], $_POST['PRENOM'], $_POST['ADRESSE'],
+									$_POST['NUM_TEL'], $_POST['SURNOM'], $_POST['DATE_EMBAUCHE'], $id);
+								header('Location: /AutoEcole-05-01-2016/instructors/show/all');
 								
 							} else {
-								header('Location: /Cas-M-Ping/instructors/modify/'.$id);
+								header('Location: /AutoEcole-05-01-2016/instructors/modify/'.$id);
 							}
 
 						} catch (Exception $e) {

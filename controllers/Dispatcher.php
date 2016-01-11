@@ -53,6 +53,11 @@
 				'directory' => 'lecons/',
 				'url-formatter' => 'lecons/add'
 			),
+			'ticket-lecons' => array(
+				'controller' => 'TicketController',
+				'directory' => 'lecons/',
+				'url-formatter' => 'lecons/ticket/{id|all}'
+			),
 			'confirm-add-lecons' => array(
 				'controller' => 'ConfirmAddController',
 				'directory' => 'lecons/',

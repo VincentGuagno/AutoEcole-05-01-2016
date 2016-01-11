@@ -42,9 +42,6 @@
 		<input class="form-control" id="DATE_LECON"name="DATE_LECON" placeholder ="11-01-2016" >
 		</br>
 		
-		<label for="ETAT_LECON">Etat de la leçon : </label>
-		<input class="form-control" id="ETAT_LECON" name="ETAT_LECON" >
-		</br>
 		<button type="submit" class="btn btn-default">Ajouter la nouvelle leçon</button>
 	</form>
 

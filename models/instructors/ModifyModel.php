@@ -84,11 +84,12 @@
 		 * @param PK_MONITEUR, customer's phone number
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function modify_moniteur($NOM, $PRENOM, $ADRESSE, $NUM_TEL, $SURNOM, $DATE_EMBAUCHE, $PK_MONITEUR) {
+		public function modify_instructor($NOM, $PRENOM, $ADRESSE, $NUM_TEL, $SURNOM, $DATE_EMBAUCHE, $PK_MONITEUR) {
 			try {
 			    // UPDATE MONITEUR SET NOM = 'ho', PRENOM = 'bi', ADRESSE = 'ee', NUM_TEL = 555546, SURNOM = 'org', DATE_EMBAUCHE = TO_DATE('2010-01-15', 'YYYY-MM-DD HH24:MI:SS') WHERE PK_MONITEUR =21
 
-				$qry = oci_parse($this->db, ("UPDATE MONITEUR SET NOM = ':NOM', PRENOM = ':PRENOM', ADRESSE = ':ADRESSE', NUM_TEL = :NUM_TEL, SURNOM = ':SURNOM', DATE_EMBAUCHE = TO_DATE(':DATE_EMBAUCHE', 'DD/MM/YYYY HH24:MI:SS') WHERE PK_MONITEUR =:PK_MONITEUR");
+				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
+				$qry = oci_parse($this->db, ("UPDATE MONITEUR SET NOM = :NOM, PRENOM = :PRENOM, ADRESSE = :ADRESSE, NUM_TEL = :NUM_TEL, SURNOM = :SURNOM, DATE_EMBAUCHE = TO_DATE(:DATE_EMBAUCHE, 'DD/MM/YYYY HH24:MI:SS') WHERE PK_MONITEUR =:PK_MONITEUR"));
 				
 				oci_bind_by_name($qry,":NOM",$NOM);
 				oci_bind_by_name($qry,":PRENOM",$PRENOM);

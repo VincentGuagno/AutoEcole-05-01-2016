@@ -38,6 +38,9 @@
 				<td>{{lecon.PRENOM}}</td>
 				<td>{{lecon.SURNOM}}</td>
 				<td>
+				<form method="post" ACTION="/AutoEcole-05-01-2016/lecons/ticket/{{lecon.PK_LECON}}">
+				<button type="submit" > Effectuer </button>
+				</form>	
 				<form method="post" ACTION="/AutoEcole-05-01-2016/lecons/delete/{{lecon.PK_LECON}}">
 				<button type="submit" > Supprimer </button>
 				</form>	

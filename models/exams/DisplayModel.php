@@ -158,12 +158,21 @@
 
 		public function display_exams_student($FK_ELEVE)  {
 			try {								
-				$qry = oci_parse($this->db, 'SELECT EXAMEN.*,
-													  PERMIS.*
-													FROM EXAMEN
-													INNER JOIN PERMIS
-													ON PERMIS.PK_PERMIS = EXAMEN.PK_EXAMEN 
-											WHERE EXAMEN.FK_ELEVE = :FK_ELEVE');
+				$qry = oci_parse($this->db, 'SELECT EXAMEN.PK_EXAMEN,
+											  ELEVE.NOM,
+											  ELEVE.PRENOM,
+											  EXAMEN.NOM AS NOMEXAM,
+											  EXAMEN.DATE_PASSAGE,
+											  PERMIS.NOM AS NOMPERMIS,
+											  MONITEUR.SURNOM 
+											FROM EXAMEN
+											INNER JOIN ELEVE
+											ON ELEVE.PK_ELEVE = EXAMEN.FK_ELEVE
+											INNER JOIN PERMIS
+											ON PERMIS.PK_PERMIS = EXAMEN.FK_PERMIS
+											INNER JOIN MONITEUR
+											ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR
+											WHERE EXAMEN.FK_ELEVE = :FK_ELEVE ORDER BY DATE_PASSAGE');
 				oci_bind_by_name($qry,":FK_ELEVE",$FK_ELEVE);			
 				oci_execute($qry);
 

@@ -1,22 +1,23 @@
 <?php
 	
 	/*
-	 * Controller for confirm new Billing
-	 * This class handles news Billings
+	 * Controller for confirm new instructor
+	 * This class handles news instructors
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('ExamController.php');
+	require_once('LeconController.php');
 	 
-	class ConfirmAddController extends ExamController {
+	class TicketController extends LeconController {
 		
 		/**
 		 * Name of called model
 		 */
-		private $model_name = 'Add';
+		private $model_nameDisplay = 'Display';
+		private $model_nameCreate = 'add';
 		
 		/**
 		 * The constructor of ConfirmAddController
@@ -41,38 +42,33 @@
 			
 			if (file_exists (_CONTROLLERS_DIR_ .'/Tools.php')) {
 				$url = Tools::getInstance()->request_url;
-				$url .= '&id=ukn';
 				$controller = Tools::getInstance()->getUrl_controller($url);
-				
-				if ($controller == 'ConfirmAddController') {
-					if (file_exists (_EXAMS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
-						try {	
-							require_once (_EXAMS_MODELS_ .'/'. $this->model_name .'Model.php');							
-							Tools::getInstance()->createPost($_POST);
-							if(!empty($_POST['DATE_DE_PASSAGE']) && !empty($_POST['NOM']) && !empty($_POST['FK_PERMIS']) && !empty($_POST['FK_ELEVE'])) {
-								\Exam\AddModel::getInstance()->add_exam($_POST['NOM'], $_POST['DATE_DE_PASSAGE'], $_POST['FK_ELEVE'], $_POST['FK_PERMIS']);
+					if (file_exists (_LECONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php')) {			
+						try {
+							require_once (_LECONS_MODELS_ .'/'. $this->model_nameDisplay .'Model.php');
+							$id = Tools::getInstance()->getUrl_id($url);
+							echo $id;
+							if( \Lecon\DisplayModel::getInstance()->has_lecon($id) >= 1 ){
+								\Lecon\DisplayModel::getInstance()->ticket_lecon($id);
 								header('Location: /AutoEcole-05-01-2016/lecons/show/all');
 								
 							} else {
-								header('Location: /AutoEcole-05-01-2016/lecons/add');
+								header('Location: /AutoEcole-05-01-2016/lecons/show/all');
 							}
 
 						} catch (Exception $e) {
-							throw new Exception('Une erreur est survenue durant la modification des données: '.$e->getMessage());
+							throw new Exception('Une erreur est survenue durant l\'ajout des données: '.$e->getMessage());
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._BILLINGS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_nameDisplay .'" n\'existe pas dans "'._INSTRUCTORS_MODELS_ .'"!');
 					}
-				} else {
-					throw new Exception('Une erreur est survenue durant la phase de routage!');
-				}
 			} else {
 				throw new Exception('L\'URL n\'est pas évaluable!');
 			}
 		}
 		
 		/**
-	     * @see BillingController::checkAccess()
+	     * @see InstructorController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -80,7 +76,7 @@
 	    }
 
 		/**
-		 * @see BillingController::viewAccess()
+		 * @see InstructorController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {
