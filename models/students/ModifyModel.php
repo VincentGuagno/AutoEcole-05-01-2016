@@ -9,7 +9,7 @@
 	 * @copyright 2015 3iL
 	 */
 	 
-	namespace Students;
+	namespace Student;
 	require_once('StudentModel.php'); 
 	
 	class ModifyModel extends StudentModel{
@@ -85,11 +85,11 @@
 		 * @param PK_ELEVE, customer's record number
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function modify_eleve($FK_MONITEUR, $NOM, $PRENOM, $ADRESSE, $NUM_TEL, $DATE_NAISSANCE, $LIEU_ETUDE, $PK_ELEVE) {
+		public function modify_student($FK_MONITEUR, $NOM, $PRENOM, $ADRESSE, $NUM_TEL, $DATE_NAISSANCE, $LIEU_ETUDE, $PK_ELEVE) {
 			try {
 
 				//UPDATE ELEVE SET FK_MONITEUR = '21', NOM = 'bi', PRENOM = 'jay', ADRESSE = 'no whi', NUM_TEL = 4, DATE_NAISSANCE = TO_DATE('2016-01-17', 'YYYY-MM-DD HH24:MI:SS'), LIEU_ETUDE = 'se' WHERE PK_ELEVE =21
-				$qry = oci_parse($this->db, ("UPDATE ELEVE SET FK_MONITEUR = :FK_MONITEUR, NOM = ':NOM', PRENOM = ':PRENOM', ADRESSE = ':ADRESSE', NUM_TEL = :NUM_TEL, DATE_NAISSANCE = TO_DATE(':DATE_NAISSANCE', 'DD/MM/YYYY HH24:MI:SS'), LIEU_ETUDE = ':LIEU_ETUDE' WHERE PK_ELEVE =:PK_ELEVE");
+				$qry = oci_parse($this->db, ("UPDATE ELEVE SET FK_MONITEUR = :FK_MONITEUR, NOM = :NOM, PRENOM = :PRENOM, ADRESSE = :ADRESSE, NUM_TEL = :NUM_TEL, DATE_NAISSANCE = TO_DATE(:DATE_NAISSANCE, 'DD/MM/YYYY HH24:MI:SS'), LIEU_ETUDE = :LIEU_ETUDE WHERE PK_ELEVE =:PK_ELEVE"));
 			
 
 				oci_bind_by_name($qry,":FK_MONITEUR",$FK_MONITEUR);
@@ -97,7 +97,7 @@
 				oci_bind_by_name($qry,":PRENOM",$PRENOM);					
 				oci_bind_by_name($qry,":ADRESSE",$ADRESSE);
 				oci_bind_by_name($qry,":NUM_TEL",$NUM_TEL);
-				oci_bind_by_name($qry,":DATE_NAISSANCE",$DATE_NAISSANCE);					
+				oci_bind_by_name($qry,":DATE_NAISSANCE",$DATE_NAISSANCE);				
 				oci_bind_by_name($qry,":LIEU_ETUDE",$LIEU_ETUDE);
 				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
 				

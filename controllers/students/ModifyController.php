@@ -53,10 +53,12 @@
 						if (file_exists (_STUDENTS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
 							try {	
 								require_once (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php');
+								require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php');
 								$id = Tools::getInstance()->getUrl_id($url);
 								
-								$data = \Season\DisplayModel::getInstance()->display_season($id);
-								echo $this->twig->render($this->view_name .'.tpl', array('season' => $data[0], 'bootstrapPath' => _BOOTSTRAP_FILE_));
+								$data = \Student\DisplayModel::getInstance()->display_student($id);
+								$instructors = \Instructor\DisplayModel::getInstance()->display_instructors();
+								echo $this->twig->render($this->view_name .'.tpl', array('instructors'=>$instructors,'student' => $data[0], 'bootstrapPath' => _BOOTSTRAP_FILE_));
 								
 							} catch (Exception $e) {
 								throw new Exception('Une erreur est survenue durant la récupération des données: '.$e->getMessage());

@@ -120,9 +120,8 @@
 			try {
 
 				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
-				$qry = oci_parse($this->db, 'SELECT PK_ELEVE,
-													  ELEVE.NOM,
-													  ELEVE.PRENOM,
+				$qry = oci_parse($this->db, 'SELECT 
+													  ELEVE.*,
 													  FORMULES.LIBELLE
 													FROM ELEVE
 													INNER JOIN FORMULES

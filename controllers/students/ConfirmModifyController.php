@@ -53,22 +53,18 @@
 						try {	
 							require_once (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
-							
-							$datetime1 = new DateTime($_POST['beginDate']);
-							$datetime2 = new DateTime($_POST['endDate']);
-							$interval = $datetime1->diff($datetime2);
+							//$FK_MONITEUR, $NOM, $PRENOM, $ADRESSE, $NUM_TEL, $DATE_NAISSANCE, $LIEU_ETUDE, $PK_ELEVE
 							
 							Tools::getInstance()->createPost($_POST);
 							
-							if(!empty($_POST['name']) && !empty($_POST['beginDate']) && !empty($_POST['endDate']) && !empty($_POST['coefficient'])) {
+							if(!empty($_POST['FK_MONITEUR']) && !empty($_POST['NOM']) && !empty($_POST['PRENOM']) && !empty($_POST['ADRESSE'])
+											 && !empty($_POST['NUM_TEL']) && !empty($_POST['DATE_NAISSANCE']) && !empty($_POST['LIEU_ETUDE'])) {
 								
-								$_POST['coefficient'] = ($_POST['coefficient'] > 1) ? 1 : $_POST['coefficient'];
-								$_POST['coefficient'] = ($_POST['coefficient'] <= 0) ? 0.1 : $_POST['coefficient'];
-								\Student\ModifyModel::getInstance()->modify_student($id, $_POST['name'], $_POST['beginDate'], $_POST['endDate'], $_POST['coefficient']);
-								header('Location: /Cas-M-Ping/students/show/'.$id);
+								\Student\ModifyModel::getInstance()->modify_student( $_POST['FK_MONITEUR'], $_POST['NOM'], $_POST['PRENOM'], $_POST['ADRESSE'], $_POST['NUM_TEL'], $_POST['DATE_NAISSANCE'], $_POST['LIEU_ETUDE'],$id);
+								header('Location: /AutoEcole-05-01-2016/students/show/all');
 								
 							} else {
-								header('Location: /Cas-M-Ping/students/modify/'.$id);
+								header('Location: /AutoEcole-05-01-2016/students/modify/'.$id);
 							}
 
 						} catch (Exception $e) {
