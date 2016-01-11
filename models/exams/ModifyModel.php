@@ -84,7 +84,7 @@
 			try {
 	
 				// UPDATE EXAMEN SET NOM = ' 1111', DATE_PASSAGE = TO_DATE('2016-01-14 09:26:23', 'YYYY-MM-DD HH24:MI:SS') WHERE PK_EXAMEN =1
-				$qry = oci_parse($this->db, ("UPDATE EXAMEN SET NOM = ':NOM', DATE_PASSAGE = TO_DATE(':DATE_PASSAGE', 'YYYY-MM-DD HH24:MI:SS') WHERE PK_EXAMEN =:PK_EXAMEN");
+				$qry = oci_parse($this->db, ("UPDATE EXAMEN SET NOM = ':NOM', DATE_PASSAGE = TO_DATE(':DATE_PASSAGE', 'DD/MM/YYYY HH24:MI:SS') WHERE PK_EXAMEN =:PK_EXAMEN");
 				
 				oci_bind_by_name($qry,":NOM",$NOM);
 				oci_bind_by_name($qry,":DATE_PASSAGE",$DATE_PASSAGE);

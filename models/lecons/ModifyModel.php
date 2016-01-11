@@ -84,7 +84,7 @@
 			try {
 
 				// UPDATE LECON SET DATE_LECON = TO_DATE('2011-01-22', 'YYYY-MM-DD HH24:MI:SS'), ETAT_LECON = '0' WHERE PK_LECON = 4
-				$qry = oci_parse($this->db, ("UPDATE LECON SET DATE_LECON = TO_DATE(':DATE_LECON', 'YYYY-MM-DD HH24:MI:SS'), ETAT_LECON = :ETAT_LECON WHERE PK_LECON = :PK_LECON");
+				$qry = oci_parse($this->db, ("UPDATE LECON SET DATE_LECON = TO_DATE(':DATE_LECON', 'DD/MM/YYYY HH24:MI:SS'), ETAT_LECON = :ETAT_LECON WHERE PK_LECON = :PK_LECON");
 				
 				oci_bind_by_name($qry,":DATE_LECON",$DATE_LECON);
 				oci_bind_by_name($qry,":ETAT_LECON",$ETAT_LECON);

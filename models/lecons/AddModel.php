@@ -82,7 +82,7 @@
 		public function add_lecon($FK_ELEVE,$DATE_LECON,$ETAT_LECON) {
 			try {		
 
-				$qry = oci_parse($this->db, 'INSERT INTO AUTO.LECON (FK_ELEVE,DATE_LECON,ETAT_LECON) VALUES (:FK_ELEVE,to_date(:DATE_LECON,\'DD-MM-YYYY\'),:ETAT_LECON)');
+				$qry = oci_parse($this->db, 'INSERT INTO AUTO.LECON (FK_ELEVE,DATE_LECON,ETAT_LECON) VALUES (:FK_ELEVE,to_date(:DATE_LECON,\'DD/MM/YYYY\'),:ETAT_LECON)');
 				oci_bind_by_name($qry,":FK_ELEVE",$FK_ELEVE);
 				oci_bind_by_name($qry,":DATE_LECON",$DATE_LECON);
 				oci_bind_by_name($qry,":ETAT_LECON",$ETAT_LECON);
