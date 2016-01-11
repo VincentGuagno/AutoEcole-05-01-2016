@@ -91,7 +91,7 @@
 											INNER JOIN PERMIS
 											ON PERMIS.PK_PERMIS = EXAMEN.FK_PERMIS
 											INNER JOIN MONITEUR
-											ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR');			
+											ON MONITEUR.PK_MONITEUR = ELEVE.FK_MONITEUR ORDER BY DATE_PASSAGE');			
 				oci_execute($qry);
 					
 				//$return_qry = $qry->fetchAll();
@@ -113,7 +113,7 @@
 		public function display_exam($PK_EXAMEN) {
 			try {
 
-				$qry = oci_parse($this->db, 'SELECT EXAMEN.DATE_PASSAGE, EXAMEN.NOM, EXAMEN.FK_ELEVE FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =:PK_EXAMEN');	
+				$qry = oci_parse($this->db, 'SELECT EXAMEN.DATE_PASSAGE, EXAMEN.NOM, EXAMEN.FK_ELEVE FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =:PK_EXAMEN ORDER BY DATE_PASSAGE');	
 				oci_bind_by_name($qry,":PK_EXAMEN",$PK_EXAMEN);
 				oci_execute($qry);
 					
