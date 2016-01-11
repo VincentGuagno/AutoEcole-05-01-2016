@@ -11,6 +11,18 @@ Ajout d'un véhicule
 
 {% block content %}
 
+<head>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#DATE_ACHAT" ).datepicker();
+  });
+  </script>
+</head>
+
 	</br>	
 	<form method="post" ACTION="/AutoEcole-05-01-2016/vehicles/add/confirm">
 		
@@ -28,8 +40,6 @@ Ajout d'un véhicule
 		
 		<label for="PRIX_ACHAT">Prix achat : </label>
 		<input class="form-control" id="PRIX_ACHAT"name="PRIX_ACHAT" >
-
-
        
 		<br/>
 		<br/>

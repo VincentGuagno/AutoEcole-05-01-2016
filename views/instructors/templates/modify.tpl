@@ -10,6 +10,17 @@
 {% endblock %}
 
 {% block content %}
+<head>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#DATE_EMBAUCHE" ).datepicker();
+  });
+  </script>
+</head>
 	
 	<form method="post" ACTION="/AutoEcole-05-01-2016/instructors/modify/confirm/{{instructor.PK_MONITEUR}}">
 		

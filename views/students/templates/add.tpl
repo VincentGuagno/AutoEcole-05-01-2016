@@ -10,16 +10,18 @@ Ajout d'un élève
 {% endblock %}
 
 {% block content %}
-	
-	<script type="text/javascript">
-	// code pour la gestion de la date dans le formulaire
-	jQuery(function()
-	{
-	//formattage de la date dans le format du la bdd       
-	jQuery('#dateEvenement').datepicker({ dateFormat: "dd/mm/yy"}).val();   
-	}
-	);
-	</script>
+
+<head>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    $( "#DATE_NAISSANCE" ).datepicker();
+  });
+  </script>
+</head>
 
 	</br>
 
@@ -54,7 +56,7 @@ Ajout d'un élève
 		</br>
 		
 		<label for="DATE_NAISSANCE">Date de naissance : </label>
-		<input class="form-control" id="DATE_NAISSANCE"name="DATE_NAISSANCE" >
+		<input class="form-control" id="DATE_NAISSANCE"name="DATE_NAISSANCE" > 
 		</br>
 
 		<label for="LIEU_ETUDE">Lieu d'étude : </label>
