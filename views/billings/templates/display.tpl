@@ -32,9 +32,10 @@
 			<td>{{billing.LIBELLE}}</td>
 			<td>{{billing.PRIX}}</td>
 			<td>{{billing.DATE_FACTURE}}</td>
-			<td>
+			
+			<td> 
 				<form method="post" ACTION="/AutoEcole-05-01-2016/billings/return/{{billing.PK_FACTURATION}}">
-				<button type="submit" > Retour </button>
+				<button type="submit" > Suppression </button>
 				</form>
 			</td>
 		</tr>
