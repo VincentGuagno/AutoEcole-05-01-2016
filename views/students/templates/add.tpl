@@ -11,6 +11,18 @@ Ajout d'un élève
 
 {% block content %}
 	
+	<script type="text/javascript">
+	// code pour la gestion de la date dans le formulaire
+	jQuery(function()
+	{
+	//formattage de la date dans le format du la bdd       
+	jQuery('#dateEvenement').datepicker({ dateFormat: "dd/mm/yy"}).val();   
+	}
+	);
+	</script>
+
+	</br>
+
 	<form method="post" ACTION="/AutoEcole-05-01-2016/students/add/confirm">
 
 		<label for="FK_FORMULES">Formule : </label>
@@ -21,7 +33,7 @@ Ajout d'un élève
 		</select> 
 		</br></br>
 		
-		<label for="FK_MONITEUR">Secteur : </label>
+		<label for="FK_MONITEUR">Nom du moniteur : </label>
 		<select id="FK_MONITEUR" name="FK_MONITEUR">
 		{% for instructor in instructors %}
 		<option value="{{instructor.PK_MONITEUR}}">{{instructor.SURNOM}}</option>
@@ -31,23 +43,29 @@ Ajout d'un élève
 		
 		<label for="NOM">Nom : </label>
 		<input class="form-control" id="NOM"name="NOM" >
+		</br>
 		
 		<label for="PRENOM">Prénom : </label>
 		<input class="form-control" id="PRENOM" name="PRENOM" >
+		</br>
 				
 		<label for="ADRESSE">Adresse : </label>
 		<input class="form-control" id="ADRESSE"name="ADRESSE" >
+		</br>
 		
 		<label for="DATE_NAISSANCE">Date de naissance : </label>
 		<input class="form-control" id="DATE_NAISSANCE"name="DATE_NAISSANCE" >
-		
+		</br>
+
 		<label for="LIEU_ETUDE">Lieu d'étude : </label>
 		<input class="form-control" id="LIEU_ETUDE"name="LIEU_ETUDE" >
+		</br>
 		
 		<label for="NUM_TEL">Téléphone : </label>
 		<input class="form-control" id="NUM_TEL"name="NUM_TEL" >
+		</br>
 		
-		<button type="submit" class="btn btn-default">Ajouter</button>
+		<button type="submit" class="btn btn-default">Ajouter un élève</button>
 	</form>
 {% endblock %}
 

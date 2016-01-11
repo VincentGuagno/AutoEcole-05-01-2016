@@ -11,9 +11,11 @@
 
 {% block content %}
 
+	</br>
 	<form method="post" ACTION="/AutoEcole-05-01-2016/vehicules/add">
-	<button type="submit" > Ajout d'un vehicule </button>
+	<button type="submit" > Ajouter un nouveau vehicule </button>
 	</form>
+	</br>
 	
 	<table class="table">
 		<tr>
@@ -35,7 +37,7 @@
 			</td>
 			<td> 
 				<form method="post" ACTION="/AutoEcole-05-01-2016/vehicules/delete/{{vehicle.PK_VEHICULE}}">
-				<button type="submit" > Suppression </button>
+				<button type="submit" > Supprimer </button>
 				</form>
 			</td>
 		</tr>

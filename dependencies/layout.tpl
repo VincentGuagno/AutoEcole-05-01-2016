@@ -23,7 +23,7 @@
 		  <ul>
 			<li><a href="/AutoEcole-05-01-2016/students/show/all">Eleves</a></li>
 			<li><a href="/AutoEcole-05-01-2016/instructors/show/all">Moniteurs</a></li>
-			<li><a href="/AutoEcole-05-01-2016/lecons/show/all">Leçons de conduites</a></li>
+			<li><a href="/AutoEcole-05-01-2016/lecons/show/all">Leçons</a></li>
 			<li><a href="/AutoEcole-05-01-2016/vehicles/show/all">Véhicules</a></li>
 			<li><a href="/AutoEcole-05-01-2016/billings/show/all">Factures</a></li>
 			<li><a href="/AutoEcole-05-01-2016/exams/show/all">Examens</a></li>
@@ -36,7 +36,7 @@
 		<div id="container">
 	  
 			<section>
-				<img src="/AutoEcole-05-01-2016/dependencies/images/campingRodez.jpg" alt="">
+				<img src="/AutoEcole-05-01-2016/dependencies/images/autoecole.jpg" alt="">
 			</section>
 		
 		</div>
@@ -69,5 +69,13 @@
 		}
 	});
 	$.datepicker.setDefaults($.datepicker.regional['fr']);
-</script>
+	</script>
+
+	<!-- Pour la gestion des calendrier-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>
+<script src=""></script>
+
+
 </html>

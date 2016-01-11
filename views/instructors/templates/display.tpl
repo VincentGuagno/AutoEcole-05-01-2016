@@ -13,7 +13,7 @@
 	
 	<form method="post" ACTION="/AutoEcole-05-01-2016/instructors/add">
 
-	<button type="submit" > Ajout d'un client </button>
+	<button type="submit" > Ajout un moniteur </button>
 	</form>	
 	<table class="table">
 		<tr>

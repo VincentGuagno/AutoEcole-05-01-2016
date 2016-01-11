@@ -11,13 +11,15 @@
 
 {% block content %}
 	<div>
+	</br>
 		<h3>
 			Leçons
 		</h3>
+		</br>
 		<form method="post" ACTION="/AutoEcole-05-01-2016/lecons/add">
-		<button type="submit" > Ajout d'une leçon </button>
+		<button type="submit" > Ajouter une leçon </button>
 		</form>
-		
+		</br>
 		<table class="table">
 			<tr>
 				<th> Numéro de leçon </th>
@@ -51,11 +53,11 @@
 		<h3>
 			Exams
 		</h3>
-		
-		<form method="post" ACTION="/Cas-M-Ping/exams/add">
-		<button type="submit" > Ajout d'un exams </button>
+		</br>
+		<form method="post" ACTION="/AutoEcole-05-01-2016/exams/add">
+		<button type="submit" > Ajouter un examen </button>
 		</form>
-
+		</br>
 		<table class="table">
 			<tr>
 				<th>Numéro de l'examen </th>
@@ -76,7 +78,7 @@
 				<td>{{exam.DATE_PASSAGE}}</td>
 				<td>{{exam.NOMPERMIS}}</td>
 				<td>
-				<form method="post" ACTION="//AutoEcole-05-01-2016/exams/delete/{{exam.PK_EXAMEN}}">
+				<form method="post" ACTION="/AutoEcole-05-01-2016/exams/delete/{{exam.PK_EXAMEN}}">
 				<button type="submit" > Supprimer </button>
 				</form>	
 				</td>

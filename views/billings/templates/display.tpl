@@ -11,10 +11,12 @@
 
 {% block content %}
 
+
+	</br>
 	<form method="post" ACTION="/AutoEcole-05-01-2016/billings/add">
 	<button type="submit" > Ajout d'une facturation </button>
 	</form>
-	
+	</br>
 	<table class="table">
 		<tr>
 			<th> numero de facture </th>

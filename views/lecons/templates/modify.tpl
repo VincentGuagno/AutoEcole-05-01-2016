@@ -34,6 +34,6 @@
 			{% endif %}
 		{% endfor %}
 		</select>	
-		<button type="submit" class="btn btn-default">Modifier</button>
+		<button type="submit" class="btn btn-default">Modifier la leçon</button>
 	</form>
 {% endblock %}

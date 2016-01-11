@@ -31,6 +31,6 @@
 		<label for="DATE_EMBAUCHE">Date d'embauche </label>
 		<input class="form-control" id="DATE_EMBAUCHE" name="DATE_EMBAUCHE" value="{{instructor.DATE_EMBAUCHE}}" placeholder="{{instructor.DATE_EMBAUCHE}}">
 		
-		<button type="submit" class="btn btn-default">Modifier</button>
+		<button type="submit" class="btn btn-default">Modifier le moniteur</button>
 	</form>
 {% endblock %}

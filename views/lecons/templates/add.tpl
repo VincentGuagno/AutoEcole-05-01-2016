@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-
+</br>
 <form method="post" ACTION="/AutoEcole-05-01-2016/lecons/add/confirm">
 		
 		<label for="eleve_pk_eleve">Elève : </label>
@@ -22,11 +22,12 @@
 		</br></br>
 		<label for="DATE_LECON">Date : </label>
 		<input class="form-control" id="DATE_LECON"name="DATE_LECON" placeholder ="11-01-2016" >
+		</br>
 		
 		<label for="ETAT_LECON">Etat de la leçon : </label>
 		<input class="form-control" id="ETAT_LECON" name="ETAT_LECON" >
 		</br>
-		<button type="submit" class="btn btn-default">Envoyer</button>
+		<button type="submit" class="btn btn-default">Ajouter la nouvelle leçon</button>
 	</form>
 
 {% endblock %}

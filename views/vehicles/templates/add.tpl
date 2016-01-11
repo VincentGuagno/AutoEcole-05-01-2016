@@ -10,20 +10,25 @@ Ajout d'un véhicule
 {% endblock %}
 
 {% block content %}
-	
+
+	</br>	
 	<form method="post" ACTION="/AutoEcole-05-01-2016/vehicles/add/confirm">
 		
 		<label for="NUMERO">Immatriculation : </label>
 		<input class="form-control" id="NUMERO" name="NUMERO" >
+		</br>
 		
 		<label for="KM">Kilométrage : </label>
 		<input class="form-control" id="KM"name="KM" >
+		</br>
 		
 		<label for="DATE_ACHAT">Date achat : </label>
 		<input class="form-control" id="DATE_ACHAT"name="DATE_ACHAT" >
+		</br>
 		
 		<label for="PRIX_ACHAT">Prix achat : </label>
 		<input class="form-control" id="PRIX_ACHAT"name="PRIX_ACHAT" >
+
 
        
 		<br/>
