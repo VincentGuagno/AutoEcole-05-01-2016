@@ -2,38 +2,45 @@
 	{%extends "layout.tpl" %}
 
 {% block header %}
-Modification d'un client
+Modification d'un vehicule
 {% endblock %}
 
 {% block title %}
-Modification d'un client
+Modification d'un vehicule
 {% endblock %}
 
-{% block content %}
-	
-	<form method="post" ACTION="/Cas-M-Ping/customers/modify/confirm/{{customer.cust_id}}">
+{% block content %}	
+
+	<form method="post" ACTION="/AutoEcole-05-01-2016/vehicles/modify/confirm/{{vehicle.PK_VEHICULE}}">
 		
-		<label for="firstName">Prénom : </label>
-		<input class="form-control" id="firstName" name="firstName" value="{{customer.cust_firstName}}" placeholder="{{customer.cust_firstName}}">
+		<label for="NUMERO">Immatriculation : </label>
+		<input class="form-control" id="NUMERO" name="NUMERO" value="{{vehicle.NUMERO}}" placeholder="{{vehicle.NUMERO}}">
 		
-		<label for="lastName">Nom : </label>
-		<input class="form-control" id="lastName" name="lastName" value="{{customer.cust_lastName}}" placeholder="{{customer.cust_lastName}}">
+		<label for="KM">Kilométrage : </label>
+		<input class="form-control" id="KM" name="KM" value="{{vehicle.KM}}" placeholder="{{vehicle.KM}}">
 		
-		<label for="adress">Adresse : </label>
-		<input class="form-control" id="adress" name="adress" value="{{customer.cust_address}}" placeholder="{{customer.cust_address}}">
+		<label for="DATE_ACHAT">Date achat : </label>
+		<input class="form-control" id="DATE_ACHAT" name="DATE_ACHAT" value="{{vehicle.DATE_ACHAT}}" placeholder="{{vehicle.DATE_ACHAT}}">
 		
-		<label for="zipCode">Code Postal : </label>
-		<input class="form-control" id="zipCode" name="zipCode" value="{{customer.cust_postal_code}}" placeholder="{{customer.cust_postal_code}}">
+		<label for="PRIX_ACHAT">Prix achat : </label>
+		<input class="form-control" id="PRIX_ACHAT" name="PRIX_ACHAT" value="{{vehicle.PRIX_ACHAT}}" placeholder="{{vehicle.PRIX_ACHAT}}">
 		
-		<label for="city">Ville : </label>
-		<input class="form-control" id="city" name="city" value="{{customer.cust_city}}" placeholder="{{customer.cust_city}}">
-		
-		<label for="telephone">Téléphone : </label>
-		<input class="form-control" id="telephone" name="telephone" value="{{customer.cust_phone_number}}" placeholder="{{customer.cust_phone_number}}">
-		
-		<label for="nenrg">N°Enregistrement : </label>
-		<input class="form-control" id="nenrg" name="nenrg" value="{{customer.cust_record_number}}" placeholder="{{customer.cust_record_number}}">
-		
+		<select id="FK_MARQUE" name="FK_MARQUE">
+		{% for brand in brands %}
+		<option value="{{brand.PK_MARQUE}}" placeholder="{{brand.PK_MARQUE}}">{{brand.NOM}}</option>
+		{% endfor %}
+		</select>
+		<select id="FK_MODELE" name="FK_MODELE">
+		{% for model in models %}
+		<option value="{{model.PK_MODELE}}" placeholder="{{model.PK_MODELE}}">{{model.NOM_MODELE}}</option>
+		{% endfor %}
+		</select>
+		<select id="FK_MONITEUR" name="FK_MONITEUR">
+		{% for instructor in instructors %}
+		<option value="{{instructor.PK_MONITEUR}}" placeholder="{{instructor.PK_MONITEUR}}">{{instructor.SURNOM}}</option>
+		{% endfor %}
+		</select>
 		<button type="submit" class="btn btn-default">Modifier</button>
 	</form>
 {% endblock %}
+
