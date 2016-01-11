@@ -2,11 +2,11 @@
 	{%extends "layout.tpl" %}
 
 {% block header %}
-Ajout d'un client
+Ajout d'un examen
 {% endblock %}
 
 {% block title %}
-Ajout d'un client
+Ajout d'un examen
 {% endblock %}
 
 {% block content %}

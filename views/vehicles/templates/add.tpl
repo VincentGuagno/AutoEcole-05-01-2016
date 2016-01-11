@@ -2,11 +2,11 @@
 	{%extends "layout.tpl" %}
 
 {% block header %}
-Ajout d'un client
+Ajout d'un véhicule
 {% endblock %}
 
 {% block title %}
-Ajout d'un client
+Ajout d'un véhicule
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@ Ajout d'un client
 		<label for="NUMERO">Immatriculation : </label>
 		<input class="form-control" id="NUMERO" name="NUMERO" >
 		
-		<label for="KM">KM : </label>
+		<label for="KM">Kilométrage : </label>
 		<input class="form-control" id="KM"name="KM" >
 		
 		<label for="DATE_ACHAT">Date achat : </label>

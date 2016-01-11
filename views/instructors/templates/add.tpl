@@ -2,11 +2,11 @@
 	{%extends "layout.tpl" %}
 
 {% block header %}
-Ajout d'un client
+Ajout d'un instructeur
 {% endblock %}
 
 {% block title %}
-Ajout d'un client
+Ajout d'un instructeur'
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@ Ajout d'un client
 		<label for="PRENOM">Prénom : </label>
 		<input class="form-control" id="PRENOM" name="PRENOM" >
 		
-		<label for="ADRESSEE">adresse : </label>
+		<label for="ADRESSE">adresse : </label>
 		<input class="form-control" id="ADRESSE"name="ADRESSE" >
 		
 		<label for="NUM_TEL">numero de telephone : </label>
@@ -34,3 +34,4 @@ Ajout d'un client
 		<button type="submit" class="btn btn-default">Envoyer</button>
 	</form>
 {% endblock %}
+

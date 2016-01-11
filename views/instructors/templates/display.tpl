@@ -17,7 +17,7 @@
 	</form>	
 	<table class="table">
 		<tr>
-			<th> Numéro de dossier </th>
+			<th> Numéro du moniteur </th>
 			<th> Nom </th>
 			<th> Prénom </th>
 			<th> Adresse </th>
