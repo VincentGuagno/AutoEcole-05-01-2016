@@ -37,7 +37,7 @@
 		<div id="container">
 	  
 			<section>
-				<img src="/AutoEcole-05-01-2016/dependencies/images/autoecole.jpg" height=330 alt=""> <!--"width=wrap height=300"-->
+				<img id='logosite' src="/AutoEcole-05-01-2016/dependencies/images/autoecole.jpg" alt=""> <!--"width=wrap height=300"-->
 			</section>
 		
 		</div>
