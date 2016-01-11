@@ -29,12 +29,7 @@
 			<td>{{vehicle.PK_VEHICULE}}</td>
 			<td>{{vehicle.NUMERO}}</td>
 			<td>{{vehicle.NOM_MODELE}}</td>
-			<td>{{vehicle.SURNOM}}</td>
-			<td> 
-				<form method="post" ACTION="/AutoEcole-05-01-2016/vehicles/modify/{{vehicle.PK_VEHICULE}}">
-				<button type="submit" > Modifier </button>
-				</form>
-			</td>
+			<td>{{vehicle.SURNOM}}</td>			
 			<td> 
 				<form method="post" ACTION="/AutoEcole-05-01-2016/vehicles/delete/{{vehicle.PK_VEHICULE}}">
 				<button type="submit" > Supprimer </button>
