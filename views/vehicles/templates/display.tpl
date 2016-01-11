@@ -12,7 +12,7 @@
 {% block content %}
 
 	</br>
-	<form method="post" ACTION="/AutoEcole-05-01-2016/vehicules/add">
+	<form method="post" ACTION="/AutoEcole-05-01-2016/vehicles/add">
 	<button type="submit" > Ajouter un nouveau vehicule </button>
 	</form>
 	</br>
