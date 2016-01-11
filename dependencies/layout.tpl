@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cas-M-Ping - {% block title %}{% endblock %} </title>
+	<title>Auto école - {% block title %}{% endblock %} </title>
 	<meta charset="utf-8">
 	{% block stylesheets %}
 		<link rel="stylesheet" href="{{bootstrapPath}}">
