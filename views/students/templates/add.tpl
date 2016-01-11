@@ -13,6 +13,22 @@ Ajout d'un élève
 	
 	<form method="post" ACTION="/AutoEcole-05-01-2016/students/add/confirm">
 
+		<label for="FK_FORMULES">Formule : </label>
+		<select id="FK_FORMULES" name="FK_FORMULES">
+		{% for formula in formulas %}
+		<option value="{{formula.PK_FORMULE}}">{{formula.LIBELLE}}</option>
+		{% endfor %}
+		</select> 
+		</br></br>
+		
+		<label for="FK_MONITEUR">Secteur : </label>
+		<select id="FK_MONITEUR" name="FK_MONITEUR">
+		{% for instructor in instructors %}
+		<option value="{{instructor.PK_MONITEUR}}">{{instructor.SURNOM}}</option>
+		{% endfor %}
+		</select> 
+		</br></br>
+		
 		<label for="NOM">Nom : </label>
 		<input class="form-control" id="NOM"name="NOM" >
 		
@@ -30,9 +46,6 @@ Ajout d'un élève
 		
 		<label for="NUM_TEL">Téléphone : </label>
 		<input class="form-control" id="NUM_TEL"name="NUM_TEL" >
-
-		<label for="LIBELLE">Libelle : </label>
-		<input class="form-control" id="LIBELLE"name="LIBELLE" >
 		
 		<button type="submit" class="btn btn-default">Ajouter</button>
 	</form>
