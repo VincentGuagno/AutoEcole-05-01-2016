@@ -36,7 +36,7 @@
 				oci_execute($qry);		
 				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);				
 				oci_close($this->db);
-				return $res;
+				return $nrows;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

@@ -1,17 +1,17 @@
 <?php
 	
 	/*
-	 * Controller for Exams displays
-	 * This class handles the Exams displays
+	 * Controller for season displays
+	 * This class handles the season displays
 	 *
 	 * @author Jérémie LIECHTI
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('ExamController.php');
+	require_once('StudentController.php');
 	 
-	class DisplayController extends ExamController {
+	class DisplayPlanningController extends StudentController {
 		
 		/**
 		 * Name of called model
@@ -21,7 +21,7 @@
 		/**
 		 * Name of called view
 		 */
-		private $view_name = 'display';
+		private $view_name = 'displayPlanning';
 		
 		/**
 		 * The constructor of DisplayController
@@ -48,36 +48,39 @@
 				$url = Tools::getInstance()->request_url;
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
-				if ($controller == 'DisplayController') {
-					if (file_exists (_EXAMS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
-						if (file_exists (_EXAMS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
+				if ($controller == 'DisplayPlanningController') {
+					if (file_exists (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php')) {			
+						if (file_exists (_STUDENTS_VIEWS_ .'/'. $this->view_name .'.tpl')) {	
 							try {	
-							echo _EXAMS_MODELS_ .'/'. $this->model_name .'Model.php';
+								require_once (_STUDENTS_MODELS_ .'/'. $this->model_name .'Model.php');
+								require_once (_LECONS_MODELS_ .'/'. $this->model_name .'Model.php');
 								require_once (_EXAMS_MODELS_ .'/'. $this->model_name .'Model.php');
 								$id = Tools::getInstance()->getUrl_id($url);
-
+								
 								switch ($id) {
 									case 'all':
-										$data = \Exams\DisplayModel::getInstance()->display_exams();
+										$data = \Student\DisplayModel::getInstance()->display_students();
 										break;
 									default:
-										if(\Exams\DisplayModel::getInstance()->has_exam($id) >= 1) {
-											$data = \Exams\DisplayModel::getInstance()->display_exam($id);
+										if(\Student\DisplayModel::getInstance()->has_student($id) == 1) {
+											$data = \Student\DisplayModel::getInstance()->display_student($id);
+											$lecons = \Lecon\DisplayModel::getInstance()->display_lecons_student($id);
+											$exams = \Exam\DisplayModel::getInstance()->display_exams_student($id);
 										} else {
-											header('Location: /Cas-M-Ping/errors/404');
+											header('Location: /AutoEcole-05-01-2016/errors/404');
 										}
 										break;
 								}
-								echo $this->twig->render($this->view_name .'.tpl', array('exams' => $data, 'bootstrapPath' => _BOOTSTRAP_FILE_));
+								echo $this->twig->render($this->view_name .'.tpl', array('students' => $data,'exams' => $exams,'lecons' => $lecons, 'bootstrapPath' => _BOOTSTRAP_FILE_));
 								
 							} catch (Exception $e) {
 								throw new Exception('Une erreur est survenue durant la récupération des données: '.$e->getMessage());
 							}
 						} else {
-							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._EXAMS_VIEWS_ .'"!');
+							throw new Exception('Le template "'.$this->view_name .'" n\'existe pas dans "'._STUDENTS_VIEWS_ .'"!');
 						}
 					} else {
-						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._EXAMS_MODELS_ .'"!');
+						throw new Exception('Le modèle "'. $this->model_name .'" n\'existe pas dans "'._STUDENTS_MODELS_ .'"!');
 					}
 				} else {
 					throw new Exception('Une erreur est survenue durant la phase de routage!');
@@ -88,7 +91,7 @@
 		}
 		
 		/**
-	     * @see ExamController::checkAccess()
+	     * @see StudentController::checkAccess()
 	     * @return true if the controller is available for the current user/visitor, false any other cases
 	     */
 	    public function checkAccess() {
@@ -96,7 +99,7 @@
 	    }
 
 		/**
-		 * @see ExamController::viewAccess()
+		 * @see StudentController::viewAccess()
 		 * @return true if the current user/visitor has valid view permissions, false any other cases
 		 */
 		public function viewAccess() {

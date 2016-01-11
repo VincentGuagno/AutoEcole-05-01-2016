@@ -140,7 +140,7 @@
 													FROM EXAMEN
 													INNER JOIN PERMIS
 													ON PERMIS.PK_PERMIS = EXAMEN.PK_EXAMEN 
-											WHERE EXAMEN.DATE_PASSAGE BETWEEN TO_DATE(\':DEBUT\', \'YYYY-MM-DD HH24:MI:SS\') AND TO_DATE(\':FIN\', \'YYYY-MM-DD HH24:MI:SS\')');			
+											WHERE EXAMEN.DATE_PASSAGE BETWEEN TO_DATE(\':DEBUT\', \'DD-MM-YYYY HH24:MI:SS\') AND TO_DATE(\':FIN\', \'YYYY-MM-DD HH24:MI:SS\')');			
 				oci_execute($qry);
 
 				oci_bind_by_name($qry,":DEBUT",$DEBUT);
@@ -154,7 +154,27 @@
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
-		}		
+		}
+
+		public function display_exams_student($FK_ELEVE)  {
+			try {								
+				$qry = oci_parse($this->db, 'SELECT EXAMEN.*,
+													  PERMIS.*
+													FROM EXAMEN
+													INNER JOIN PERMIS
+													ON PERMIS.PK_PERMIS = EXAMEN.PK_EXAMEN 
+											WHERE EXAMEN.FK_ELEVE = :FK_ELEVE');
+				oci_bind_by_name($qry,":FK_ELEVE",$FK_ELEVE);			
+				oci_execute($qry);
+
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				oci_close($this->db);
+				return $res;
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}			
 	}
 ?>
 

@@ -293,6 +293,11 @@
 				'directory' => 'students/',
 				'url-formatter' => 'students/add'
 			),
+			'display-planning-students' => array(
+				'controller' => 'DisplayPlanningController',
+				'directory' => 'students/',
+				'url-formatter' => 'students/planning/{id|all}'
+			),
 			'confirm-add-students' => array(
 				'controller' => 'ConfirmAddController',
 				'directory' => 'students/',

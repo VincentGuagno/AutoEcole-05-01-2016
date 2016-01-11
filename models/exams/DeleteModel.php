@@ -78,10 +78,11 @@
 		 * @param PK_EXAMEN, Eleve's id
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function delete_examen($PK_EXAMEN) {
+		public function delete_exam($PK_EXAMEN) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.EXAMEN FROM EXAMEN WHERE EXAMEN.PK_EXAMEN =:PK_EXAMEN');	
+				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
+				$qry = oci_parse($this->db, 'DELETE EXAMEN WHERE EXAMEN.PK_EXAMEN =:PK_EXAMEN');	
 				oci_bind_by_name($qry,":PK_EXAMEN",$PK_EXAMEN);
 				oci_execute($qry);
 				oci_close($this->db);

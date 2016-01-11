@@ -54,13 +54,12 @@
 							
 							if(!empty($_POST['FK_FORMULES']) && !empty($_POST['FK_MONITEUR']) && !empty($_POST['PRENOM']) && !empty($_POST['NOM']) && !empty($_POST['LIEU_ETUDE'])
 												&& !empty($_POST['ADRESSE']) && !empty($_POST['NUM_TEL']) && !empty($_POST['DATE_NAISSANCE'])) {
-								var_dump($_POST);
 								\Student\AddModel::getInstance()->add_student($_POST['NOM'], $_POST['PRENOM'], $_POST['ADRESSE'], $_POST['NUM_TEL'], $_POST['DATE_NAISSANCE'], $_POST['LIEU_ETUDE']
 																					, $_POST['FK_FORMULES'], $_POST['FK_MONITEUR']);
-								//header('Location: /AutoEcole-05-01-2016/students/show/all');
+								header('Location: /AutoEcole-05-01-2016/students/show/all');
 								
 							} else {
-								//header('Location: /AutoEcole-05-01-2016/students/add');
+								header('Location: /AutoEcole-05-01-2016/students/add');
 							}
 
 						} catch (Exception $e) {

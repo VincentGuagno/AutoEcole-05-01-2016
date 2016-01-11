@@ -150,6 +150,24 @@
 				return $e->getMessage();
 			}
 		}
+		
+		public function display_lecons_student($FK_ELEVE)  {
+			try {
+
+				$qry = oci_parse($this->db, 'SELECT * FROM LECON WHERE FK_ELEVE = :FK_ELEVE');
+
+				oci_bind_by_name($qry,":FK_ELEVE",$FK_ELEVE);
+				oci_execute($qry);
+					
+				//$return_qry = $qry->fetchAll();
+				$nrows = oci_fetch_all($qry, $res,null,null,OCI_FETCHSTATEMENT_BY_ROW);
+				
+				oci_close($this->db);
+				return $res;		
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
 
 		
 	}

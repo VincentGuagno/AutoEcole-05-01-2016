@@ -78,10 +78,11 @@
 		 * @param PK_FACTURATION, Eleve's id
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function delete_type_facture($PK_FACTURATION) {
+		public function delete_billing($PK_FACTURATION) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.FACTURATION FROM FACTURATION WHERE FACTURATION.PK_FACTURATION =:PK_FACTURATION');	
+				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
+				$qry = oci_parse($this->db, 'UPDATE AUTO.FACTURATION SET ETAT_FACTURE = \'Paiement effectue\' WHERE FACTURATION.PK_FACTURATION =:PK_FACTURATION');	
 				oci_bind_by_name($qry,":PK_FACTURATION",$PK_FACTURATION);
 				
 				oci_execute($qry);

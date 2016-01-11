@@ -9,9 +9,9 @@
 	 * @copyright 2015 3iL
 	 */
 
-	require_once('InstructorController.php');
+	require_once('BillingsController.php');
 	 
-	class DeleteController extends InstructorController {
+	class DeleteController extends BillingsController {
 		
 		/**
 		 * Name of called model
@@ -44,24 +44,24 @@
 				$controller = Tools::getInstance()->getUrl_controller($url);
 				
 				if ($controller == 'DeleteController') {
-					if (file_exists (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
+					if (file_exists (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php')) {				
 						try {	
-							require_once (_INSTRUCTORS_MODELS_ .'/'. $this->model_name .'Model.php');
+							require_once (_BILLINGS_MODELS_ .'/'. $this->model_name .'Model.php');
 							$id = Tools::getInstance()->getUrl_id($url);
-							echo $id;
+							
 							switch ($id) {
 								case 'all':
-									\Instructor\DeleteModel::getInstance()->delete_instructors();
+									\Billings\DeleteModel::getInstance()->delete_billings();
 									break;
 								default:
-									if(\Instructor\DeleteModel::getInstance()->has_instructor($id) >= 1) {
-										\Instructor\DeleteModel::getInstance()->delete_instructor($id);	
+									if(\Billings\DeleteModel::getInstance()->has_billing($id) >= 1) {
+										\Billings\DeleteModel::getInstance()->delete_billing($id);	
 									} else {
-										//header('Location: /AutoEcole-05-01-2016/errors/404');
+										header('Location: /AutoEcole-05-01-2016/errors/404');
 									}	
 									break;
 							}
-							//header('Location: /AutoEcole-05-01-2016/instructors/show/all');
+							header('Location: /AutoEcole-05-01-2016/billings/show/all');
 							
 						} catch (Exception $e) {
 							throw new Exception('Une erreur est survenue durant la suppression des données: '.$e->getMessage());

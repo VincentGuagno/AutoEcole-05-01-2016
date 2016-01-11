@@ -119,6 +119,7 @@
 		public function display_student($PK_ELEVE) {
 			try {
 
+				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
 				$qry = oci_parse($this->db, 'SELECT PK_ELEVE,
 													  ELEVE.NOM,
 													  ELEVE.PRENOM,
@@ -126,7 +127,7 @@
 													FROM ELEVE
 													INNER JOIN FORMULES
 													ON FORMULES.PK_FORMULE = ELEVE.FK_FORMULES
-													WHERE ELEVE.PK_ELEVE   = :$PK_ELEVE');	
+													WHERE ELEVE.PK_ELEVE   = :PK_ELEVE');	
 				oci_bind_by_name($qry,":PK_ELEVE",$PK_ELEVE);
 				oci_execute($qry);
 

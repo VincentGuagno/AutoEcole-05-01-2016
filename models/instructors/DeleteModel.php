@@ -78,10 +78,11 @@
 		 * @param PK_MONITEUR, Eleve's id
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function delete_moniteur($PK_MONITEUR) {
+		public function delete_instructor($PK_MONITEUR) {
 			try {
 				
-				$qry = oci_parse($this->db, 'DELETE AUTO.MONITEUR FROM MONITEUR WHERE MONITEUR.PK_MONITEUR =:PK_MONITEUR');	
+				$this->db = oci_connect(_LOGIN_, _PASSWORD_, _HOST_);
+				$qry = oci_parse($this->db, 'DELETE MONITEUR WHERE MONITEUR.PK_MONITEUR =:PK_MONITEUR');	
 				oci_bind_by_name($qry,":PK_MONITEUR",$PK_MONITEUR);
 				oci_execute($qry);
 				oci_close($this->db);	

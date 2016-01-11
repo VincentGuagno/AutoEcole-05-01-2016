@@ -64,6 +64,7 @@
 							header('Location: /AutoEcole-05-01-2016/students/show/all');
 							
 						} catch (Exception $e) {
+							
 							throw new Exception('Une erreur est survenue durant la suppression des données: '.$e->getMessage());
 						}
 					} else {
